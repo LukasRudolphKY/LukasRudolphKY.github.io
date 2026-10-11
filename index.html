@@ -285,6 +285,38 @@ footer {
         transition: none;
     }
 }
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+    padding: 55px 0 0;
+    overflow: hidden;
+}
+.hero-content {
+    width: 100%;
+    padding: 0 7%;
+}
+.model-area {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2.34 / 1;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+}
+.gearbox-animation {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+}
+@media (max-width:800px) {
+    .hero { padding-top: 38px; }
+    .model-area { height: auto; aspect-ratio: 2.34 / 1; }
+}
 </style>
 </head>
 
@@ -330,7 +362,7 @@ footer {
     </div>
 
     <div class="model-area">
-        <iframe class="gearbox-animation" src="assets/realistic-gearbox-animation.html" title="Photorealistic cinematic gearbox animation" loading="eager" aria-label="Photorealistic gearbox and exploded assembly animation"></iframe>
+        <iframe class="gearbox-animation" src="assets/realistic-gearbox-animation.html?v=2" scrolling="no" title="Photorealistic cinematic gearbox animation" loading="eager" aria-label="Photorealistic gearbox and exploded assembly animation"></iframe>
     </div>
 
 </div>
