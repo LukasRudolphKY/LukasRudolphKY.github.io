@@ -1,187 +1,290 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description" content="Explore the professional portfolio of Lukas Rudolph, an industrial technical specialist with experience in CAD design, industrial automation, mechanical systems, and engineering technology.">
-
+<meta name="description" content="Lukas Rudolph — industrial technology, CAD design, mechanical systems, automation, and engineering technology.">
 <meta name="author" content="Lukas Rudolph">
 
-<title>Lukas Rudolph | Industrial Technical Specialist</title>
+<title>Lukas Rudolph | Engineering & Technology</title>
 
 <style>
-    :root {
-        --navy: #0b1525;
-        --navy-light: #14243b;
-        --blue: #4da3ff;
-        --white: #ffffff;
-        --gray: #b9c5d6;
+:root {
+    --bg: #07101e;
+    --panel: #101e32;
+    --blue: #43baff;
+    --text: #f3f7ff;
+    --muted: #a7b8cd;
+    --border: #284463;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px 7%;
+    background: #060d18;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: var(--blue);
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav a {
+    color: var(--muted);
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: var(--blue);
+}
+
+.hero {
+    position: relative;
+    min-height: 590px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 25px;
+    padding: 65px 7%;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            ellipse at 75% 50%,
+            #16436a 0%,
+            transparent 55%
+        ),
+        linear-gradient(135deg, #07101e, #10253d);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.15;
+    background-image:
+        linear-gradient(#42baff 1px, transparent 1px),
+        linear-gradient(90deg, #42baff 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(42px, 5vw, 72px);
+    line-height: 1.1;
+    margin: 20px 0;
+}
+
+.hero h2 {
+    color: var(--blue);
+    font-size: 23px;
+    font-weight: normal;
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 580px;
+    font-size: 17px;
+}
+
+.button {
+    display: inline-block;
+    background: var(--blue);
+    color: #06101d;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 13px 25px;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: 0.2s;
+}
+
+.button:hover {
+    background: #91d9ff;
+    transform: translateY(-2px);
+}
+
+.model-area {
+    position: relative;
+    height: 440px;
+    min-width: 0;
+}
+
+#model3d {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.model-label {
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    color: var(--blue);
+    font-family: monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    pointer-events: none;
+}
+
+section {
+    padding: 75px 7%;
+    max-width: 1450px;
+    margin: auto;
+}
+
+section h2 {
+    color: var(--blue);
+    font-size: 30px;
+}
+
+section p {
+    color: var(--muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    margin-top: 35px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px;
+    border-radius: 8px;
+    transition: 0.25s;
+}
+
+.card:hover {
+    border-color: var(--blue);
+    transform: translateY(-4px);
+}
+
+.card h3 {
+    color: white;
+}
+
+.card p {
+    font-size: 15px;
+}
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 35px;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.profile-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid var(--blue);
+    background: linear-gradient(
+        135deg,
+        #183b60,
+        #091320
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--blue);
+    font-size: 42px;
+    font-weight: bold;
+    overflow: hidden;
+    box-shadow: 0 0 25px #43baff22;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+footer {
+    text-align: center;
+    padding: 35px;
+    background: #060d18;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
     }
 
-    * {
-        box-sizing: border-box;
+    .model-area {
+        height: 330px;
     }
 
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: var(--navy);
-        color: var(--white);
-        line-height: 1.7;
-    }
-
-    header {
-        background: #08111e;
-        padding: 22px 8%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .logo {
-        font-size: 22px;
-        font-weight: bold;
-        letter-spacing: 1px;
+    .profile-layout {
+        grid-template-columns: 1fr;
     }
 
     nav a {
-        color: var(--gray);
-        text-decoration: none;
-        margin-left: 20px;
-        font-size: 14px;
+        margin: 0 12px 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
     }
 
-    nav a:hover {
-        color: var(--blue);
-    }
-
-    .hero {
-        padding: 110px 8%;
-        background: linear-gradient(
-            135deg,
-            #0b1525,
-            #193456
-        );
-    }
-
-    .hero h1 {
-        font-size: clamp(38px, 6vw, 64px);
-        margin: 0;
-        line-height: 1.15;
-    }
-
-    .hero h2 {
-        color: var(--blue);
-        font-size: 23px;
-        font-weight: normal;
-        margin-top: 20px;
-    }
-
-    .hero p {
-        max-width: 720px;
-        color: var(--gray);
-        font-size: 18px;
-    }
-
-    .button {
-        display: inline-block;
-        margin-top: 25px;
-        padding: 13px 28px;
-        background: var(--blue);
-        color: #08111e;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 6px;
-    }
-
-    .button:hover {
-        background: #85c1ff;
-    }
-
-    section {
-        padding: 75px 8%;
-        max-width: 1400px;
-        margin: auto;
-    }
-
-    section h2 {
-        color: var(--blue);
-        font-size: 30px;
-        margin-bottom: 25px;
-    }
-
-    section p {
-        color: var(--gray);
-        max-width: 950px;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(
-            auto-fit,
-            minmax(240px, 1fr)
-        );
-        gap: 25px;
-        margin-top: 35px;
-    }
-
+    .button,
     .card {
-        background: var(--navy-light);
-        padding: 28px;
-        border-radius: 10px;
-        border: 1px solid #263d5c;
+        transition: none;
     }
-
-    .card h3 {
-        color: var(--white);
-        margin-top: 0;
-    }
-
-    .card p {
-        font-size: 15px;
-        color: var(--gray);
-    }
-
-    .highlight {
-        border-left: 4px solid var(--blue);
-        padding-left: 20px;
-        margin-top: 30px;
-    }
-
-    footer {
-        text-align: center;
-        padding: 35px 20px;
-        background: #08111e;
-        color: var(--gray);
-        font-size: 14px;
-    }
-
-    @media (max-width: 600px) {
-        header {
-            justify-content: center;
-            text-align: center;
-        }
-
-        nav a {
-            margin: 0 8px;
-        }
-
-        .hero {
-            padding: 75px 7%;
-        }
-
-        section {
-            padding: 55px 7%;
-        }
-    }
+}
 </style>
 </head>
 
@@ -198,59 +301,87 @@
     </nav>
 </header>
 
+<main>
+
 <div class="hero">
-    <h1>Lukas Rudolph</h1>
 
-    <h2>
-        Industrial Technical Specialist |
-        CAD Design | Engineering Technology
-    </h2>
+    <div class="hero-content">
+        <div class="eyebrow">
+            Engineering • Design • Innovation
+        </div>
 
-    <p>
-        Bridging hands-on industrial experience
-        with modern engineering design,
-        technical problem-solving, and automation.
-    </p>
+        <h1>Lukas<br>Rudolph</h1>
 
-    <a href="#projects" class="button">
-        Explore My Work
-    </a>
+        <h2>
+            Industrial Technology<br>
+            CAD Design & Automation
+        </h2>
+
+        <p>
+            Bridging hands-on industrial experience
+            with modern engineering design,
+            mechanical systems, and
+            technical innovation.
+        </p>
+
+        <a class="button" href="#projects">
+            EXPLORE MY WORK →
+        </a>
+    </div>
+
+    <div class="model-area">
+        <canvas id="model3d"
+                aria-label="Animated 3D mechanical gear assembly">
+        </canvas>
+
+        <div class="model-label">
+            MECHANICAL DESIGN // 3D VISUALIZATION
+        </div>
+    </div>
+
 </div>
 
 <section id="about">
+
     <h2>Professional Profile</h2>
 
-    <p>
-        I am an industrial technical professional
-        with a background in industrial maintenance,
-        mechanical systems, automation, and
-        specialized technical operations.
-    </p>
+    <div class="profile-layout">
 
-    <p>
-        My experience includes supporting technical
-        operations in complex industrial environments,
-        including work associated with nuclear
-        facility cleanup.
-    </p>
+        <div class="profile-photo"
+             aria-label="Profile photo placeholder">
+            LR
+        </div>
 
-    <p>
-        I combine practical field experience with
-        computer-aided design, mechanical modeling,
-        and an ongoing focus on engineering technology.
-    </p>
+        <div>
+            <p>
+                I am an industrial technical professional
+                with experience in industrial maintenance,
+                mechanical systems, automation,
+                and specialized technical operations.
+            </p>
 
-    <div class="highlight">
-        <p>
-            My professional interests center on
-            solving difficult technical problems,
-            improving processes, and developing
-            practical engineering solutions.
-        </p>
+            <p>
+                My background includes technical work
+                supporting nuclear facility cleanup,
+                along with CAD design,
+                mechanical modeling,
+                and engineering support.
+            </p>
+
+            <p>
+                I focus on combining practical
+                field experience with digital
+                engineering tools to develop
+                effective technical solutions.
+            </p>
+        </div>
+
     </div>
+
 </section>
 
 <section id="expertise">
+
     <h2>Technical Expertise</h2>
 
     <div class="grid">
@@ -258,7 +389,8 @@
         <div class="card">
             <h3>CAD & Mechanical Design</h3>
             <p>
-                SolidWorks, AutoCAD, Autodesk Inventor,
+                SolidWorks, AutoCAD,
+                Autodesk Inventor,
                 3D modeling, engineering drawings,
                 and mechanical assemblies.
             </p>
@@ -267,40 +399,43 @@
         <div class="card">
             <h3>Industrial Technology</h3>
             <p>
-                Industrial maintenance, mechanical
-                troubleshooting, technical operations,
-                and equipment systems.
+                Industrial maintenance,
+                mechanical troubleshooting,
+                equipment systems,
+                and technical operations.
             </p>
         </div>
 
         <div class="card">
             <h3>Automation & Controls</h3>
             <p>
-                Industrial automation, control
-                systems, electronics, and practical
-                automation applications.
+                Industrial automation,
+                electronics, control systems,
+                and practical automation solutions.
             </p>
         </div>
 
         <div class="card">
-            <h3>Technical Development</h3>
+            <h3>Prototyping & Development</h3>
             <p>
-                3D printing, prototyping, mechanical
-                fabrication, technical documentation,
-                and engineering support.
+                3D printing, mechanical fabrication,
+                technical documentation,
+                and engineering technology.
             </p>
         </div>
 
     </div>
+
 </section>
 
 <section id="projects">
+
     <h2>Engineering & Technical Projects</h2>
 
     <p>
-        This section will feature selected
-        CAD models, mechanical designs,
-        prototypes, and technical projects.
+        Selected mechanical designs,
+        CAD assemblies, prototypes,
+        and technical projects.
     </p>
 
     <div class="grid">
@@ -309,50 +444,293 @@
             <h3>Mechanical Design</h3>
             <p>
                 3D CAD models, assemblies,
-                and technical drawings.
+                mechanical components,
+                and engineering drawings.
             </p>
         </div>
 
         <div class="card">
-            <h3>3D Printing & Prototyping</h3>
+            <h3>3D Printing</h3>
             <p>
-                Functional prototypes and
-                practical mechanical solutions.
+                Functional components,
+                practical prototypes,
+                and mechanical solutions.
             </p>
         </div>
 
         <div class="card">
             <h3>Automation Projects</h3>
             <p>
-                Electronics, controls, and
-                automation-related developments.
+                Electronics, microcontrollers,
+                control systems,
+                and technical experiments.
             </p>
         </div>
 
     </div>
+
 </section>
 
 <section id="contact">
+
     <h2>Professional Connections</h2>
 
     <p>
-        I welcome opportunities to connect
-        with professionals working in
-        engineering technology, industrial
-        operations, mechanical design,
+        Interested in connecting with professionals
+        working in engineering technology,
+        mechanical design,
+        industrial operations,
         and technical innovation.
     </p>
 
     <p>
-        Professional networking information
-        will be added here.
+        Professional contact information
+        will be added soon.
     </p>
+
 </section>
+
+</main>
 
 <footer>
     &copy; 2026 Lukas Rudolph.
-    Professional Portfolio.
+    Engineering & Technical Portfolio.
 </footer>
+
+<script type="module">
+
+import * as THREE from
+"https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js";
+
+const canvas = document.getElementById("model3d");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+    40, 1, 0.1, 100
+);
+
+camera.position.set(0, 0, 12);
+
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true
+});
+
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+);
+
+const ambient = new THREE.AmbientLight(
+    0x83b7ff, 2.0
+);
+
+scene.add(ambient);
+
+const keyLight = new THREE.DirectionalLight(
+    0xffffff, 3
+);
+
+keyLight.position.set(4, 6, 8);
+scene.add(keyLight);
+
+const rimLight = new THREE.PointLight(
+    0x28baff, 85
+);
+
+rimLight.position.set(-4, -2, 5);
+scene.add(rimLight);
+
+const metal = new THREE.MeshStandardMaterial({
+    color: 0x92a8c2,
+    metalness: 0.85,
+    roughness: 0.28
+});
+
+const blueMetal = new THREE.MeshStandardMaterial({
+    color: 0x158bdf,
+    metalness: 0.75,
+    roughness: 0.25
+});
+
+const darkMetal = new THREE.MeshStandardMaterial({
+    color: 0x344b63,
+    metalness: 0.8,
+    roughness: 0.32
+});
+
+const assembly = new THREE.Group();
+scene.add(assembly);
+
+function makeGear(radius, teeth, material) {
+
+    const shape = new THREE.Shape();
+
+    const root = radius * 0.84;
+    const tip = radius;
+    const steps = teeth * 4;
+
+    for (let i = 0; i <= steps; i++) {
+
+        const angle = i / steps * Math.PI * 2;
+
+        const part = i % 4;
+
+        const r = (
+            part === 1 || part === 2
+        ) ? tip : root;
+
+        const x = Math.cos(angle) * r;
+        const y = Math.sin(angle) * r;
+
+        if (i === 0) {
+            shape.moveTo(x, y);
+        } else {
+            shape.lineTo(x, y);
+        }
+    }
+
+    shape.closePath();
+
+    const hole = new THREE.Path();
+    hole.absarc(
+        0, 0, radius * 0.19,
+        0, Math.PI * 2, true
+    );
+
+    shape.holes.push(hole);
+
+    const geometry = new THREE.ExtrudeGeometry(
+        shape, {
+            depth: 0.36,
+            bevelEnabled: true,
+            bevelThickness: 0.07,
+            bevelSize: 0.05,
+            bevelSegments: 2,
+            steps: 1
+        }
+    );
+
+    geometry.center();
+
+    return new THREE.Mesh(geometry, material);
+}
+
+const mainGear = makeGear(
+    1.85, 24, metal
+);
+
+const smallGear = makeGear(
+    1.05, 14, blueMetal
+);
+
+mainGear.position.set(-0.75, 0.2, 0);
+
+smallGear.position.set(1.65, -0.75, 0);
+
+assembly.add(mainGear);
+assembly.add(smallGear);
+
+function cylinder(radius, depth, material) {
+
+    const geometry = new THREE.CylinderGeometry(
+        radius, radius, depth, 48
+    );
+
+    const mesh = new THREE.Mesh(
+        geometry, material
+    );
+
+    mesh.rotation.x = Math.PI / 2;
+
+    return mesh;
+}
+
+const hub1 = cylinder(
+    0.42, 0.58, darkMetal
+);
+
+hub1.position.copy(mainGear.position);
+hub1.position.z = 0.02;
+
+const hub2 = cylinder(
+    0.3, 0.58, metal
+);
+
+hub2.position.copy(smallGear.position);
+hub2.position.z = 0.02;
+
+assembly.add(hub1);
+assembly.add(hub2);
+
+const accentRing = new THREE.Mesh(
+    new THREE.TorusGeometry(
+        2.45, 0.012, 8, 120
+    ),
+    new THREE.MeshBasicMaterial({
+        color: 0x2e9fe8,
+        transparent: true,
+        opacity: 0.32
+    })
+);
+
+assembly.add(accentRing);
+
+const clock = new THREE.Clock();
+
+const reducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+function resize() {
+
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    if (!width || !height) return;
+
+    renderer.setSize(width, height, false);
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+}
+
+window.addEventListener("resize", resize);
+
+resize();
+
+function animate() {
+
+    const time = clock.getElapsedTime();
+
+    if (!reducedMotion) {
+
+        mainGear.rotation.z = time * 0.26;
+
+        smallGear.rotation.z =
+            -time * 0.26 * 24 / 14;
+
+        assembly.rotation.x =
+            -0.3 + Math.sin(time * 0.3) * 0.08;
+
+        assembly.rotation.y =
+            0.25 + Math.sin(time * 0.25) * 0.22;
+
+        accentRing.rotation.z = -time * 0.08;
+    }
+
+    renderer.render(scene, camera);
+
+    if (!reducedMotion) {
+        requestAnimationFrame(animate);
+    }
+}
+
+animate();
+
+</script>
 
 </body>
 </html>
