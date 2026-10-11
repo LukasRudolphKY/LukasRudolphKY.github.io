@@ -331,11 +331,11 @@ footer {
 
     <div class="model-area">
         <canvas id="model3d"
-                aria-label="Animated 3D mechanical gear assembly">
+                aria-label="Animated 3D precision gearbox showing synchronized gears and an exploded assembly sequence">
         </canvas>
 
         <div class="model-label">
-            MECHANICAL DESIGN // 3D VISUALIZATION
+            PRECISION GEARBOX // ASSEMBLY MOTION
         </div>
     </div>
 
@@ -535,238 +535,147 @@ footer {
 </footer>
 
 <script type="module">
-
-import * as THREE from
-"https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js";
 
 const canvas = document.getElementById("model3d");
-
 const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(
-    40, 1, 0.1, 100
-);
-
-camera.position.set(0, 0, 12);
-
-const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true,
-    alpha: true
-});
-
-renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio, 2)
-);
-
-const ambient = new THREE.AmbientLight(
-    0x83b7ff, 2.0
-);
-
-scene.add(ambient);
-
-const keyLight = new THREE.DirectionalLight(
-    0xffffff, 3
-);
-
-keyLight.position.set(4, 6, 8);
-scene.add(keyLight);
-
-const rimLight = new THREE.PointLight(
-    0x28baff, 85
-);
-
-rimLight.position.set(-4, -2, 5);
-scene.add(rimLight);
-
-const metal = new THREE.MeshStandardMaterial({
-    color: 0x92a8c2,
-    metalness: 0.85,
-    roughness: 0.28
-});
-
-const blueMetal = new THREE.MeshStandardMaterial({
-    color: 0x158bdf,
-    metalness: 0.75,
-    roughness: 0.25
-});
-
-const darkMetal = new THREE.MeshStandardMaterial({
-    color: 0x344b63,
-    metalness: 0.8,
-    roughness: 0.32
-});
-
+const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+camera.position.set(5.6, 4.4, 10.5);
+camera.lookAt(0, 0, 0);
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:"high-performance"});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.45;
+scene.add(new THREE.HemisphereLight(0xdcecff, 0x182b43, 2.4));
+const key = new THREE.DirectionalLight(0xffffff, 4.1);
+key.position.set(5, 7, 8); scene.add(key);
+const fill = new THREE.DirectionalLight(0x46baff, 2.8);
+fill.position.set(-5, 1, -4); scene.add(fill);
+const steel = new THREE.MeshStandardMaterial({color:0xb5c5d6, metalness:0.86, roughness:0.27});
+const machined = new THREE.MeshStandardMaterial({color:0x7e97ae, metalness:0.88, roughness:0.32});
+const dark = new THREE.MeshStandardMaterial({color:0x263c52, metalness:0.78, roughness:0.36});
+const blue = new THREE.MeshStandardMaterial({color:0x168dca, metalness:0.73, roughness:0.3});
+const edge = new THREE.MeshStandardMaterial({color:0x8dd6ff, metalness:0.65, roughness:0.27});
 const assembly = new THREE.Group();
+assembly.rotation.set(-0.12, -0.28, 0);
 scene.add(assembly);
 
-function makeGear(radius, teeth, material) {
-
-    const shape = new THREE.Shape();
-
-    const root = radius * 0.84;
-    const tip = radius;
-    const steps = teeth * 4;
-
-    for (let i = 0; i <= steps; i++) {
-
-        const angle = i / steps * Math.PI * 2;
-
-        const part = i % 4;
-
-        const r = (
-            part === 1 || part === 2
-        ) ? tip : root;
-
-        const x = Math.cos(angle) * r;
-        const y = Math.sin(angle) * r;
-
-        if (i === 0) {
-            shape.moveTo(x, y);
-        } else {
-            shape.lineTo(x, y);
-        }
-    }
-
-    shape.closePath();
-
-    const hole = new THREE.Path();
-    hole.absarc(
-        0, 0, radius * 0.19,
-        0, Math.PI * 2, true
-    );
-
-    shape.holes.push(hole);
-
-    const geometry = new THREE.ExtrudeGeometry(
-        shape, {
-            depth: 0.36,
-            bevelEnabled: true,
-            bevelThickness: 0.07,
-            bevelSize: 0.05,
-            bevelSegments: 2,
-            steps: 1
-        }
-    );
-
-    geometry.center();
-
-    return new THREE.Mesh(geometry, material);
+function cylinder(r, length, mat, segments=48) {
+  return new THREE.Mesh(new THREE.CylinderGeometry(r,r,length,segments),mat);
 }
-
-const mainGear = makeGear(
-    1.85, 24, metal
-);
-
-const smallGear = makeGear(
-    1.05, 14, blueMetal
-);
-
-mainGear.position.set(-0.75, 0.2, 0);
-
-smallGear.position.set(1.65, -0.75, 0);
-
-assembly.add(mainGear);
-assembly.add(smallGear);
-
-function cylinder(radius, depth, material) {
-
-    const geometry = new THREE.CylinderGeometry(
-        radius, radius, depth, 48
-    );
-
-    const mesh = new THREE.Mesh(
-        geometry, material
-    );
-
-    mesh.rotation.x = Math.PI / 2;
-
-    return mesh;
+function ring(outer,inner,depth,mat) {
+  const shape = new THREE.Shape();
+  shape.absarc(0,0,outer,0,Math.PI*2,false);
+  const hole = new THREE.Path();
+  hole.absarc(0,0,inner,0,Math.PI*2,true);
+  shape.holes.push(hole);
+  const g = new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelThickness:0.025,bevelSize:0.025,bevelSegments:2,curveSegments:64});
+  g.translate(0,0,-depth/2);
+  return new THREE.Mesh(g,mat);
 }
-
-const hub1 = cylinder(
-    0.42, 0.58, darkMetal
-);
-
-hub1.position.copy(mainGear.position);
-hub1.position.z = 0.02;
-
-const hub2 = cylinder(
-    0.3, 0.58, metal
-);
-
-hub2.position.copy(smallGear.position);
-hub2.position.z = 0.02;
-
-assembly.add(hub1);
-assembly.add(hub2);
-
-const accentRing = new THREE.Mesh(
-    new THREE.TorusGeometry(
-        2.45, 0.012, 8, 120
-    ),
-    new THREE.MeshBasicMaterial({
-        color: 0x2e9fe8,
-        transparent: true,
-        opacity: 0.32
-    })
-);
-
-assembly.add(accentRing);
-
-const clock = new THREE.Clock();
-
-const reducedMotion =
-    window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-function resize() {
-
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-
-    if (!width || !height) return;
-
-    renderer.setSize(width, height, false);
-
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
+function gear(radius,teeth,mat) {
+  const shape = new THREE.Shape();
+  const root=radius*0.86, tip=radius;
+  for(let i=0;i<=teeth*4;i++){
+    const a=(i/(teeth*4))*Math.PI*2;
+    const r=(i%4===1||i%4===2)?tip:root;
+    const x=Math.cos(a)*r,y=Math.sin(a)*r;
+    if(i===0)shape.moveTo(x,y); else shape.lineTo(x,y);
+  }
+  const hole=new THREE.Path(); hole.absarc(0,0,0.21,0,Math.PI*2,true); shape.holes.push(hole);
+  const geo=new THREE.ExtrudeGeometry(shape,{depth:0.33,bevelEnabled:true,bevelThickness:0.035,bevelSize:0.028,bevelSegments:2,steps:1});
+  geo.translate(0,0,-0.165);
+  return new THREE.Mesh(geo,mat);
 }
-
-window.addEventListener("resize", resize);
-
+const rotor = new THREE.Group();
+assembly.add(rotor);
+const g1 = new THREE.Group(), g2 = new THREE.Group();
+g1.position.x=-1.04; g2.position.x=1.04;
+rotor.add(g1,g2);
+g1.add(gear(1.43,24,steel));
+g2.add(gear(0.91,16,blue));
+for(const [group,r] of [[g1,0.39],[g2,0.33]]){
+  const hub=cylinder(r,0.58,dark); hub.rotation.x=Math.PI/2; group.add(hub);
+  const collar=ring(r*1.12,r*0.69,0.12,machined); collar.position.z=0.33;group.add(collar);
+  for(let i=0;i<6;i++){
+    const a=i*Math.PI/3;
+    const hole=cylinder(0.065,0.05,dark,20);hole.rotation.x=Math.PI/2;
+    hole.position.set(Math.cos(a)*r*0.72,Math.sin(a)*r*0.72,0.34);
+    group.add(hole);
+  }
+}
+const shafts=[];
+for(const [x,r] of [[-1.04,0.17],[1.04,0.15]]){
+  const shaft=cylinder(r,2.65,steel,40); shaft.rotation.x=Math.PI/2;shaft.position.set(x,0,0);
+  assembly.add(shaft); shafts.push(shaft);
+}
+const front = new THREE.Group(), back = new THREE.Group();
+assembly.add(front,back);
+for(const [part,z] of [[front,0.82],[back,-0.82]]){
+  const frame=ring(2.83,2.64,0.19,dark);
+  frame.position.set(0,0,z);part.add(frame);
+  for(let i=0;i<8;i++){
+    const a=i*Math.PI/4;
+    const bolt=cylinder(0.11,0.16,steel,20);
+    bolt.rotation.x=Math.PI/2;
+    bolt.position.set(Math.cos(a)*2.73,Math.sin(a)*2.73,z+0.12);
+    part.add(bolt);
+  }
+  for(const x of [-1.04,1.04]){
+    const bearing=ring(0.42,0.2,0.19,machined);
+    bearing.position.set(x,0,z);part.add(bearing);
+    const inner=ring(0.29,0.2,0.21,edge);
+    inner.position.set(x,0,z+0.015);part.add(inner);
+  }
+}
+const frameStruts=[];
+for(let i=0;i<8;i++){
+  const a=i*Math.PI/4;
+  const strut=cylinder(0.085,1.65,machined,16);
+  strut.rotation.x=Math.PI/2;
+  strut.position.set(Math.cos(a)*2.73,Math.sin(a)*2.73,0);
+  assembly.add(strut);frameStruts.push(strut);
+}
+const baseLine=new THREE.Mesh(new THREE.TorusGeometry(3.3,0.009,6,120),new THREE.MeshBasicMaterial({color:0x43baff,transparent:true,opacity:0.26}));
+baseLine.position.z=-1.5;assembly.add(baseLine);
+const motionQuery=window.matchMedia("(prefers-reduced-motion: reduce)");
+let reduced=motionQuery.matches;
+motionQuery.addEventListener?.("change",e=>{reduced=e.matches; if(!reduced)requestAnimationFrame(animate);else renderFrame(0);});
+function resize(){
+  const w=canvas.clientWidth,h=canvas.clientHeight;
+  if(!w||!h)return;
+  renderer.setSize(w,h,false);
+  camera.aspect=w/h;
+  camera.position.z=w<450?13.5:10.5;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener("resize",resize);
+const clock=new THREE.Clock();
+function renderFrame(t){
+  // 10-second cycle: assemble, operate, explode, return.
+  const cycle=t%12;
+  const smooth=v=>{v=Math.max(0,Math.min(1,v));return v*v*(3-2*v);};
+  const separation=smooth((cycle-5.2)/1.9)*(1-smooth((cycle-9.3)/1.8));
+  front.position.z=separation*1.75;
+  back.position.z=-separation*1.75;
+  g1.position.z=separation*0.37;
+  g2.position.z=-separation*0.37;
+  shafts[0].position.z=separation*0.65;
+  shafts[1].position.z=-separation*0.65;
+  for(const s of frameStruts)s.scale.y=1+separation*0.55;
+  g1.rotation.z=t*0.38;
+  g2.rotation.z=-t*0.38*24/16+Math.PI/16;
+  assembly.rotation.y=-0.28+Math.sin(t*0.22)*0.15;
+  assembly.rotation.x=-0.12+Math.sin(t*0.17)*0.06;
+  renderer.render(scene,camera);
+}
+function animate(){
+  renderFrame(clock.getElapsedTime());
+  if(!reduced)requestAnimationFrame(animate);
+}
 resize();
-
-function animate() {
-
-    const time = clock.getElapsedTime();
-
-    if (!reducedMotion) {
-
-        mainGear.rotation.z = time * 0.26;
-
-        smallGear.rotation.z =
-            -time * 0.26 * 24 / 14;
-
-        assembly.rotation.x =
-            -0.3 + Math.sin(time * 0.3) * 0.08;
-
-        assembly.rotation.y =
-            0.25 + Math.sin(time * 0.25) * 0.22;
-
-        accentRing.rotation.z = -time * 0.08;
-    }
-
-    renderer.render(scene, camera);
-
-    if (!reducedMotion) {
-        requestAnimationFrame(animate);
-    }
-}
-
-animate();
-
+if(reduced)renderFrame(0);else animate();
 </script>
 
 </body>
