@@ -1,62 +1,358 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lukas Rudolph is an industrial technical professional specializing in CAD design, automation, and engineering technology.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lukas Rudolph | Industrial Technical Specialist</title>
+<meta name="description" content="Explore the professional portfolio of Lukas Rudolph, an industrial technical specialist with experience in CAD design, industrial automation, mechanical systems, and engineering technology.">
+
+<meta name="author" content="Lukas Rudolph">
+
+<title>Lukas Rudolph | Industrial Technical Specialist</title>
+
+<style>
+    :root {
+        --navy: #0b1525;
+        --navy-light: #14243b;
+        --blue: #4da3ff;
+        --white: #ffffff;
+        --gray: #b9c5d6;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--navy);
+        color: var(--white);
+        line-height: 1.7;
+    }
+
+    header {
+        background: #08111e;
+        padding: 22px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    nav a {
+        color: var(--gray);
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        color: var(--blue);
+    }
+
+    .hero {
+        padding: 110px 8%;
+        background: linear-gradient(
+            135deg,
+            #0b1525,
+            #193456
+        );
+    }
+
+    .hero h1 {
+        font-size: clamp(38px, 6vw, 64px);
+        margin: 0;
+        line-height: 1.15;
+    }
+
+    .hero h2 {
+        color: var(--blue);
+        font-size: 23px;
+        font-weight: normal;
+        margin-top: 20px;
+    }
+
+    .hero p {
+        max-width: 720px;
+        color: var(--gray);
+        font-size: 18px;
+    }
+
+    .button {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 13px 28px;
+        background: var(--blue);
+        color: #08111e;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 6px;
+    }
+
+    .button:hover {
+        background: #85c1ff;
+    }
+
+    section {
+        padding: 75px 8%;
+        max-width: 1400px;
+        margin: auto;
+    }
+
+    section h2 {
+        color: var(--blue);
+        font-size: 30px;
+        margin-bottom: 25px;
+    }
+
+    section p {
+        color: var(--gray);
+        max-width: 950px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(240px, 1fr)
+        );
+        gap: 25px;
+        margin-top: 35px;
+    }
+
+    .card {
+        background: var(--navy-light);
+        padding: 28px;
+        border-radius: 10px;
+        border: 1px solid #263d5c;
+    }
+
+    .card h3 {
+        color: var(--white);
+        margin-top: 0;
+    }
+
+    .card p {
+        font-size: 15px;
+        color: var(--gray);
+    }
+
+    .highlight {
+        border-left: 4px solid var(--blue);
+        padding-left: 20px;
+        margin-top: 30px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 35px 20px;
+        background: #08111e;
+        color: var(--gray);
+        font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+        header {
+            justify-content: center;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 8px;
+        }
+
+        .hero {
+            padding: 75px 7%;
+        }
+
+        section {
+            padding: 55px 7%;
+        }
+    }
+</style>
 </head>
 
 <body>
 
+<header>
+    <div class="logo">LUKAS RUDOLPH</div>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Connect</a>
+    </nav>
+</header>
+
+<div class="hero">
     <h1>Lukas Rudolph</h1>
 
-    <h2>Industrial Technical Specialist | CAD & Automation</h2>
+    <h2>
+        Industrial Technical Specialist |
+        CAD Design | Engineering Technology
+    </h2>
 
     <p>
-        Welcome to my professional website.
+        Bridging hands-on industrial experience
+        with modern engineering design,
+        technical problem-solving, and automation.
+    </p>
+
+    <a href="#projects" class="button">
+        Explore My Work
+    </a>
+</div>
+
+<section id="about">
+    <h2>Professional Profile</h2>
+
+    <p>
+        I am an industrial technical professional
+        with a background in industrial maintenance,
+        mechanical systems, automation, and
+        specialized technical operations.
     </p>
 
     <p>
-        I am an industrial technical professional with experience
-        in industrial maintenance, automation, technical design,
-        and engineering support.
+        My experience includes supporting technical
+        operations in complex industrial environments,
+        including work associated with nuclear
+        facility cleanup.
     </p>
 
     <p>
-        My technical interests include SolidWorks, AutoCAD,
-        mechanical design, 3D printing, and industrial technology.
+        I combine practical field experience with
+        computer-aided design, mechanical modeling,
+        and an ongoing focus on engineering technology.
     </p>
 
-    <h2>Professional Experience</h2>
+    <div class="highlight">
+        <p>
+            My professional interests center on
+            solving difficult technical problems,
+            improving processes, and developing
+            practical engineering solutions.
+        </p>
+    </div>
+</section>
+
+<section id="expertise">
+    <h2>Technical Expertise</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>CAD & Mechanical Design</h3>
+            <p>
+                SolidWorks, AutoCAD, Autodesk Inventor,
+                3D modeling, engineering drawings,
+                and mechanical assemblies.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Industrial Technology</h3>
+            <p>
+                Industrial maintenance, mechanical
+                troubleshooting, technical operations,
+                and equipment systems.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Automation & Controls</h3>
+            <p>
+                Industrial automation, control
+                systems, electronics, and practical
+                automation applications.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Technical Development</h3>
+            <p>
+                3D printing, prototyping, mechanical
+                fabrication, technical documentation,
+                and engineering support.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section id="projects">
+    <h2>Engineering & Technical Projects</h2>
 
     <p>
-        My background includes industrial maintenance,
-        technical operations, automation, and specialized
-        technical work supporting nuclear facility cleanup.
+        This section will feature selected
+        CAD models, mechanical designs,
+        prototypes, and technical projects.
     </p>
 
-    <h2>Technical Skills</h2>
+    <div class="grid">
 
-    <ul>
-        <li>AutoCAD</li>
-        <li>SolidWorks</li>
-        <li>Autodesk Inventor</li>
-        <li>Mechanical Design and Drafting</li>
-        <li>Industrial Maintenance</li>
-        <li>Industrial Automation</li>
-        <li>3D Printing and Prototyping</li>
-    </ul>
+        <div class="card">
+            <h3>Mechanical Design</h3>
+            <p>
+                3D CAD models, assemblies,
+                and technical drawings.
+            </p>
+        </div>
 
-    <h2>Projects</h2>
+        <div class="card">
+            <h3>3D Printing & Prototyping</h3>
+            <p>
+                Functional prototypes and
+                practical mechanical solutions.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Automation Projects</h3>
+            <p>
+                Electronics, controls, and
+                automation-related developments.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Professional Connections</h2>
 
     <p>
-        Selected technical projects and design work
-        will be featured here soon.
+        I welcome opportunities to connect
+        with professionals working in
+        engineering technology, industrial
+        operations, mechanical design,
+        and technical innovation.
     </p>
+
+    <p>
+        Professional networking information
+        will be added here.
+    </p>
+</section>
+
+<footer>
+    &copy; 2026 Lukas Rudolph.
+    Professional Portfolio.
+</footer>
 
 </body>
-
 </html>
