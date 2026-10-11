@@ -288,9 +288,9 @@ footer {
 </style>
 </head>
 
-<body>\n<div style="background:#122d42;color:#eaf6ff;padding:12px 7%;font:14px Arial,sans-serif;border-bottom:1px solid #43baff"><strong>DESIGN PREVIEW — NOT PUBLISHED AS HOMEPAGE</strong> · <a href="/" style="color:#77d4ff">Return to live website</a></div>
+<body>\n<div style="background:#122d42;color:#eaf6ff;padding:12px 7%;font:14px Arial,sans-serif;border-bottom:1px solid #43baff"><strong>REAL CAD MODEL PREVIEW — HOMEPAGE UNCHANGED</strong> · <a href="/" style="color:#77d4ff">Return to live website</a></div>
 
-<header>
+<div style="background:#09192b;color:#b8cfe2;padding:8px 7%;font:12px Arial,sans-serif">CAD gearbox model by Designer BoI (CC BY), hosted on Sketchfab. Rotating 3D preview; exploded animation not yet implemented. <a href="https://sketchfab.com/3d-models/gearbox-assembly-5c59e88ece0340d4a5b01b6c8496aafe" style="color:#77d4ff" target="_blank" rel="noopener">Source and attribution</a>.</div><header>
     <div class="logo">LUKAS RUDOLPH</div>
 
     <nav>
@@ -335,7 +335,7 @@ footer {
         </canvas>
 
         <div class="model-label">
-            HELICAL GEARBOX // EXPLODED ASSEMBLY
+            REAL CAD GEARBOX // INTERACTIVE MODEL
         </div>
     </div>
 
@@ -534,142 +534,16 @@ footer {
     Engineering & Technical Portfolio.
 </footer>
 
-<script type="module">
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js";
-const canvas=document.querySelector("#model3d");
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(36,1,.1,100);
-camera.position.set(7.2,5.3,10.8);camera.lookAt(0,0,0);
-const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:"high-performance"});
-renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.8));
-renderer.outputColorSpace=THREE.SRGBColorSpace;
-renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.35;
-scene.add(new THREE.HemisphereLight(0xddeeff,0x142235,2.6));
-function light(c,i,x,y,z){const l=new THREE.DirectionalLight(c,i);l.position.set(x,y,z);scene.add(l)}
-light(0xffffff,4.2,5,8,9);light(0x65baff,2.8,-7,2,-4);light(0xffffff,1.7,0,-5,7);
-const mat=(color,metalness=.85,roughness=.29)=>new THREE.MeshStandardMaterial({color,metalness,roughness});
-const alloy=mat(0xb9c3ca,.92,.24),cut=mat(0x8b9ba6,.91,.29),dark=mat(0x303e4b,.85,.35),edge=mat(0xdde7ed,.9,.2),bronze=mat(0x9a866d,.83,.3),seal=mat(0x1b2834,.28,.65),blue=mat(0x347fa5,.85,.31);
-const root=new THREE.Group();scene.add(root);root.rotation.set(-.16,-.24,.06);
-function mesh(g,m,parent=root){const o=new THREE.Mesh(g,m);parent.add(o);return o}
-function cyl(r,h,m,parent=root,n=64){return mesh(new THREE.CylinderGeometry(r,r,h,n),m,parent)}
-function torus(R,r,m,parent=root){return mesh(new THREE.TorusGeometry(R,r,12,72),m,parent)}
-function ring(R,r,d,m,parent=root){
- const s=new THREE.Shape();s.absarc(0,0,R,0,Math.PI*2,false);
- const hole=new THREE.Path();hole.absarc(0,0,r,0,Math.PI*2,true);s.holes.push(hole);
- const g=new THREE.ExtrudeGeometry(s,{depth:d,bevelEnabled:true,bevelSize:.022,bevelThickness:.022,bevelSegments:2,curveSegments:80});
- g.translate(0,0,-d/2);return mesh(g,m,parent);
-}
-function box(x,y,z,m,parent=root){return mesh(new THREE.BoxGeometry(x,y,z),m,parent)}
-function bolt(parent,x,y,z){
- const head=cyl(.105,.105,edge,parent,6);head.rotation.x=Math.PI/2;head.position.set(x,y,z);
- const recess=cyl(.045,.008,dark,parent,6);recess.rotation.x=Math.PI/2;recess.position.set(x,y,z+.057);
-}
-function helicalGear(radius,teeth,width,parent,material){
- // Dense tooth profile with a controlled twist across the gear face.
- const rootR=radius*.855,outer=radius,segments=teeth*8,layers=7;
- const verts=[],indices=[];
- for(let j=0;j<=layers;j++){
-  const z=(j/layers-.5)*width,twist=(j/layers-.5)*.16;
-  for(let i=0;i<segments;i++){
-   const a=i/segments*Math.PI*2+twist;
-   const f=(i%8);
-   const r=(f===0||f===7)?rootR:(f===1||f===6)?radius*.9:outer;
-   verts.push(Math.cos(a)*r,Math.sin(a)*r,z);
-  }
- }
- for(let j=0;j<layers;j++)for(let i=0;i<segments;i++){
-  const k=j*segments+i,n=j*segments+(i+1)%segments;
-  indices.push(k,n,k+segments,n,n+segments,k+segments);
- }
- const s=new THREE.Shape();s.absarc(0,0,rootR,0,Math.PI*2,false);
- const h=new THREE.Path();h.absarc(0,0,.26,0,Math.PI*2,true);s.holes.push(h);
- const core=new THREE.ExtrudeGeometry(s,{depth:width,bevelEnabled:true,bevelSize:.03,bevelThickness:.025,bevelSegments:2,curveSegments:96});
- core.translate(0,0,-width/2);
- const group=new THREE.Group();parent.add(group);
- mesh(core,material,group);
- const g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(verts,3));g.setIndex(indices);g.computeVertexNormals();
- mesh(g,new THREE.MeshStandardMaterial({color:material.color,metalness:.92,roughness:.28,side:THREE.DoubleSide}),group);
- for(const side of [-1,1]){
-  const face=ring(radius*.69,.32,.05,cut,group);face.position.z=side*(width/2+.026);
-  const hub=ring(.44,.24,.13,edge,group);hub.position.z=side*(width/2+.085);
-  for(let i=0;i<6;i++){
-   const a=i*Math.PI/3;
-   const port=cyl(.12,.013,dark,group,32);port.rotation.x=Math.PI/2;
-   port.position.set(Math.cos(a)*radius*.51,Math.sin(a)*radius*.51,side*(width/2+.059));
-  }
- }
- return group;
-}
-const gearTrain=new THREE.Group();root.add(gearTrain);
-const left=new THREE.Group(),right=new THREE.Group();gearTrain.add(left,right);
-left.position.x=-1.02;right.position.x=1.02;
-const g1=helicalGear(1.42,28,.54,left,alloy);
-const g2=helicalGear(.88,18,.54,right,bronze);
-for(const [group] of [[left],[right]]){
- const shaft=cyl(.23,2.9,cut,group);shaft.rotation.x=Math.PI/2;
- const shoulder=cyl(.34,.16,edge,group);shoulder.rotation.x=Math.PI/2;shoulder.position.z=.57;
- const key=box(.11,.07,.58,edge,group);key.position.set(0,.24,.85);
-}
-const front=new THREE.Group(),back=new THREE.Group();root.add(front,back);
-function bearing(parent,x,z){
- const mount=ring(.55,.25,.28,dark,parent);mount.position.set(x,0,z);
- const outer=ring(.46,.36,.22,edge,parent);outer.position.set(x,0,z+.035);
- const inner=ring(.30,.235,.23,alloy,parent);inner.position.set(x,0,z+.045);
- for(let i=0;i<11;i++){
-  const a=i*Math.PI*2/11;
-  const ball=mesh(new THREE.SphereGeometry(.07,12,8),edge,parent);
-  ball.position.set(x+Math.cos(a)*.335,Math.sin(a)*.335,z+.16);
- }
- const gasket=ring(.57,.52,.03,seal,parent);gasket.position.set(x,0,z+.18);
-}
-function plate(parent,z,frontFace){
- const plate=ring(2.74,2.46,.23,dark,parent);plate.position.z=z;
- const lip=ring(2.57,2.45,.10,cut,parent);lip.position.z=z+.13;
- for(let i=0;i<10;i++){
-  const a=i*Math.PI*2/10,x=Math.cos(a)*2.62,y=Math.sin(a)*2.62;
-  bolt(parent,x,y,z+(frontFace?.19:-.13));
- }
- for(const x of [-1.02,1.02])bearing(parent,x,z+.14);
-}
-plate(front,.93,true);plate(back,-1.12,false);
-const shell=new THREE.Group();root.add(shell);
-for(let i=0;i<10;i++){
- const a=i*Math.PI*2/10;
- const beam=cyl(.11,1.96,cut,shell,24);beam.rotation.x=Math.PI/2;
- beam.position.set(Math.cos(a)*2.63,Math.sin(a)*2.63,0);
- const washer=cyl(.16,.035,bronze,shell,32);washer.rotation.x=Math.PI/2;
- washer.position.set(Math.cos(a)*2.63,Math.sin(a)*2.63,.88);
-}
-const foot1=box(1.15,.23,.62,dark,shell),foot2=box(1.15,.23,.62,dark,shell);
-foot1.position.set(-1.5,-2.67,-.1);foot2.position.set(1.5,-2.67,-.1);
-const indicator=torus(3.2,.008,new THREE.MeshBasicMaterial({color:0x56baff,transparent:true,opacity:.2}));
-indicator.position.z=-1.5;
-let reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-const mq=matchMedia("(prefers-reduced-motion: reduce)");
-mq.addEventListener?.("change",e=>{reduce=e.matches;if(!reduce)requestAnimationFrame(tick);else draw(0)});
-function resize(){
- const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;
- renderer.setSize(w,h,false);camera.aspect=w/h;
- camera.position.set(w<460?8.7:7.2,w<460?6.4:5.3,w<460?14.2:10.8);camera.updateProjectionMatrix();
-}
-addEventListener("resize",resize);
-const clock=new THREE.Clock();
-function smooth(v){v=Math.max(0,Math.min(1,v));return v*v*(3-2*v)}
-function draw(t){
- const p=t%14;
- const explode=smooth((p-5)/2.4)*(1-smooth((p-10.1)/2.3));
- front.position.z=explode*1.9;back.position.z=-explode*1.85;
- left.position.z=explode*.52;right.position.z=-explode*.46;
- left.position.x=-1.02-explode*.33;right.position.x=1.02+explode*.33;
- shell.scale.z=1+explode*.45;
- g1.rotation.z=t*.36;g2.rotation.z=-t*.36*28/18+Math.PI/18;
- root.rotation.y=-.24+Math.sin(t*.19)*.12;
- root.rotation.x=-.16+Math.sin(t*.15)*.055;
- renderer.render(scene,camera);
-}
-function tick(){draw(clock.getElapsedTime());if(!reduce)requestAnimationFrame(tick)}
-resize();if(reduce)draw(0);else tick();
+<script>
+const canvas=document.getElementById("model3d");
+canvas.style.display="none";
+const frame=document.createElement("iframe");
+frame.title="Detailed CAD gearbox assembly by Designer BoI on Sketchfab";
+frame.src="https://sketchfab.com/models/5c59e88ece0340d4a5b01b6c8496aafe/embed?autostart=1&autospin=0.18&ui_controls=1&ui_infos=0&transparent=1";
+frame.allow="autoplay; fullscreen; xr-spatial-tracking";
+frame.setAttribute("allowfullscreen","");
+frame.style.cssText="display:block;width:100%;height:100%;border:0;border-radius:12px;background:#0b1929";
+canvas.parentNode.insertBefore(frame,canvas);
 </script>
 
 </body>
