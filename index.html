@@ -347,6 +347,55 @@ footer {
     }
     .model-area { width: 100%; aspect-ratio: 2.34 / 1; height: auto; }
 }
+
+/* Homepage value proposition: highlight breadth without overpowering the gearbox. */
+.hero .hero-value-statement {
+    max-width: 650px;
+    font-size: clamp(23px, 2.45vw, 34px);
+    line-height: 1.28;
+    font-weight: 700;
+    margin: 18px 0 18px;
+    text-wrap: balance;
+}
+.hero .hero-value-detail {
+    max-width: 620px;
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0 0 19px;
+}
+.hero-experience {
+    max-width: 630px;
+    margin: 15px 0 9px;
+}
+.hero-experience-label {
+    display: block;
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+.hero-experience-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.hero-experience-list li {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(16, 30, 50, .8);
+    color: #d6e9f9;
+    padding: 5px 11px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+@media (max-width: 800px) {
+    .hero .hero-value-statement { font-size: clamp(23px, 5vw, 31px); }
+    .hero .hero-value-detail { font-size: 15px; }
+}
 </style>
 </head>
 
@@ -375,17 +424,28 @@ footer {
 
         <h1>Lukas<br>Rudolph</h1>
 
-        <h2>
-            Industrial Technology<br>
-            CAD Design & Automation
+        <h2 class="hero-value-statement">
+            Bridging the Shop Floor and the Design Desk
+            to Solve Real-World Industrial Problems.
         </h2>
 
-        <p>
-            Bridging hands-on industrial experience
-            with modern engineering design,
-            mechanical systems, and
-            technical innovation.
+        <p class="hero-value-detail">
+            I combine hands-on industrial experience with CAD design,
+            automation, and practical problem-solving to design,
+            build, and improve systems that work in the real world.
         </p>
+
+        <div class="hero-experience" aria-label="Professional experience areas">
+            <span class="hero-experience-label">EXPERIENCE ACROSS</span>
+            <ul class="hero-experience-list">
+                <li>Industrial Maintenance</li>
+                <li>Automation</li>
+                <li>Nuclear-Site Technical Operations</li>
+                <li>Mechanical Design</li>
+                <li>3D Printing</li>
+                <li>Process Improvement</li>
+            </ul>
+        </div>
 
         <a class="button" href="#projects">
             EXPLORE MY WORK →
