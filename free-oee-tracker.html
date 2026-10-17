@@ -21,17 +21,39 @@
 header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:16px max(4%,calc((100% - 1200px)/2));border-bottom:1px solid var(--line);background:#060d18}
 header a{color:var(--muted);text-decoration:none}header a:hover{color:var(--blue)}.brand{font-weight:800;color:var(--blue);letter-spacing:2px}.toplinks{display:flex;gap:25px;flex-wrap:wrap;font-size:14px}
 main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase}h1{font-size:clamp(34px,5vw,58px);margin:12px 0;line-height:1.1}h2{font-size:23px;margin:0 0 10px;color:var(--blue)}h3{margin:0 0 10px}.intro{max-width:850px;color:var(--muted);font-size:18px;margin:12px 0 28px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:25px;margin:22px 0;box-shadow:0 15px 35px #00000016}.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field label{font-size:13px;font-weight:700;color:#d5e6fa}input{width:100%;background:#081626;color:white;border:1px solid #385772;border-radius:8px;min-height:43px;padding:10px 11px;font:inherit}input:focus{outline:2px solid var(--blue);outline-offset:1px}input::placeholder{color:#7f96ae}.hint{color:var(--muted);font-size:13px}.small{font-size:12px}.sectionhead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}.controls{display:flex;gap:9px;flex-wrap:wrap}.btn{background:var(--blue);border:1px solid var(--blue);border-radius:8px;color:#06101d;padding:11px 16px;cursor:pointer;font-weight:800;font-size:14px;text-decoration:none;display:inline-block;transition:background .15s}.btn:hover{background:#92dbff}.btn.secondary{background:#173149;color:#d7ecff;border-color:#3b6685}.btn.secondary:hover{background:#23445e}.btn.danger{background:transparent;color:#ffbdc6;border-color:#9e5560}.btn:disabled{opacity:.5;cursor:not-allowed}.row{position:relative;background:#0b192a;border:1px solid var(--line);padding:16px;border-radius:11px;margin-bottom:14px}.row-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}.row-number{font-size:13px;font-weight:800;letter-spacing:1.3px;color:var(--blue)}.row-fields{display:grid;grid-template-columns:1.6fr repeat(4,minmax(0,1fr));gap:12px}.row button{padding:6px 10px;font-size:12px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.scores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}.score{padding:18px;background:var(--panel2);border:1px solid var(--line);border-radius:12px}.score .label{font-size:12px;text-transform:uppercase;color:var(--muted);letter-spacing:1px;font-weight:700}.score strong{display:block;font-size:clamp(26px,3vw,40px);line-height:1.4}.score.highlight{border-color:var(--blue);background:#14334a}.score.highlight strong{color:var(--blue)}.summary{color:#d4e3f4}.statline{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:18px}.statline span{font-size:14px;color:var(--muted)}.statline strong{color:#fff}.status{margin-top:16px;padding:12px 14px;border-left:3px solid var(--blue);border-radius:5px;background:#112a3d;color:#e0efff}.status.warning{border-color:var(--warn);background:#322719}.status.error{border-color:#ff838d;background:#351d25}.note{color:var(--muted);font-size:14px}.helpgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.history th{color:var(--muted)}.tablewrap{overflow-x:auto}footer{text-align:center;padding:28px;color:var(--muted);border-top:1px solid var(--line);font-size:13px}.sr{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}@media(max-width:1000px){.row-fields{grid-template-columns:repeat(3,minmax(0,1fr))}.meta{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.row-fields,.meta,.scores,.helpgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.field.name{grid-column:1/-1}.scores{gap:8px}.score{padding:12px}.score strong{font-size:26px}.panel{padding:18px}main{padding:28px 12px 55px}}@media print{header,.controls,.actions,.no-print,.row button,footer{display:none!important}body{background:#fff;color:#111}.panel,.row,.score{background:#fff;color:#111;border-color:#bbb;box-shadow:none}.score strong,.score.highlight strong,h2,.tag{color:#111}.hint,.note,.field label,.score .label,.statline span{color:#333}input{color:#111;background:#fff;border-color:#aaa}.scores{grid-template-columns:repeat(4,1fr)}}
+.agreement-gate{border-color:var(--blue);background:linear-gradient(125deg,#112b42,#101e32)}
+.agreement-gate h2{font-size:25px}.agreement-gate p{color:#dae9fa}
+.legal-check{display:flex;align-items:flex-start;gap:13px;cursor:pointer;background:#0b1e30;border:1px solid #3b6481;border-radius:9px;padding:17px;font-size:15px;line-height:1.55}
+.legal-check input{width:22px;height:22px;min-height:22px;flex:none;accent-color:#43baff;margin:2px 0}
+.legal-check a,.legal-warning a{color:var(--blue)}
+.legal-warning{padding:13px 16px;border-left:4px solid #ffcd77;background:#2c261d;border-radius:6px;color:#f7e8ca!important;font-size:14px}
+.legal-gate-note{font-size:13px!important;color:var(--muted)!important}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
 <header>
   <div class="brand">FORGE10 <span style="font-weight:400;color:#c4d8eb;letter-spacing:0">/ Lukas Rudolph</span></div>
-  <nav class="toplinks" aria-label="Site navigation"><a href="index.html">← Portfolio</a><a href="#tracker">OEE Tracker</a><a href="#how-it-works">How It Works</a></nav>
+  <nav class="toplinks" aria-label="Site navigation"><a href="index.html">← Portfolio</a><a href="#tracker">OEE Tracker</a><a href="#how-it-works">How It Works</a><a href="terms-of-use.html">Terms</a><a href="privacy-notice.html">Privacy</a></nav>
 </header>
 <main>
   <div class="tag">Free manufacturing productivity tool · No sign-up</div>
   <h1>Free OEE Tracker &amp; Calculator</h1>
   <p class="intro">Calculate your production line's end-of-day <strong>Overall Equipment Effectiveness (OEE)</strong> across up to 10 components. Enter ideal and recorded cycle times, production quantities, downtime, and rejects. Get an actionable daily score.</p>
+  <section id="legal-gate" class="panel agreement-gate" aria-labelledby="agreement-title">
+    <div class="tag">Required before using the free tracker</div>
+    <h2 id="agreement-title">Review and accept the terms</h2>
+    <p>This is a free informational manufacturing tool, not a certified production or compliance system. Results depend on the inputs and assumptions, and calculations must be independently verified before any business, financial, quality, safety, or regulatory decisions.</p>
+    <form id="legal-consent-form">
+      <label class="legal-check" for="legal-consent-check">
+        <input id="legal-consent-check" type="checkbox" required>
+        <span>I have reviewed and agree to the <a href="terms-of-use.html" target="_blank" rel="noopener noreferrer">Terms of Use</a>, acknowledge the <a href="privacy-notice.html" target="_blank" rel="noopener noreferrer">Privacy Notice</a>, and understand that I am responsible for independently verifying all results before relying on them.</span>
+      </label>
+      <div class="actions"><button class="btn" id="legal-consent-button" type="submit" disabled>Agree &amp; Open Free OEE Tracker →</button></div>
+    </form>
+    <p class="legal-gate-note">Agreement is remembered only in this browser. No central acceptance log is maintained. If browser data is cleared or the terms version changes, you may be asked to agree again.</p>
+  </section>
+  <div id="protected-tool" hidden inert>
   <div id="tracker">
     <section class="panel" aria-labelledby="shift-title">
       <h2 id="shift-title">1. Shift details</h2>
@@ -58,11 +80,13 @@ main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);
       </div>
       <div class="statline summary" id="details"></div>
       <div class="status" id="status" role="status">Enter your shift data and production totals to calculate your OEE.</div>
+      <p class="legal-warning" role="note"><strong>Important:</strong> Estimates are based on user-entered data and process assumptions. Verify all values and calculations before using results for production, purchasing, staffing, financial, quality, safety, or regulatory decisions. The tool is supplied “AS IS,” without warranties, and liability is limited to the extent permitted by law. <a href="terms-of-use.html" target="_blank" rel="noopener noreferrer">Read full Terms of Use</a>.</p>
       <div class="actions"><button class="btn" type="button" id="calculate">Calculate OEE</button><button class="btn secondary" type="button" id="save">Save Day Locally</button><button class="btn secondary" type="button" id="csv">Export History CSV</button><button class="btn secondary" type="button" id="print">Print Report</button><button class="btn secondary" type="button" id="example">Load Example</button><button class="btn danger" type="button" id="reset">Reset Form</button></div>
       <p class="note">Your draft and saved days stay in this browser's local storage. No production data is sent to our server. Export CSV for a durable copy; clearing browser storage can erase saved days.</p>
     </section>
   </div>
   <section class="panel" aria-labelledby="history-title"><div class="sectionhead"><div><h2 id="history-title">Saved production days</h2><p class="hint" style="margin:0">Choose a saved day to reload it. Maximum 120 records are retained in this browser.</p></div></div><div class="tablewrap" id="history"></div></section>
+  </div><!-- End acceptance-gated tool and saved days -->
   <section class="panel" id="how-it-works" aria-labelledby="faq-title">
     <h2 id="faq-title">How to calculate OEE</h2>
     <div class="helpgrid">
@@ -74,7 +98,7 @@ main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);
     <p class="note">Created by Lukas Rudolph · Practical industrial technology, automation, and process improvement. This free tool is intended for operational analysis, not regulatory production reporting.</p>
   </section>
 </main>
-<footer>© 2026 Lukas Rudolph · Forge10 · <a href="index.html" style="color:var(--blue)">Professional Portfolio</a></footer>
+<footer>© 2026 Lukas Rudolph · Forge10 · <a href="index.html" style="color:var(--blue)">Professional Portfolio</a> · <a href="terms-of-use.html" style="color:var(--blue)">Terms of Use</a> · <a href="privacy-notice.html" style="color:var(--blue)">Privacy Notice</a></footer>
 <script>
 (function () {
   'use strict';
@@ -197,6 +221,45 @@ main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);
   el('history').addEventListener('click',function(event){if(!event.target.classList.contains('load'))return;var id=event.target.getAttribute('data-id'),r=savedDays().find(function(x){return x.id===id;});if(r){applyForm(r.form);window.scrollTo({top:0,behavior:'smooth'});}});
   try{var existing=JSON.parse(localStorage.getItem(KEY)||'null');applyForm(existing||{day:dateToday(),parts:[{}]});}catch(e){applyForm({day:dateToday(),parts:[{}]});}
   historyTable();
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var VERSION = '2026-10-16';
+  var STORAGE_KEY = 'forge10-legal-consent-v1';
+  var gate = document.getElementById('legal-gate');
+  var tool = document.getElementById('protected-tool');
+  var checkbox = document.getElementById('legal-consent-check');
+  var button = document.getElementById('legal-consent-button');
+  var form = document.getElementById('legal-consent-form');
+  function unlock() {
+    gate.hidden = true;
+    tool.hidden = false;
+    tool.removeAttribute('inert');
+  }
+  var agreed = false;
+  try {
+    var record = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    agreed = Boolean(record && record.version === VERSION && record.agreed === true && typeof record.acceptedAt === 'string');
+  } catch (e) { agreed = false; }
+  if (agreed) unlock();
+  checkbox.addEventListener('change', function () { button.disabled = !checkbox.checked; });
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (!checkbox.checked) { button.disabled = true; return; }
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        version: VERSION, agreed: true, acceptedAt: new Date().toISOString()
+      }));
+    } catch (e) {
+      // The site can still be used for this session if storage is unavailable.
+    }
+    unlock();
+    window.location.hash = 'tracker';
+    var firstInput = tool.querySelector('#planned');
+    if (firstInput) firstInput.focus();
+  });
 })();
 </script>
 </body>
