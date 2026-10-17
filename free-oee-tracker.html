@@ -205,7 +205,7 @@ main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);
   el('components').addEventListener('click',function(event){
     if(!event.target.classList.contains('remove'))return;var row=event.target.closest('.row'),id=Number(row.getAttribute('data-id'));
     if(parts.length===1){parts=[{id:nextId++,name:'',ideal:'',actual:'',total:'',rejects:''}];}
-    else parts=parts.filter(function(p){return p.id!==id;});renderParts();draft();calculate(false);
+    else parts=parts.filter(function(p){return p.id!==id;});renderParts();draft();calculate(false);if(window.Forge10Sound)Forge10Sound.play('remove');
   });
   ['day','shift','planned','downtime'].forEach(function(id){el(id).addEventListener('input',function(){draft();calculate(false);});});
   el('add').addEventListener('click',function(){addPart({});});
@@ -219,7 +219,7 @@ main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);
   el('csv').addEventListener('click',exportCSV);
   el('print').addEventListener('click',function(){if(calculate(true))window.print();});
   el('example').addEventListener('click',function(){applyForm({day:dateToday(),shift:'Demo Production Line',planned:'480',downtime:'35',parts:[{name:'Bracket A',ideal:'44',actual:'51',total:'320',rejects:'8'},{name:'Housing B',ideal:'63',actual:'70',total:'130',rejects:'4'}]});setStatus('Example loaded. Change any number to see updated results.');calculate(true);});
-  el('reset').addEventListener('click',function(){if(!window.confirm('Reset current unsaved form? Saved production days will remain.'))return;applyForm({day:dateToday(),parts:[{}]});});
+  el('reset').addEventListener('click',function(){if(!window.confirm('Reset current unsaved form? Saved production days will remain.'))return;applyForm({day:dateToday(),parts:[{}]});if(window.Forge10Sound)Forge10Sound.play('reset');});
   el('history').addEventListener('click',function(event){
     var button=event.target.closest('button[data-id]');
     if(!button)return;
@@ -234,7 +234,7 @@ main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);
       var remaining=records.filter(function(x){return x.id!==id;});
       if(remaining.length)localStorage.setItem(DAYKEY,JSON.stringify(remaining));
       else localStorage.removeItem(DAYKEY);
-      historyTable();setStatus('Saved production day deleted. Your current form was not changed.');
+      historyTable();setStatus('Saved production day deleted. Your current form was not changed.');if(window.Forge10Sound)Forge10Sound.play('reset');
     }catch(e){setStatus('Could not delete the saved day. Check browser storage settings.','error');}
   });
   el('clear-history').addEventListener('click',function(){
@@ -243,7 +243,7 @@ main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);
     if(!window.confirm('Permanently delete ALL '+records.length+' saved production days from this browser? This cannot be undone. Export History CSV first if you need a backup.'))return;
     try{
       localStorage.removeItem(DAYKEY);
-      historyTable();setStatus('All saved production days cleared. Your current form was not changed.');
+      historyTable();setStatus('All saved production days cleared. Your current form was not changed.');if(window.Forge10Sound)Forge10Sound.play('reset');
     }catch(e){setStatus('Could not clear saved days. Check browser storage settings.','error');}
   });
   try{var existing=JSON.parse(localStorage.getItem(KEY)||'null');applyForm(existing||{day:dateToday(),parts:[{}]});}catch(e){applyForm({day:dateToday(),parts:[{}]});}
@@ -289,5 +289,6 @@ main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);
   });
 })();
 </script>
+<script src="assets/forge10-audio.js" defer></script>
 </body>
 </html>
