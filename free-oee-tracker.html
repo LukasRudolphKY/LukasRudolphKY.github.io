@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free OEE Tracker & Calculator | Forge10 by Lukas Rudolph</title>
+<meta name="description" content="Free OEE tracker for manufacturing and production. Track up to 10 components, compare actual and ideal cycle times, enter downtime and rejects, and calculate end-of-day OEE. No account required.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://lukasrudolphky.github.io/free-oee-tracker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free OEE Tracker & Calculator | Forge10">
+<meta property="og:description" content="Calculate availability, performance, quality, and daily overall equipment effectiveness across up to 10 components. Free and private.">
+<meta property="og:url" content="https://lukasrudolphky.github.io/free-oee-tracker.html">
+<meta name="theme-color" content="#081220">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Forge10 Free OEE Tracker","url":"https://lukasrudolphky.github.io/free-oee-tracker.html","description":"A free manufacturing OEE calculator for up to 10 components with daily availability, performance, quality, and total OEE.","applicationCategory":"BusinessApplication","operatingSystem":"Any modern web browser","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Lukas Rudolph"}}
+</script>
+<style>
+:root{color-scheme:dark;--bg:#07101e;--panel:#101e32;--panel2:#14263d;--blue:#43baff;--text:#f3f7ff;--muted:#b5c5d8;--line:#304965;--ok:#6be0aa;--warn:#ffcd77}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 65% 0%,#173550 0%,#07101e 44%);font:16px/1.55 Arial,Helvetica,sans-serif;color:var(--text)}
+header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:16px max(4%,calc((100% - 1200px)/2));border-bottom:1px solid var(--line);background:#060d18}
+header a{color:var(--muted);text-decoration:none}header a:hover{color:var(--blue)}.brand{font-weight:800;color:var(--blue);letter-spacing:2px}.toplinks{display:flex;gap:25px;flex-wrap:wrap;font-size:14px}
+main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase}h1{font-size:clamp(34px,5vw,58px);margin:12px 0;line-height:1.1}h2{font-size:23px;margin:0 0 10px;color:var(--blue)}h3{margin:0 0 10px}.intro{max-width:850px;color:var(--muted);font-size:18px;margin:12px 0 28px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:25px;margin:22px 0;box-shadow:0 15px 35px #00000016}.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field label{font-size:13px;font-weight:700;color:#d5e6fa}input{width:100%;background:#081626;color:white;border:1px solid #385772;border-radius:8px;min-height:43px;padding:10px 11px;font:inherit}input:focus{outline:2px solid var(--blue);outline-offset:1px}input::placeholder{color:#7f96ae}.hint{color:var(--muted);font-size:13px}.small{font-size:12px}.sectionhead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}.controls{display:flex;gap:9px;flex-wrap:wrap}.btn{background:var(--blue);border:1px solid var(--blue);border-radius:8px;color:#06101d;padding:11px 16px;cursor:pointer;font-weight:800;font-size:14px;text-decoration:none;display:inline-block;transition:background .15s}.btn:hover{background:#92dbff}.btn.secondary{background:#173149;color:#d7ecff;border-color:#3b6685}.btn.secondary:hover{background:#23445e}.btn.danger{background:transparent;color:#ffbdc6;border-color:#9e5560}.btn:disabled{opacity:.5;cursor:not-allowed}.row{position:relative;background:#0b192a;border:1px solid var(--line);padding:16px;border-radius:11px;margin-bottom:14px}.row-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}.row-number{font-size:13px;font-weight:800;letter-spacing:1.3px;color:var(--blue)}.row-fields{display:grid;grid-template-columns:1.6fr repeat(4,minmax(0,1fr));gap:12px}.row button{padding:6px 10px;font-size:12px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.scores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}.score{padding:18px;background:var(--panel2);border:1px solid var(--line);border-radius:12px}.score .label{font-size:12px;text-transform:uppercase;color:var(--muted);letter-spacing:1px;font-weight:700}.score strong{display:block;font-size:clamp(26px,3vw,40px);line-height:1.4}.score.highlight{border-color:var(--blue);background:#14334a}.score.highlight strong{color:var(--blue)}.summary{color:#d4e3f4}.statline{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:18px}.statline span{font-size:14px;color:var(--muted)}.statline strong{color:#fff}.status{margin-top:16px;padding:12px 14px;border-left:3px solid var(--blue);border-radius:5px;background:#112a3d;color:#e0efff}.status.warning{border-color:var(--warn);background:#322719}.status.error{border-color:#ff838d;background:#351d25}.note{color:var(--muted);font-size:14px}.helpgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.history th{color:var(--muted)}.tablewrap{overflow-x:auto}footer{text-align:center;padding:28px;color:var(--muted);border-top:1px solid var(--line);font-size:13px}.sr{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}@media(max-width:1000px){.row-fields{grid-template-columns:repeat(3,minmax(0,1fr))}.meta{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.row-fields,.meta,.scores,.helpgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.field.name{grid-column:1/-1}.scores{gap:8px}.score{padding:12px}.score strong{font-size:26px}.panel{padding:18px}main{padding:28px 12px 55px}}@media print{header,.controls,.actions,.no-print,.row button,footer{display:none!important}body{background:#fff;color:#111}.panel,.row,.score{background:#fff;color:#111;border-color:#bbb;box-shadow:none}.score strong,.score.highlight strong,h2,.tag{color:#111}.hint,.note,.field label,.score .label,.statline span{color:#333}input{color:#111;background:#fff;border-color:#aaa}.scores{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">FORGE10 <span style="font-weight:400;color:#c4d8eb;letter-spacing:0">/ Lukas Rudolph</span></div>
+  <nav class="toplinks" aria-label="Site navigation"><a href="index.html">← Portfolio</a><a href="#tracker">OEE Tracker</a><a href="#how-it-works">How It Works</a></nav>
+</header>
+<main>
+  <div class="tag">Free manufacturing productivity tool · No sign-up</div>
+  <h1>Free OEE Tracker &amp; Calculator</h1>
+  <p class="intro">Calculate your production line's end-of-day <strong>Overall Equipment Effectiveness (OEE)</strong> across up to 10 components. Enter ideal and recorded cycle times, production quantities, downtime, and rejects. Get an actionable daily score.</p>
+  <div id="tracker">
+    <section class="panel" aria-labelledby="shift-title">
+      <h2 id="shift-title">1. Shift details</h2>
+      <div class="meta">
+        <div class="field"><label for="day">Production date</label><input id="day" type="date"></div>
+        <div class="field"><label for="shift">Process / shift name</label><input id="shift" type="text" maxlength="90" placeholder="e.g., Packaging Line 1"></div>
+        <div class="field"><label for="planned">Planned production time (minutes)</label><input id="planned" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g., 480"></div>
+        <div class="field"><label for="downtime">Unplanned downtime (minutes)</label><input id="downtime" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g., 35"></div>
+      </div>
+      <p class="hint">Planned time excludes scheduled breaks or planned non-production periods. Downtime is time lost during the planned production period, including breakdowns and changeovers if your OEE policy counts them.</p>
+    </section>
+    <section class="panel" aria-labelledby="comp-title">
+      <div class="sectionhead"><div><h2 id="comp-title">2. Components / part numbers</h2><p class="hint" style="margin:0">Add 1–10 product types. Enter total parts produced and rejected parts for each.</p></div><div class="controls"><button class="btn secondary" id="add" type="button">+ Add component</button><span class="hint" id="comp-count" aria-live="polite"></span></div></div>
+      <div id="components"></div>
+      <p class="note"><strong>Ideal cycle time (capability):</strong> the fastest sustainable standard time per unit, in seconds. <strong>Recorded cycle time:</strong> an observed or measured cycle time, used for comparison only. OEE performance is calculated from <em>actual output versus the ideal output during run time</em>, not from the recorded-cycle-time field.</p>
+    </section>
+    <section class="panel" aria-labelledby="result-title">
+      <h2 id="result-title">3. End-of-day OEE score</h2>
+      <div class="scores" aria-live="polite">
+        <div class="score"><div class="label">Availability</div><strong id="s-avail">—</strong></div>
+        <div class="score"><div class="label">Performance</div><strong id="s-perf">—</strong></div>
+        <div class="score"><div class="label">Quality</div><strong id="s-qual">—</strong></div>
+        <div class="score highlight"><div class="label">Total OEE</div><strong id="s-oee">—</strong></div>
+      </div>
+      <div class="statline summary" id="details"></div>
+      <div class="status" id="status" role="status">Enter your shift data and production totals to calculate your OEE.</div>
+      <div class="actions"><button class="btn" type="button" id="calculate">Calculate OEE</button><button class="btn secondary" type="button" id="save">Save Day Locally</button><button class="btn secondary" type="button" id="csv">Export History CSV</button><button class="btn secondary" type="button" id="print">Print Report</button><button class="btn secondary" type="button" id="example">Load Example</button><button class="btn danger" type="button" id="reset">Reset Form</button></div>
+      <p class="note">Your draft and saved days stay in this browser's local storage. No production data is sent to our server. Export CSV for a durable copy; clearing browser storage can erase saved days.</p>
+    </section>
+  </div>
+  <section class="panel" aria-labelledby="history-title"><div class="sectionhead"><div><h2 id="history-title">Saved production days</h2><p class="hint" style="margin:0">Choose a saved day to reload it. Maximum 120 records are retained in this browser.</p></div></div><div class="tablewrap" id="history"></div></section>
+  <section class="panel" id="how-it-works" aria-labelledby="faq-title">
+    <h2 id="faq-title">How to calculate OEE</h2>
+    <div class="helpgrid">
+      <div><h3>What is OEE?</h3><p class="note">Overall Equipment Effectiveness compares productive manufacturing time to planned production time. <strong>OEE = Availability × Performance × Quality.</strong></p><p class="note">Availability = operating time ÷ planned production time. Operating time = planned time − unplanned downtime.</p></div>
+      <div><h3>How are multiple components handled?</h3><p class="note">When part cycle times differ, Performance uses the <strong>sum of ideal time for every unit produced</strong> divided by actual operating time. Quality uses good ideal production time divided by total ideal production time, instead of simply averaging unlike components.</p><p class="note">This keeps the combined OEE equivalent to <strong>ideal seconds for good parts ÷ planned production seconds</strong>.</p></div>
+      <div><h3>How does recorded cycle time help?</h3><p class="note">Record the measured cycle time to compare it with your process's proven ideal capability. A slow observed cycle may identify speed loss. It is a diagnostic input; do not substitute it for verified actual part counts when calculating standard OEE.</p></div>
+      <div><h3>Why might my OEE exceed 100%?</h3><p class="note">A value above 100% indicates inconsistent entries or an ideal cycle time slower than your actual process capability. Review planned time, downtime, counts, and ideal cycle standards. The tracker flags this instead of silently altering your values.</p></div>
+    </div>
+    <p class="note">Created by Lukas Rudolph · Practical industrial technology, automation, and process improvement. This free tool is intended for operational analysis, not regulatory production reporting.</p>
+  </section>
+</main>
+<footer>© 2026 Lukas Rudolph · Forge10 · <a href="index.html" style="color:var(--blue)">Professional Portfolio</a></footer>
+<script>
+(function () {
+  'use strict';
+  var KEY = 'forge10-oee-v1';
+  var DAYKEY = 'forge10-oee-days-v1';
+  var max = 10;
+  var nextId = 1;
+  var parts = [];
+  var lastResult = null;
+  function el(id) { return document.getElementById(id); }
+  function fmt(n) { return (n * 100).toFixed(1) + '%'; }
+  function num(v) { return v === '' || v === null || v === undefined ? NaN : Number(v); }
+  function txt(s) { return String(s == null ? '' : s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function dateToday() { var d = new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function addPart(data) {
+    if(parts.length >= max) return;
+    var p = Object.assign({name:'',ideal:'',actual:'',total:'',rejects:''},data || {});
+    p.id = nextId++;
+    parts.push(p);
+    renderParts();
+    draft();
+    calculate(false);
+  }
+  function renderParts() {
+    el('components').innerHTML = parts.map(function(p,i) {
+      return '<div class="row" data-id="'+p.id+'"><div class="row-header"><span class="row-number">COMPONENT '+(i+1)+'</span><button type="button" class="btn danger remove" aria-label="Remove component '+(i+1)+'">Remove</button></div><div class="row-fields">'
+      +'<div class="field name"><label>Component / part name</label><input data-key="name" maxlength="90" type="text" placeholder="e.g., Part A" value="'+txt(p.name)+'"></div>'
+      +'<div class="field"><label>Ideal cycle (sec/unit)</label><input data-key="ideal" type="number" min="0" step="any" inputmode="decimal" placeholder="45" value="'+txt(p.ideal)+'"></div>'
+      +'<div class="field"><label>Recorded cycle (sec/unit)</label><input data-key="actual" type="number" min="0" step="any" inputmode="decimal" placeholder="51" value="'+txt(p.actual)+'"></div>'
+      +'<div class="field"><label>Total produced</label><input data-key="total" type="number" min="0" step="1" inputmode="numeric" placeholder="320" value="'+txt(p.total)+'"></div>'
+      +'<div class="field"><label>Rejects / scrap</label><input data-key="rejects" type="number" min="0" step="1" inputmode="numeric" placeholder="8" value="'+txt(p.rejects)+'"></div></div></div>';
+    }).join('');
+    el('comp-count').textContent = parts.length + ' / 10';
+    el('add').disabled = parts.length >= max;
+  }
+  function getForm() {
+    return {day:el('day').value,shift:el('shift').value,planned:el('planned').value,downtime:el('downtime').value,parts:parts.map(function(p){return {name:p.name,ideal:p.ideal,actual:p.actual,total:p.total,rejects:p.rejects};})};
+  }
+  function applyForm(f) {
+    f=f||{};el('day').value=f.day||dateToday();el('shift').value=f.shift||'';el('planned').value=f.planned==null?'':f.planned;el('downtime').value=f.downtime==null?'':f.downtime;
+    parts=[];nextId=1;(Array.isArray(f.parts)?f.parts.slice(0,max):[{}]).forEach(function(p){var row=Object.assign({name:'',ideal:'',actual:'',total:'',rejects:''},p);row.id=nextId++;parts.push(row);});
+    if(!parts.length)parts.push({id:nextId++,name:'',ideal:'',actual:'',total:'',rejects:''});renderParts();draft();calculate(false);
+  }
+  function draft(){try{localStorage.setItem(KEY,JSON.stringify(getForm()));}catch(e){}}
+  function savedDays(){try{var value=JSON.parse(localStorage.getItem(DAYKEY)||'[]');return Array.isArray(value)?value:[];}catch(e){return [];}}
+  function setStatus(message, kind){var node=el('status');node.textContent=message;node.className='status'+(kind?' '+kind:'');}
+  function clearScore(msg,kind){lastResult=null;['s-avail','s-perf','s-qual','s-oee'].forEach(function(id){el(id).textContent='—';});el('details').textContent='';setStatus(msg||'Complete the fields to see your OEE.',kind);}
+  function calculate(loud) {
+    var f = getForm(), planned=num(f.planned), downtime=f.downtime===''?0:num(f.downtime);
+    if(!(Number.isFinite(planned)&&planned>0&&Number.isFinite(downtime)&&downtime>=0&&downtime<=planned)) {
+      clearScore('Enter planned production minutes greater than zero and downtime between zero and planned time.',loud?'error':''); return null;
+    }
+    var runtime=planned-downtime, idealTotal=0, goodIdeal=0, total=0, rejects=0, cycleIdeal=0, cycleActual=0, cycleUnits=0, invalid='';
+    parts.forEach(function(p,i){
+      var qty=p.total===''?0:num(p.total), bad=p.rejects===''?0:num(p.rejects), ideal=num(p.ideal), observed=p.actual===''?NaN:num(p.actual);
+      if(!Number.isInteger(qty)||qty<0||!Number.isInteger(bad)||bad<0||bad>qty){invalid='Component '+(i+1)+': produced and rejected units must be whole numbers, with rejects no higher than total produced.';return;}
+      if(qty>0&&(!Number.isFinite(ideal)||ideal<=0)){invalid='Component '+(i+1)+': enter an ideal cycle time greater than zero for produced parts.';return;}
+      if(p.ideal!==''&&(!Number.isFinite(ideal)||ideal<=0)){invalid='Component '+(i+1)+': ideal cycle time must be greater than zero.';return;}
+      if(p.actual!==''&&(!Number.isFinite(observed)||observed<=0)){invalid='Component '+(i+1)+': recorded cycle time must be greater than zero.';return;}
+      total+=qty;rejects+=bad;
+      if(qty>0){idealTotal+=ideal*qty;goodIdeal+=ideal*(qty-bad);if(Number.isFinite(observed)){cycleIdeal+=ideal*qty;cycleActual+=observed*qty;cycleUnits+=qty;}}
+    });
+    if(invalid){clearScore(invalid,'error');return null;}
+    if(total===0){clearScore('Enter total produced and rejects for at least one component to calculate OEE.',loud?'error':'');return null;}
+    if(runtime===0){clearScore('Production count is positive but available running time is zero. Check downtime.','error');return null;}
+    var a=runtime/planned, p=idealTotal/(runtime*60), q=goodIdeal/idealTotal, oee=a*p*q;
+    lastResult={availability:a,performance:p,quality:q,oee:oee,planned:planned,downtime:downtime,runtime:runtime,units:total,rejects:rejects,good:total-rejects,idealTotal:idealTotal,goodIdeal:goodIdeal,cycleEfficiency:cycleUnits?cycleIdeal/cycleActual:null};
+    el('s-avail').textContent=fmt(a);el('s-perf').textContent=fmt(p);el('s-qual').textContent=fmt(q);el('s-oee').textContent=fmt(oee);
+    var details=[['Run time',runtime.toFixed(1)+' min'],['Total parts',total.toLocaleString()],['Good parts',(total-rejects).toLocaleString()],['Rejects',rejects.toLocaleString()],['Ideal good production time',(goodIdeal/60).toFixed(1)+' min']];
+    if(cycleUnits)details.push(['Recorded vs ideal cycle efficiency',fmt(cycleIdeal/cycleActual)]);
+    el('details').innerHTML=details.map(function(d){return '<span>'+txt(d[0])+': <strong>'+txt(d[1])+'</strong></span>';}).join('');
+    if(p>1.000001||oee>1.000001) setStatus('Review your inputs: performance exceeds 100%. Your ideal cycle capability, downtime, or part totals may be inconsistent. The tracker has not capped the score.','warning');
+    else if(oee>=0.85)setStatus('Strong result. Use the component and downtime details to target further improvement.');
+    else setStatus('OEE is below the commonly cited 85% benchmark. Compare availability, performance, and quality to identify your biggest production loss.');
+    return lastResult;
+  }
+  function historyTable(){
+    var records=savedDays().slice().reverse();var holder=el('history');
+    if(!records.length){holder.innerHTML='<p class="note">No days saved yet. Complete a shift, then select “Save Day Locally.”</p>';return;}
+    holder.innerHTML='<table class="history"><thead><tr><th>Date</th><th>Process / shift</th><th>OEE</th><th>Parts</th><th>Action</th></tr></thead><tbody>'+records.slice(0,25).map(function(r){
+      return '<tr><td>'+txt(r.form.day)+'</td><td>'+txt(r.form.shift||'Unnamed')+'</td><td>'+fmt(r.result.oee)+'</td><td>'+r.result.units+'</td><td><button type="button" class="btn secondary load" data-id="'+txt(r.id)+'">Reload</button></td></tr>';
+    }).join('')+'</tbody></table>';
+  }
+  function csvField(v){var s=String(v==null?'':v);return '"'+s.replace(/"/g,'""')+'"';}
+  function exportCSV(){
+    var records=savedDays(), rows=[['Date','Shift','Planned min','Downtime min','Run min','Availability %','Performance %','Quality %','OEE %','Component','Ideal cycle sec','Recorded cycle sec','Total produced','Rejects','Good units']];
+    records.forEach(function(r){
+      (r.form.parts||[]).forEach(function(p){
+        var qty=Number(p.total)||0,bad=Number(p.rejects)||0;
+        rows.push([r.form.day,r.form.shift,r.result.planned,r.result.downtime,r.result.runtime,(r.result.availability*100).toFixed(2),(r.result.performance*100).toFixed(2),(r.result.quality*100).toFixed(2),(r.result.oee*100).toFixed(2),p.name,p.ideal,p.actual,qty,bad,qty-bad]);
+      });
+    });
+    if(!records.length){setStatus('No saved production days to export. Save a completed day first.','warning');return;}
+    var csv='\uFEFF'+rows.map(function(r){return r.map(csvField).join(',');}).join('\r\n');
+    var url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'})),anchor=document.createElement('a');anchor.href=url;anchor.download='forge10-oee-history.csv';document.body.appendChild(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  el('components').addEventListener('input',function(event){
+    var input=event.target, key=input.getAttribute('data-key'), row=input.closest('.row');if(!key||!row)return;
+    var p=parts.find(function(x){return String(x.id)===row.getAttribute('data-id');});if(!p)return;
+    p[key]=input.value;draft();calculate(false);
+  });
+  el('components').addEventListener('click',function(event){
+    if(!event.target.classList.contains('remove'))return;var row=event.target.closest('.row'),id=Number(row.getAttribute('data-id'));
+    if(parts.length===1){parts=[{id:nextId++,name:'',ideal:'',actual:'',total:'',rejects:''}];}
+    else parts=parts.filter(function(p){return p.id!==id;});renderParts();draft();calculate(false);
+  });
+  ['day','shift','planned','downtime'].forEach(function(id){el(id).addEventListener('input',function(){draft();calculate(false);});});
+  el('add').addEventListener('click',function(){addPart({});});
+  el('calculate').addEventListener('click',function(){calculate(true);});
+  el('save').addEventListener('click',function(){
+    var result=calculate(true);if(!result)return;
+    var f=getForm(),records=savedDays(),id=f.day+'||'+f.shift.trim().toLowerCase(),record={id:id,form:f,result:result,savedAt:new Date().toISOString()};
+    var ix=records.findIndex(function(r){return r.id===id;});if(ix>=0)records.splice(ix,1);records.push(record);records=records.slice(-120);
+    try{localStorage.setItem(DAYKEY,JSON.stringify(records));historyTable();setStatus('Saved locally for '+f.day+'. Export CSV regularly to back up your production history.');}catch(e){setStatus('Could not save data in this browser. Please check browser storage settings.','error');}
+  });
+  el('csv').addEventListener('click',exportCSV);
+  el('print').addEventListener('click',function(){if(calculate(true))window.print();});
+  el('example').addEventListener('click',function(){applyForm({day:dateToday(),shift:'Demo Production Line',planned:'480',downtime:'35',parts:[{name:'Bracket A',ideal:'44',actual:'51',total:'320',rejects:'8'},{name:'Housing B',ideal:'63',actual:'70',total:'130',rejects:'4'}]});setStatus('Example loaded. Change any number to see updated results.');calculate(true);});
+  el('reset').addEventListener('click',function(){if(!window.confirm('Reset current unsaved form? Saved production days will remain.'))return;applyForm({day:dateToday(),parts:[{}]});});
+  el('history').addEventListener('click',function(event){if(!event.target.classList.contains('load'))return;var id=event.target.getAttribute('data-id'),r=savedDays().find(function(x){return x.id===id;});if(r){applyForm(r.form);window.scrollTo({top:0,behavior:'smooth'});}});
+  try{var existing=JSON.parse(localStorage.getItem(KEY)||'null');applyForm(existing||{day:dateToday(),parts:[{}]});}catch(e){applyForm({day:dateToday(),parts:[{}]});}
+  historyTable();
+})();
+</script>
+</body>
+</html>
