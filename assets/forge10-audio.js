@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   var KEY = 'forge10-sound-enabled-v1';
+  var OUTPUT_LEVEL = 0.75; // 25% softer across all Forge10 sound effects.
   var enabled = true;
   try { enabled = localStorage.getItem(KEY) !== 'false'; } catch (_) {}
   var context = null;
@@ -21,7 +22,7 @@
     oscillator.frequency.setValueAtTime(frequency, when);
     oscillator.frequency.exponentialRampToValueAtTime(Math.max(35, frequency * fall), when + duration);
     amp.gain.setValueAtTime(0.0001, when);
-    amp.gain.exponentialRampToValueAtTime(Math.max(0.0002, volume), when + 0.008);
+    amp.gain.exponentialRampToValueAtTime(Math.max(0.0002, volume * OUTPUT_LEVEL), when + 0.008);
     amp.gain.exponentialRampToValueAtTime(0.0001, when + duration);
     oscillator.connect(amp); amp.connect(ctx.destination);
     oscillator.start(when); oscillator.stop(when + duration + 0.015);
@@ -42,7 +43,7 @@
     band.frequency.value = cutoff;
     band.Q.value = 0.75;
     var amp = ctx.createGain();
-    amp.gain.value = peak;
+    amp.gain.value = peak * OUTPUT_LEVEL;
     source.connect(band); band.connect(amp); amp.connect(ctx.destination);
     source.start(when); source.stop(when + duration);
   }
