@@ -1,292 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free OEE Tracker & Calculator | Forge10 by Lukas Rudolph</title>
-<meta name="description" content="Free OEE tracker for manufacturing and production. Track up to 10 components, compare actual and ideal cycle times, enter downtime and rejects, and calculate end-of-day OEE. No account required.">
-<meta name="robots" content="index,follow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#091321">
+<title>Forge10 | Free OEE, Takt & Downtime Decision Dashboard</title>
+<meta name="description" content="Free browser-based OEE, takt time, downtime cost and recovered-time planner. Audit checks, print-ready daily reports, saved days and private on-device storage.">
 <link rel="canonical" href="https://lukasrudolphky.github.io/free-oee-tracker.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Free OEE Tracker & Calculator | Forge10">
-<meta property="og:description" content="Calculate availability, performance, quality, and daily overall equipment effectiveness across up to 10 components. Free and private.">
-<meta property="og:url" content="https://lukasrudolphky.github.io/free-oee-tracker.html">
-<meta name="theme-color" content="#081220">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Forge10 Free OEE Tracker","url":"https://lukasrudolphky.github.io/free-oee-tracker.html","description":"A free manufacturing OEE calculator for up to 10 components with daily availability, performance, quality, and total OEE.","applicationCategory":"BusinessApplication","operatingSystem":"Any modern web browser","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Lukas Rudolph"}}
-</script>
-<style>
-:root{color-scheme:dark;--bg:#07101e;--panel:#101e32;--panel2:#14263d;--blue:#43baff;--text:#f3f7ff;--muted:#b5c5d8;--line:#304965;--ok:#6be0aa;--warn:#ffcd77}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 65% 0%,#173550 0%,#07101e 44%);font:16px/1.55 Arial,Helvetica,sans-serif;color:var(--text)}
-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:16px max(4%,calc((100% - 1200px)/2));border-bottom:1px solid var(--line);background:#060d18}
-header a{color:var(--muted);text-decoration:none}header a:hover{color:var(--blue)}.brand{font-weight:800;color:var(--blue);letter-spacing:2px}.toplinks{display:flex;gap:25px;flex-wrap:wrap;font-size:14px}
-main{max-width:1230px;margin:auto;padding:40px 20px 80px}.tag{color:var(--blue);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase}h1{font-size:clamp(34px,5vw,58px);margin:12px 0;line-height:1.1}h2{font-size:23px;margin:0 0 10px;color:var(--blue)}h3{margin:0 0 10px}.intro{max-width:850px;color:var(--muted);font-size:18px;margin:12px 0 28px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:25px;margin:22px 0;box-shadow:0 15px 35px #00000016}.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field label{font-size:13px;font-weight:700;color:#d5e6fa}input{width:100%;background:#081626;color:white;border:1px solid #385772;border-radius:8px;min-height:43px;padding:10px 11px;font:inherit}input:focus{outline:2px solid var(--blue);outline-offset:1px}input::placeholder{color:#7f96ae}.hint{color:var(--muted);font-size:13px}.small{font-size:12px}.sectionhead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}.controls{display:flex;gap:9px;flex-wrap:wrap}.btn{background:var(--blue);border:1px solid var(--blue);border-radius:8px;color:#06101d;padding:11px 16px;cursor:pointer;font-weight:800;font-size:14px;text-decoration:none;display:inline-block;transition:background .15s}.btn:hover{background:#92dbff}.btn.secondary{background:#173149;color:#d7ecff;border-color:#3b6685}.btn.secondary:hover{background:#23445e}.btn.danger{background:transparent;color:#ffbdc6;border-color:#9e5560}.btn:disabled{opacity:.5;cursor:not-allowed}.row{position:relative;background:#0b192a;border:1px solid var(--line);padding:16px;border-radius:11px;margin-bottom:14px}.row-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}.row-number{font-size:13px;font-weight:800;letter-spacing:1.3px;color:var(--blue)}.row-fields{display:grid;grid-template-columns:1.6fr repeat(4,minmax(0,1fr));gap:12px}.row button{padding:6px 10px;font-size:12px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.scores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}.score{padding:18px;background:var(--panel2);border:1px solid var(--line);border-radius:12px}.score .label{font-size:12px;text-transform:uppercase;color:var(--muted);letter-spacing:1px;font-weight:700}.score strong{display:block;font-size:clamp(26px,3vw,40px);line-height:1.4}.score.highlight{border-color:var(--blue);background:#14334a}.score.highlight strong{color:var(--blue)}.summary{color:#d4e3f4}.statline{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:18px}.statline span{font-size:14px;color:var(--muted)}.statline strong{color:#fff}.status{margin-top:16px;padding:12px 14px;border-left:3px solid var(--blue);border-radius:5px;background:#112a3d;color:#e0efff}.status.warning{border-color:var(--warn);background:#322719}.status.error{border-color:#ff838d;background:#351d25}.note{color:var(--muted);font-size:14px}.helpgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.history th{color:var(--muted)}.history-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.history-actions .btn{padding:7px 11px;font-size:12px}.tablewrap{overflow-x:auto}footer{text-align:center;padding:28px;color:var(--muted);border-top:1px solid var(--line);font-size:13px}.sr{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}@media(max-width:1000px){.row-fields{grid-template-columns:repeat(3,minmax(0,1fr))}.meta{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.row-fields,.meta,.scores,.helpgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.field.name{grid-column:1/-1}.scores{gap:8px}.score{padding:12px}.score strong{font-size:26px}.panel{padding:18px}main{padding:28px 12px 55px}}@media print{header,.controls,.actions,.no-print,.row button,footer{display:none!important}body{background:#fff;color:#111}.panel,.row,.score{background:#fff;color:#111;border-color:#bbb;box-shadow:none}.score strong,.score.highlight strong,h2,.tag{color:#111}.hint,.note,.field label,.score .label,.statline span{color:#333}input{color:#111;background:#fff;border-color:#aaa}.scores{grid-template-columns:repeat(4,1fr)}}
-.agreement-gate{border-color:var(--blue);background:linear-gradient(125deg,#112b42,#101e32)}
-.agreement-gate h2{font-size:25px}.agreement-gate p{color:#dae9fa}
-.legal-check{display:flex;align-items:flex-start;gap:13px;cursor:pointer;background:#0b1e30;border:1px solid #3b6481;border-radius:9px;padding:17px;font-size:15px;line-height:1.55}
-.legal-check input{width:22px;height:22px;min-height:22px;flex:none;accent-color:#43baff;margin:2px 0}
-.legal-check a,.legal-warning a{color:var(--blue)}
-.legal-warning{padding:13px 16px;border-left:4px solid #ffcd77;background:#2c261d;border-radius:6px;color:#f7e8ca!important;font-size:14px}
-.legal-gate-note{font-size:13px!important;color:var(--muted)!important}
-[hidden]{display:none!important}
+<meta property="og:type" content="website"><meta property="og:title" content="Forge10 Free OEE & Takt Dashboard"><meta property="og:description" content="A practical daily production improvement dashboard: OEE, takt, downtime cost, improvement planning and printable reports.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Forge10 Free OEE & Takt Dashboard","url":"https://lukasrudolphky.github.io/free-oee-tracker.html","isAccessibleForFree":true,"applicationCategory":"BusinessApplication","operatingSystem":"Web browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Lukas Rudolph"}}</script>
+<style>:root{color-scheme:dark;--bg:#07111d;--base:#0e1d30;--panel:#102137;--tile:#11273f;--stroke:#28425b;--text:#edf6ff;--muted:#b4c4d4;--cyan:#56c8fb;--cyan2:#a7e8ff;--green:#76e2bd;--amber:#ffd28a;--red:#ff9caa}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 72% -5%,#1b3d54 0%,#091321 32%,#07111d 70%);font:15px/1.55 system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--text)}a{color:#87d9ff}a:hover{color:#d2efff}.site-head{background:#07101bf0;border-bottom:1px solid #25415b;padding:15px max(20px,calc((100vw - 1250px)/2));display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.brand{text-decoration:none;font-weight:900;letter-spacing:2px;font-size:18px;color:white}.brand span{color:var(--cyan)}.brand small{font-weight:500;font-size:12px;color:#b0c9db;letter-spacing:0}.site-head nav{display:flex;gap:18px;flex-wrap:wrap;font-size:13px}.site-head nav a{color:#d2deea;text-decoration:none}.site-head nav a:hover{color:var(--cyan)}.shell{max-width:1250px;padding:30px 20px 70px;margin:auto}.hero{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:10px 0 22px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--cyan);font-weight:800}.dot{width:7px;height:7px;background:var(--green);display:inline-block;border-radius:50%;margin-right:6px}.revision{color:#829fb6;letter-spacing:1px;margin-left:10px}.hero h1{font-size:clamp(32px,4.6vw,58px);line-height:1.12;letter-spacing:-1.4px;margin:15px 0 13px;max-width:780px}.hero h1 em{font-style:normal;color:#86dafe}.hero p{font-size:16px;max-width:820px;color:var(--muted);margin:0}.hero-pill{min-width:220px;background:#102c41;border:1px solid #396687;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px;box-shadow:0 15px 35px #0002}.hero-pill span{font-size:11px;color:var(--green);font-weight:800;letter-spacing:1px}.hero-pill strong{font-size:16px}.hero-pill small{font-size:12px;color:var(--muted)}.panel{background:linear-gradient(155deg,#102136,#0c1c2f);border:1px solid var(--stroke);border-radius:16px;padding:25px;margin:18px 0;box-shadow:0 12px 30px #020a1218}.panel h2{font-size:23px;line-height:1.3;margin:4px 0 4px}.panel h3{font-size:16px;margin:0 0 5px}.panel p{margin:7px 0}.section-heading{display:flex;align-items:start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px}.muted{color:var(--muted)}.tiny,.micro{font-size:12px;color:var(--muted);line-height:1.5}.micro{margin-top:11px!important}.btn{border:1px solid #346184;border-radius:9px;cursor:pointer;padding:11px 15px;font:800 13px/1.3 system-ui,Arial,sans-serif;white-space:normal;color:#e8f6ff;background:#1a3752;transition:filter .16s,background .16s}.btn:hover{filter:brightness(1.18)}.btn:focus-visible,.text-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}.btn.primary{background:var(--cyan);border-color:var(--cyan);color:#071523}.btn.secondary{background:#183550}.btn.ghost{background:transparent;border-color:#416682}.btn.danger{background:#3a2330;border-color:#885260;color:#ffcad1}.btn.success{background:#1b584d;border-color:#3a987f;color:#d1ffee}.small-button{padding:8px 11px}.text-button{border:0;background:transparent;color:var(--cyan);cursor:pointer;font-weight:700}.consent{border-color:#418bba;background:linear-gradient(135deg,#12334b,#122238)}.consent p{color:#d8e4f0;max-width:900px}.consent form{margin-top:19px}.checkline{display:flex;gap:12px;padding:15px;border-radius:10px;background:#0d253a;border:1px solid #426a86;margin-bottom:16px;cursor:pointer;max-width:990px}.checkline input{width:20px;height:20px;flex:0 0 20px;accent-color:#56c8fb}.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.steps>div{background:#0d2439;border:1px solid #294761;padding:15px;border-radius:10px;display:flex;flex-direction:column;gap:5px}.steps b{font-size:21px;color:var(--cyan);font-variant-numeric:tabular-nums}.steps strong{font-size:14px}.steps span{font-size:12px;color:var(--muted)}.guide-note{background:#123247;padding:12px 14px;margin-top:15px;border-left:3px solid #57c8f4;border-radius:5px;font-size:13px;color:#d8e8f5}.pill{border:1px solid #35566e;background:#152b3e;color:#c9deee;font-size:11px;border-radius:99px;padding:7px 10px;font-weight:700;white-space:nowrap}.pill.accent{color:#8ceac9;border-color:#287961;background:#112e2f}.input-grid{display:grid;gap:14px;margin:14px 0}.input-grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}.input-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.field{display:flex;flex-direction:column;gap:6px;color:#d5e5f3;font-size:12px;font-weight:700}.field i{font-weight:500;font-style:normal;color:#91a9b9}.field small{font-size:11px;color:#92a9bc;font-weight:500;line-height:1.4}input,select{width:100%;min-width:0;background:#091c2e;border:1px solid #395873;border-radius:8px;padding:10px 11px;min-height:43px;color:white;font:15px system-ui,Arial,sans-serif}input::placeholder{color:#7c98ad}input[type=number]{font-variant-numeric:tabular-nums}select option{background:#091c2e}.subhead{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:20px;border-top:1px solid var(--stroke);padding-top:15px}.subhead strong{font-size:14px}.subhead span{color:var(--muted);font-size:12px}.downtime-grid .field input{max-width:100%}.inline-totals{background:#071c2a;border:1px solid #25516a;display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap;border-radius:10px;padding:12px 15px;margin-top:15px}.inline-totals span{font-size:12px;color:#bfd7ea}.inline-totals strong{font-size:17px;color:#fff;display:inline-block;margin-left:8px}.product-rows{display:grid;gap:10px}.product{border:1px solid #2d4c64;background:#0b1d2e;border-radius:11px;padding:13px}.product-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.product-head b{font-size:12px;color:var(--cyan);letter-spacing:1px}.product-fields{display:grid;grid-template-columns:1.5fr repeat(3,minmax(0,1fr));gap:12px}.product .remove{font-size:12px;background:#34222d;border:1px solid #7a4559;border-radius:7px;color:#ffc1c6;cursor:pointer;padding:5px 9px}.small-note{font-size:12px;color:var(--muted);margin-top:10px}.scenario-help{border-left:3px solid #5d97b7;background:#102c43;border-radius:5px;padding:11px 14px;color:#c7dfec;font-size:12px}.metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric{background:#132b42;border:1px solid #35526e;padding:17px;border-radius:12px;display:flex;flex-direction:column;gap:4px}.metric span{text-transform:uppercase;font-size:10px;font-weight:800;letter-spacing:1.1px;color:#c5d5e3}.metric strong{font-size:clamp(24px,3.6vw,40px);font-variant-numeric:tabular-nums;line-height:1.35}.metric small{font-size:11px;color:#98b4c7}.primary-metric{border-color:#49afe0;background:#17405a}.primary-metric strong{color:#76d4ff}.audit-chip{font-size:12px;font-weight:800;border:1px solid #55738b;border-radius:99px;padding:7px 12px;background:#122c3d;color:#c9d6e0}.audit-chip.ok{background:#15392f;color:#85eac0;border-color:#2f916d}.audit-chip.warning{background:#392d1b;color:#ffdc98;border-color:#846b36}.audit-chip.error{background:#401f2a;color:#ffc2c8;border-color:#9b5167}.message{border-radius:9px;background:#14334a;border-left:3px solid #6dcfff;margin:16px 0;padding:12px 15px;color:#dbf1ff;font-size:13px}.message.warning{background:#362c1d;border-color:#e3ae63;color:#ffe0aa}.message.error{background:#3b1f29;border-color:#e78898;color:#ffbfc6}.analysis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:15px 0}.analysis-tile{background:#0b1c2c;border:1px solid #29445d;border-radius:12px;padding:17px;min-width:0}.analysis-tile h3{font-size:15px}.loss-chart{display:flex;overflow:hidden;height:27px;border-radius:8px;background:#20364b;margin:21px 0 13px}.loss-chart>div:not(.empty-chart){height:100%;min-width:0}.empty-chart{color:#a7c0cf;font-size:12px;padding:5px 12px}.loss-chart .good{background:#53c99e}.loss-chart .quality{background:#e9b862}.loss-chart .speed{background:#5aabed}.loss-chart .stops{background:#d17983}.legend{display:flex;gap:8px 15px;flex-wrap:wrap}.legend span{display:flex;align-items:center;gap:5px;font-size:11px;color:#b7cfe1}.legend i{display:inline-block;width:9px;height:9px;border-radius:2px}.c-good{background:#53c99e}.c-quality{background:#e9b862}.c-speed{background:#5aabed}.c-stops{background:#d17983}.summary-stats{display:grid;gap:10px;margin-top:12px}.statpair{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-bottom:1px solid #203a50;padding-bottom:7px}.statpair span{color:#bcd0dd;font-size:12px}.statpair strong{font-variant-numeric:tabular-nums;font-size:17px;text-align:right}.statpair strong.warm{color:var(--amber)}.statpair strong.cool{color:var(--green)}.stat-caption{color:#9fb8ca;font-size:11px}.recommendations{font-size:13px;color:#d1e5f1}.recommendations strong{color:#98e5ff}.recommendations p{margin-bottom:10px}.task-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}.task{padding:11px 12px;border:1px solid #2e5066;border-radius:9px;background:#10283b}.task b{font-size:13px;display:block}.task span{font-size:11px;color:#afc4d2;display:block;margin-top:5px}.audit-list{list-style:none;margin:9px 0 15px;padding:0;display:grid;gap:7px}.audit-list li{font-size:12px;border-bottom:1px solid #243e53;padding-bottom:8px;display:flex;gap:8px;align-items:baseline}.audit-list li::before{content:'✓';color:var(--green);font-weight:900}.audit-list li.warn::before{content:'!';color:var(--amber)}.audit-list li.fail::before{content:'×';color:var(--red)}.report-actions{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 11px}.action-feedback{font-size:13px;min-height:20px;color:#bfe7ff}.legal-warning{padding:12px 14px;border-radius:8px;border-left:3px solid #e4b36e;background:#322b20;color:#ffebcf;font-size:12px!important;margin-top:15px!important}.actions{display:flex;gap:8px;flex-wrap:wrap}.history-wrap{overflow-x:auto}.history-table{border-collapse:collapse;width:100%;min-width:650px}.history-table th,.history-table td{text-align:left;padding:10px 9px;border-bottom:1px solid #29445a;font-size:12px}.history-table th{color:#adcad9}.history-table td{color:#e2eef6}.history-table button{background:#193750;color:#d8f0ff;border:1px solid #3f6380;border-radius:6px;cursor:pointer;padding:6px 9px;font-size:11px;margin:2px}.history-table button.delete{color:#ffbfcb;border-color:#704858;background:#33212b}.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.method-grid>div{border-left:2px solid #335d78;padding-left:14px}.method-grid p{font-size:13px;color:#b6cddd}.method-grid h3{color:#cfeaff}footer{text-align:center;color:#9fb3c2;border-top:1px solid #203b50;padding:25px;font-size:12px}[hidden]{display:none!important}.print-only{display:none}
+@media(max-width:900px){.hero{align-items:start}.hero-pill{display:none}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.input-grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}.task-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:670px){.shell{padding:15px 12px 55px}.site-head{padding:12px}.hero{padding:14px 3px}.hero h1{font-size:34px;letter-spacing:-1px}.hero p{font-size:14px}.panel{padding:16px;border-radius:12px}.steps,.input-grid.three,.input-grid.four,.product-fields,.analysis-grid,.metric-grid,.method-grid,.task-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-fields label:first-child{grid-column:1/-1}.metric{padding:11px}.metric strong{font-size:25px}.report-actions .btn{flex:1 1 46%;min-width:0}.revision{display:block;margin-left:0;margin-top:6px}}
+@media(max-width:400px){.metric-grid,.steps,.input-grid.three,.input-grid.four,.product-fields,.analysis-grid,.task-grid,.method-grid{grid-template-columns:1fr}.metric strong{font-size:30px}}
+@media print{ @page{size:letter;margin:0.55in} :root{color-scheme:light}body{background:white!important;color:#111!important;font:11px/1.35 Arial,sans-serif} .site-head,.hero,.consent,#protected-tool,footer{display:none!important}.shell{max-width:none;padding:0;margin:0}.print-only{display:block!important;color:#111}.print-only h1{font-size:20px;margin:0 0 5px}.print-only h2{font-size:14px;color:#111;margin:15px 0 7px}.print-only p{margin:4px 0}.print-only table{width:100%;border-collapse:collapse;margin:7px 0;font-size:10px}.print-only th,.print-only td{padding:5px;border:1px solid #aaa;text-align:left;vertical-align:top}.print-only th{background:#e8edf1}.print-only .print-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.print-only .print-metrics>div{border:1px solid #aaa;padding:9px}.print-only .print-metrics strong{display:block;font-size:18px}.print-only .print-note{border:1px solid #aaa;padding:9px;background:#f6f6f6;font-size:10px}.print-only .warningprint{border-left:4px solid #222;padding-left:8px}.print-only .smallprint{font-size:9px;color:#555}.print-only section{break-inside:avoid}}
 </style>
 </head>
 <body>
-<header>
-  <div class="brand">FORGE10 <span style="font-weight:400;color:#c4d8eb;letter-spacing:0">/ Lukas Rudolph</span></div>
-  <nav class="toplinks" aria-label="Site navigation"><a href="index.html">← Portfolio</a><a href="#tracker">OEE Tracker</a><a href="#how-it-works">How It Works</a><a href="terms-of-use.html">Terms</a><a href="privacy-notice.html">Privacy</a></nav>
-</header>
-<main>
-  <div class="tag">Free manufacturing productivity tool · No sign-up</div>
-  <h1>Free OEE Tracker &amp; Calculator</h1>
-  <p class="intro">Calculate your production line's end-of-day <strong>Overall Equipment Effectiveness (OEE)</strong> across up to 10 components. Enter ideal and recorded cycle times, production quantities, downtime, and rejects. Get an actionable daily score.</p>
-  <section id="legal-gate" class="panel agreement-gate" aria-labelledby="agreement-title">
-    <div class="tag">Required before using the free tracker</div>
-    <h2 id="agreement-title">Review and accept the terms</h2>
-    <p>This is a free informational manufacturing tool, not a certified production or compliance system. Results depend on the inputs and assumptions, and calculations must be independently verified before any business, financial, quality, safety, or regulatory decisions.</p>
-    <form id="legal-consent-form">
-      <label class="legal-check" for="legal-consent-check">
-        <input id="legal-consent-check" type="checkbox" required>
-        <span>I have reviewed and agree to the <a href="terms-of-use.html" target="_blank" rel="noopener noreferrer">Terms of Use</a>, acknowledge the <a href="privacy-notice.html" target="_blank" rel="noopener noreferrer">Privacy Notice</a>, and understand that I am responsible for independently verifying all results before relying on them.</span>
-      </label>
-      <div class="actions"><button class="btn" id="legal-consent-button" type="submit" disabled>Agree &amp; Open Free OEE Tracker →</button></div>
-    </form>
-    <p class="legal-gate-note">Agreement is remembered only in this browser. No central acceptance log is maintained. If browser data is cleared or the terms version changes, you may be asked to agree again.</p>
-  </section>
-  <div id="protected-tool" hidden inert>
-  <div id="tracker">
-    <section class="panel" aria-labelledby="shift-title">
-      <h2 id="shift-title">1. Shift details</h2>
-      <div class="meta">
-        <div class="field"><label for="day">Production date</label><input id="day" type="date"></div>
-        <div class="field"><label for="shift">Process / shift name</label><input id="shift" type="text" maxlength="90" placeholder="e.g., Packaging Line 1"></div>
-        <div class="field"><label for="planned">Planned production time (minutes)</label><input id="planned" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g., 480"></div>
-        <div class="field"><label for="downtime">Unplanned downtime (minutes)</label><input id="downtime" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g., 35"></div>
-      </div>
-      <p class="hint">Planned time excludes scheduled breaks or planned non-production periods. Downtime is time lost during the planned production period, including breakdowns and changeovers if your OEE policy counts them.</p>
-    </section>
-    <section class="panel" aria-labelledby="comp-title">
-      <div class="sectionhead"><div><h2 id="comp-title">2. Components / part numbers</h2><p class="hint" style="margin:0">Add 1–10 product types. Enter total parts produced and rejected parts for each.</p></div><div class="controls"><button class="btn secondary" id="add" type="button">+ Add component</button><span class="hint" id="comp-count" aria-live="polite"></span></div></div>
-      <div id="components"></div>
-      <p class="note"><strong>Ideal cycle time (capability):</strong> the fastest sustainable standard time per unit, in seconds. <strong>Recorded cycle time:</strong> an observed or measured cycle time, used for comparison only. OEE performance is calculated from <em>actual output versus the ideal output during run time</em>, not from the recorded-cycle-time field.</p>
-    </section>
-    <section class="panel" aria-labelledby="result-title">
-      <h2 id="result-title">3. End-of-day OEE score</h2>
-      <div class="scores" aria-live="polite">
-        <div class="score"><div class="label">Availability</div><strong id="s-avail">—</strong></div>
-        <div class="score"><div class="label">Performance</div><strong id="s-perf">—</strong></div>
-        <div class="score"><div class="label">Quality</div><strong id="s-qual">—</strong></div>
-        <div class="score highlight"><div class="label">Total OEE</div><strong id="s-oee">—</strong></div>
-      </div>
-      <div class="statline summary" id="details"></div>
-      <div class="status" id="status" role="status">Enter your shift data and production totals to calculate your OEE.</div>
-      <p class="legal-warning" role="note"><strong>Important:</strong> Estimates are based on user-entered data and process assumptions. Verify all values and calculations before using results for production, purchasing, staffing, financial, quality, safety, or regulatory decisions. The tool is supplied “AS IS,” without warranties, and liability is limited to the extent permitted by law. <a href="terms-of-use.html" target="_blank" rel="noopener noreferrer">Read full Terms of Use</a>.</p>
-      <div class="actions"><button class="btn" type="button" id="calculate">Calculate OEE</button><button class="btn secondary" type="button" id="save">Save Day Locally</button><button class="btn secondary" type="button" id="csv">Export History CSV</button><button class="btn secondary" type="button" id="print">Print Report</button><button class="btn secondary" type="button" id="example">Load Example</button><button class="btn danger" type="button" id="reset">Reset Form</button></div>
-      <p class="note">Your draft and saved days stay in this browser's local storage. No production data is sent to our server. Export CSV for a durable copy; clearing browser storage can erase saved days.</p>
-    </section>
-  </div>
-  <section class="panel" aria-labelledby="history-title"><div class="sectionhead"><div><h2 id="history-title">Saved production days</h2><p class="hint" style="margin:0">Reload or delete individual days below. Maximum 120 records are retained in this browser.</p></div><div class="controls no-print"><button class="btn danger" type="button" id="clear-history" disabled>Clear All Saved Days</button></div></div><div class="tablewrap" id="history"></div><p class="hint no-print">Deleting saved records cannot be undone. Export History CSV first if you need a backup. Your current form is not affected.</p></section>
-  </div><!-- End acceptance-gated tool and saved days -->
-  <section class="panel" id="how-it-works" aria-labelledby="faq-title">
-    <h2 id="faq-title">How to calculate OEE</h2>
-    <div class="helpgrid">
-      <div><h3>What is OEE?</h3><p class="note">Overall Equipment Effectiveness compares productive manufacturing time to planned production time. <strong>OEE = Availability × Performance × Quality.</strong></p><p class="note">Availability = operating time ÷ planned production time. Operating time = planned time − unplanned downtime.</p></div>
-      <div><h3>How are multiple components handled?</h3><p class="note">When part cycle times differ, Performance uses the <strong>sum of ideal time for every unit produced</strong> divided by actual operating time. Quality uses good ideal production time divided by total ideal production time, instead of simply averaging unlike components.</p><p class="note">This keeps the combined OEE equivalent to <strong>ideal seconds for good parts ÷ planned production seconds</strong>.</p></div>
-      <div><h3>How does recorded cycle time help?</h3><p class="note">Record the measured cycle time to compare it with your process's proven ideal capability. A slow observed cycle may identify speed loss. It is a diagnostic input; do not substitute it for verified actual part counts when calculating standard OEE.</p></div>
-      <div><h3>Why might my OEE exceed 100%?</h3><p class="note">A value above 100% indicates inconsistent entries or an ideal cycle time slower than your actual process capability. Review planned time, downtime, counts, and ideal cycle standards. The tracker flags this instead of silently altering your values.</p></div>
-    </div>
-    <p class="note">Created by Lukas Rudolph · Practical industrial technology, automation, and process improvement. This free tool is intended for operational analysis, not regulatory production reporting.</p>
-  </section>
-</main>
-<footer>© 2026 Lukas Rudolph · Forge10 · <a href="index.html" style="color:var(--blue)">Professional Portfolio</a> · <a href="terms-of-use.html" style="color:var(--blue)">Terms of Use</a> · <a href="privacy-notice.html" style="color:var(--blue)">Privacy Notice</a></footer>
-<script>
-(function () {
-  'use strict';
-  var KEY = 'forge10-oee-v1';
-  var DAYKEY = 'forge10-oee-days-v1';
-  var max = 10;
-  var nextId = 1;
-  var parts = [];
-  var lastResult = null;
-  function el(id) { return document.getElementById(id); }
-  function fmt(n) { return (n * 100).toFixed(1) + '%'; }
-  function num(v) { return v === '' || v === null || v === undefined ? NaN : Number(v); }
-  function txt(s) { return String(s == null ? '' : s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
-  function dateToday() { var d = new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-  function addPart(data) {
-    if(parts.length >= max) return;
-    var p = Object.assign({name:'',ideal:'',actual:'',total:'',rejects:''},data || {});
-    p.id = nextId++;
-    parts.push(p);
-    renderParts();
-    draft();
-    calculate(false);
-  }
-  function renderParts() {
-    el('components').innerHTML = parts.map(function(p,i) {
-      return '<div class="row" data-id="'+p.id+'"><div class="row-header"><span class="row-number">COMPONENT '+(i+1)+'</span><button type="button" class="btn danger remove" aria-label="Remove component '+(i+1)+'">Remove</button></div><div class="row-fields">'
-      +'<div class="field name"><label>Component / part name</label><input data-key="name" maxlength="90" type="text" placeholder="e.g., Part A" value="'+txt(p.name)+'"></div>'
-      +'<div class="field"><label>Ideal cycle (sec/unit)</label><input data-key="ideal" type="number" min="0" step="any" inputmode="decimal" placeholder="45" value="'+txt(p.ideal)+'"></div>'
-      +'<div class="field"><label>Recorded cycle (sec/unit)</label><input data-key="actual" type="number" min="0" step="any" inputmode="decimal" placeholder="51" value="'+txt(p.actual)+'"></div>'
-      +'<div class="field"><label>Total produced</label><input data-key="total" type="number" min="0" step="1" inputmode="numeric" placeholder="320" value="'+txt(p.total)+'"></div>'
-      +'<div class="field"><label>Rejects / scrap</label><input data-key="rejects" type="number" min="0" step="1" inputmode="numeric" placeholder="8" value="'+txt(p.rejects)+'"></div></div></div>';
-    }).join('');
-    el('comp-count').textContent = parts.length + ' / 10';
-    el('add').disabled = parts.length >= max;
-  }
-  function getForm() {
-    return {day:el('day').value,shift:el('shift').value,planned:el('planned').value,downtime:el('downtime').value,parts:parts.map(function(p){return {name:p.name,ideal:p.ideal,actual:p.actual,total:p.total,rejects:p.rejects};})};
-  }
-  function applyForm(f) {
-    f=f||{};el('day').value=f.day||dateToday();el('shift').value=f.shift||'';el('planned').value=f.planned==null?'':f.planned;el('downtime').value=f.downtime==null?'':f.downtime;
-    parts=[];nextId=1;(Array.isArray(f.parts)?f.parts.slice(0,max):[{}]).forEach(function(p){var row=Object.assign({name:'',ideal:'',actual:'',total:'',rejects:''},p);row.id=nextId++;parts.push(row);});
-    if(!parts.length)parts.push({id:nextId++,name:'',ideal:'',actual:'',total:'',rejects:''});renderParts();draft();calculate(false);
-  }
-  function draft(){try{localStorage.setItem(KEY,JSON.stringify(getForm()));}catch(e){}}
-  function savedDays(){try{var value=JSON.parse(localStorage.getItem(DAYKEY)||'[]');return Array.isArray(value)?value:[];}catch(e){return [];}}
-  function setStatus(message, kind){var node=el('status');node.textContent=message;node.className='status'+(kind?' '+kind:'');}
-  function clearScore(msg,kind){lastResult=null;['s-avail','s-perf','s-qual','s-oee'].forEach(function(id){el(id).textContent='—';});el('details').textContent='';setStatus(msg||'Complete the fields to see your OEE.',kind);}
-  function calculate(loud) {
-    var f = getForm(), planned=num(f.planned), downtime=f.downtime===''?0:num(f.downtime);
-    if(!(Number.isFinite(planned)&&planned>0&&Number.isFinite(downtime)&&downtime>=0&&downtime<=planned)) {
-      clearScore('Enter planned production minutes greater than zero and downtime between zero and planned time.',loud?'error':''); return null;
-    }
-    var runtime=planned-downtime, idealTotal=0, goodIdeal=0, total=0, rejects=0, cycleIdeal=0, cycleActual=0, cycleUnits=0, invalid='';
-    parts.forEach(function(p,i){
-      var qty=p.total===''?0:num(p.total), bad=p.rejects===''?0:num(p.rejects), ideal=num(p.ideal), observed=p.actual===''?NaN:num(p.actual);
-      if(!Number.isInteger(qty)||qty<0||!Number.isInteger(bad)||bad<0||bad>qty){invalid='Component '+(i+1)+': produced and rejected units must be whole numbers, with rejects no higher than total produced.';return;}
-      if(qty>0&&(!Number.isFinite(ideal)||ideal<=0)){invalid='Component '+(i+1)+': enter an ideal cycle time greater than zero for produced parts.';return;}
-      if(p.ideal!==''&&(!Number.isFinite(ideal)||ideal<=0)){invalid='Component '+(i+1)+': ideal cycle time must be greater than zero.';return;}
-      if(p.actual!==''&&(!Number.isFinite(observed)||observed<=0)){invalid='Component '+(i+1)+': recorded cycle time must be greater than zero.';return;}
-      total+=qty;rejects+=bad;
-      if(qty>0){idealTotal+=ideal*qty;goodIdeal+=ideal*(qty-bad);if(Number.isFinite(observed)){cycleIdeal+=ideal*qty;cycleActual+=observed*qty;cycleUnits+=qty;}}
-    });
-    if(invalid){clearScore(invalid,'error');return null;}
-    if(total===0){clearScore('Enter total produced and rejects for at least one component to calculate OEE.',loud?'error':'');return null;}
-    if(runtime===0){clearScore('Production count is positive but available running time is zero. Check downtime.','error');return null;}
-    var a=runtime/planned, p=idealTotal/(runtime*60), q=goodIdeal/idealTotal, oee=a*p*q;
-    lastResult={availability:a,performance:p,quality:q,oee:oee,planned:planned,downtime:downtime,runtime:runtime,units:total,rejects:rejects,good:total-rejects,idealTotal:idealTotal,goodIdeal:goodIdeal,cycleEfficiency:cycleUnits?cycleIdeal/cycleActual:null};
-    el('s-avail').textContent=fmt(a);el('s-perf').textContent=fmt(p);el('s-qual').textContent=fmt(q);el('s-oee').textContent=fmt(oee);
-    var details=[['Run time',runtime.toFixed(1)+' min'],['Total parts',total.toLocaleString()],['Good parts',(total-rejects).toLocaleString()],['Rejects',rejects.toLocaleString()],['Ideal good production time',(goodIdeal/60).toFixed(1)+' min']];
-    if(cycleUnits)details.push(['Recorded vs ideal cycle efficiency',fmt(cycleIdeal/cycleActual)]);
-    el('details').innerHTML=details.map(function(d){return '<span>'+txt(d[0])+': <strong>'+txt(d[1])+'</strong></span>';}).join('');
-    if(p>1.000001||oee>1.000001) setStatus('Review your inputs: performance exceeds 100%. Your ideal cycle capability, downtime, or part totals may be inconsistent. The tracker has not capped the score.','warning');
-    else if(oee>=0.85)setStatus('Strong result. Use the component and downtime details to target further improvement.');
-    else setStatus('OEE is below the commonly cited 85% benchmark. Compare availability, performance, and quality to identify your biggest production loss.');
-    return lastResult;
-  }
-  function historyTable(){
-    var records=savedDays().slice().reverse(),holder=el('history');
-    el('clear-history').disabled=records.length===0;
-    if(!records.length){holder.innerHTML='<p class="note">No days saved yet. Complete a shift, then select “Save Day Locally.”</p>';return;}
-    holder.innerHTML='<table class="history"><thead><tr><th>Date</th><th>Process / shift</th><th>OEE</th><th>Parts</th><th>Actions</th></tr></thead><tbody>'+records.map(function(r){
-      var label=(r.form.day||'undated')+' — '+(r.form.shift||'Unnamed');
-      return '<tr><td>'+txt(r.form.day)+'</td><td>'+txt(r.form.shift||'Unnamed')+'</td><td>'+fmt(r.result.oee)+'</td><td>'+r.result.units+'</td><td><div class="history-actions no-print"><button type="button" class="btn secondary load" data-id="'+txt(r.id)+'" aria-label="Reload '+txt(label)+'">Reload</button><button type="button" class="btn danger delete-day" data-id="'+txt(r.id)+'" aria-label="Delete saved day '+txt(label)+'">Delete Day</button></div></td></tr>';
-    }).join('')+'</tbody></table>';
-  }
-  function csvField(v){var s=String(v==null?'':v);return '"'+s.replace(/"/g,'""')+'"';}
-  function exportCSV(){
-    var records=savedDays(), rows=[['Date','Shift','Planned min','Downtime min','Run min','Availability %','Performance %','Quality %','OEE %','Component','Ideal cycle sec','Recorded cycle sec','Total produced','Rejects','Good units']];
-    records.forEach(function(r){
-      (r.form.parts||[]).forEach(function(p){
-        var qty=Number(p.total)||0,bad=Number(p.rejects)||0;
-        rows.push([r.form.day,r.form.shift,r.result.planned,r.result.downtime,r.result.runtime,(r.result.availability*100).toFixed(2),(r.result.performance*100).toFixed(2),(r.result.quality*100).toFixed(2),(r.result.oee*100).toFixed(2),p.name,p.ideal,p.actual,qty,bad,qty-bad]);
-      });
-    });
-    if(!records.length){setStatus('No saved production days to export. Save a completed day first.','warning');return;}
-    var csv='\uFEFF'+rows.map(function(r){return r.map(csvField).join(',');}).join('\r\n');
-    var url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'})),anchor=document.createElement('a');anchor.href=url;anchor.download='forge10-oee-history.csv';document.body.appendChild(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);
-  }
-  el('components').addEventListener('input',function(event){
-    var input=event.target, key=input.getAttribute('data-key'), row=input.closest('.row');if(!key||!row)return;
-    var p=parts.find(function(x){return String(x.id)===row.getAttribute('data-id');});if(!p)return;
-    p[key]=input.value;draft();calculate(false);
-  });
-  el('components').addEventListener('click',function(event){
-    if(!event.target.classList.contains('remove'))return;var row=event.target.closest('.row'),id=Number(row.getAttribute('data-id'));
-    if(parts.length===1){parts=[{id:nextId++,name:'',ideal:'',actual:'',total:'',rejects:''}];}
-    else parts=parts.filter(function(p){return p.id!==id;});renderParts();draft();calculate(false);if(window.Forge10Sound)Forge10Sound.play('remove');
-  });
-  ['day','shift','planned','downtime'].forEach(function(id){el(id).addEventListener('input',function(){draft();calculate(false);});});
-  el('add').addEventListener('click',function(){addPart({});});
-  el('calculate').addEventListener('click',function(){calculate(true);});
-  el('save').addEventListener('click',function(){
-    var result=calculate(true);if(!result)return;
-    var f=getForm(),records=savedDays(),id=f.day+'||'+f.shift.trim().toLowerCase(),record={id:id,form:f,result:result,savedAt:new Date().toISOString()};
-    var ix=records.findIndex(function(r){return r.id===id;});if(ix>=0)records.splice(ix,1);records.push(record);records=records.slice(-120);
-    try{localStorage.setItem(DAYKEY,JSON.stringify(records));historyTable();setStatus('Saved locally for '+f.day+'. Export CSV regularly to back up your production history.');}catch(e){setStatus('Could not save data in this browser. Please check browser storage settings.','error');}
-  });
-  el('csv').addEventListener('click',exportCSV);
-  el('print').addEventListener('click',function(){if(calculate(true))window.print();});
-  el('example').addEventListener('click',function(){applyForm({day:dateToday(),shift:'Demo Production Line',planned:'480',downtime:'35',parts:[{name:'Bracket A',ideal:'44',actual:'51',total:'320',rejects:'8'},{name:'Housing B',ideal:'63',actual:'70',total:'130',rejects:'4'}]});setStatus('Example loaded. Change any number to see updated results.');calculate(true);});
-  el('reset').addEventListener('click',function(){if(!window.confirm('Reset current unsaved form? Saved production days will remain.'))return;applyForm({day:dateToday(),parts:[{}]});if(window.Forge10Sound)Forge10Sound.play('reset');});
-  el('history').addEventListener('click',function(event){
-    var button=event.target.closest('button[data-id]');
-    if(!button)return;
-    var id=button.getAttribute('data-id'),records=savedDays(),r=records.find(function(x){return x.id===id;});
-    if(!r)return;
-    if(button.classList.contains('load')){
-      applyForm(r.form);window.scrollTo({top:0,behavior:'smooth'});return;
-    }
-    if(!button.classList.contains('delete-day'))return;
-    if(!window.confirm('Permanently delete saved production day '+(r.form.day||'undated')+' — '+(r.form.shift||'Unnamed')+'? This cannot be undone.'))return;
-    try{
-      var remaining=records.filter(function(x){return x.id!==id;});
-      if(remaining.length)localStorage.setItem(DAYKEY,JSON.stringify(remaining));
-      else localStorage.removeItem(DAYKEY);
-      historyTable();setStatus('Saved production day deleted. Your current form was not changed.');if(window.Forge10Sound)Forge10Sound.play('reset');
-    }catch(e){setStatus('Could not delete the saved day. Check browser storage settings.','error');}
-  });
-  el('clear-history').addEventListener('click',function(){
-    var records=savedDays();
-    if(!records.length)return;
-    if(!window.confirm('Permanently delete ALL '+records.length+' saved production days from this browser? This cannot be undone. Export History CSV first if you need a backup.'))return;
-    try{
-      localStorage.removeItem(DAYKEY);
-      historyTable();setStatus('All saved production days cleared. Your current form was not changed.');if(window.Forge10Sound)Forge10Sound.play('reset');
-    }catch(e){setStatus('Could not clear saved days. Check browser storage settings.','error');}
-  });
-  try{var existing=JSON.parse(localStorage.getItem(KEY)||'null');applyForm(existing||{day:dateToday(),parts:[{}]});}catch(e){applyForm({day:dateToday(),parts:[{}]});}
-  historyTable();
-})();
-</script>
-<script>
-(function () {
-  'use strict';
-  var VERSION = '2026-10-16';
-  var STORAGE_KEY = 'forge10-legal-consent-v1';
-  var gate = document.getElementById('legal-gate');
-  var tool = document.getElementById('protected-tool');
-  var checkbox = document.getElementById('legal-consent-check');
-  var button = document.getElementById('legal-consent-button');
-  var form = document.getElementById('legal-consent-form');
-  function unlock() {
-    gate.hidden = true;
-    tool.hidden = false;
-    tool.removeAttribute('inert');
-  }
-  var agreed = false;
-  try {
-    var record = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-    agreed = Boolean(record && record.version === VERSION && record.agreed === true && typeof record.acceptedAt === 'string');
-  } catch (e) { agreed = false; }
-  if (agreed) unlock();
-  checkbox.addEventListener('change', function () { button.disabled = !checkbox.checked; });
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    if (!checkbox.checked) { button.disabled = true; return; }
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        version: VERSION, agreed: true, acceptedAt: new Date().toISOString()
-      }));
-    } catch (e) {
-      // The site can still be used for this session if storage is unavailable.
-    }
-    unlock();
-    window.location.hash = 'tracker';
-    var firstInput = tool.querySelector('#planned');
-    if (firstInput) firstInput.focus();
-  });
+<header class="site-head"><a class="brand" href="index.html">FORGE<span>10</span><small> / Lukas Rudolph</small></a><nav aria-label="Website"><a href="index.html">Portfolio</a><a href="#guide">Instructions</a><a href="#history-section">Saved days</a><a href="terms-of-use.html">Terms</a><a href="privacy-notice.html">Privacy</a></nav></header>
+<main class="shell">
+<div class="hero"><div><div class="eyebrow"><span class="dot"></span> FREE OPERATIONS IMPROVEMENT TOOL <span class="revision">VERSION 2.0 · OCT 2026</span></div><h1>Make lost production time<br><em>visible, measurable, actionable.</em></h1><p>One dashboard for daily OEE, customer takt, downtime exposure, and a practical plan for recovered capacity. Built for supervisors and operations managers across repetitive production and service workflows.</p></div><div class="hero-pill"><span>NO ACCOUNT REQUIRED</span><strong>Data stays in your browser</strong><small>Print or export a backup. Avoid sensitive information.</small></div></div>
+<section class="consent panel" id="legal-gate" aria-labelledby="consent-title">
+<div class="eyebrow">REQUIRED TO ACCESS THE DASHBOARD</div><h2 id="consent-title">Terms, limitations and privacy</h2><p>This free tool provides <strong>illustrative management estimates, not certified engineering, accounting, productivity, safety, or compliance determinations.</strong> Inputs and policies vary by operation. Inspect and independently verify figures before relying on them. Downtime exposure is not automatically cash savings, and recovered minutes do not automatically reduce payroll.</p>
+<p>Data is stored in this browser only; the website owner does not maintain production history or an acceptance registry. Saved data can be lost when browser storage is cleared. Do not enter classified, export-controlled, confidential, regulated, or sensitive data.</p>
+<form id="consent-form"><label class="checkline"><input type="checkbox" id="consent-check" required><span>I have read and agree to the <a href="terms-of-use.html" target="_blank" rel="noopener">Terms of Use</a>, acknowledge the <a href="privacy-notice.html" target="_blank" rel="noopener">Privacy Notice</a>, and accept responsibility for independently verifying results before making decisions.</span></label><button id="consent-button" class="btn primary" type="submit" disabled>Agree & open dashboard →</button></form>
+<p class="muted tiny">Acceptance is remembered locally on this browser for this version of the terms. Disclaimers cannot eliminate liability imposed by applicable law.</p>
+</section>
+<div id="protected-tool" hidden inert>
+<section class="quickguide panel" id="guide"><div class="section-heading"><div><div class="eyebrow">START HERE</div><h2>How to use this dashboard</h2></div><button class="text-button" id="instructions-toggle" type="button" aria-expanded="true" aria-controls="instructions-body">Hide instructions ▴</button></div>
+<div id="instructions-body" class="steps">
+<div><b>01</b><strong>Define the shift</strong><span>Enter scheduled minutes, excluded breaks, and downtime. A stop while production was expected belongs in downtime.</span></div><div><b>02</b><strong>Record output</strong><span>Enter every product or activity, its validated ideal time, total units, and first-pass rejects.</span></div><div><b>03</b><strong>Add demand & cost</strong><span>Enter shift demand in comparable units and a defensible downtime rate, if known. Leave optional fields blank otherwise.</span></div><div><b>04</b><strong>Review, print, archive</strong><span>Resolve warnings, print the dated report, save the day, then begin a clean next-day entry without deleting history.</span></div>
+</div><div class="guide-note">Use for <strong>repeatable, countable outputs</strong> such as parts, packages, orders, test batches, or completed standardized services. If units differ substantially, analyze separate processes or use documented equivalent units. Never treat takt, OEE or financial projections as universal staffing standards.</div>
+</section>
+<section class="input-section panel" id="inputs"><div class="section-heading"><div><div class="eyebrow">01 / INPUTS</div><h2>Shift & process profile</h2></div><span class="pill">Auto-calculates as you type</span></div>
+<div class="input-grid four">
+<label class="field">Date<input id="date" type="date"></label><label class="field">Process / line / work center<input id="process" type="text" maxlength="90" placeholder="e.g., Assembly Cell A"></label><label class="field">Industry / workflow<select id="industry"><option value="manufacturing">Manufacturing & assembly</option><option value="packaging">Packaging / food production</option><option value="warehouse">Warehouse / fulfillment</option><option value="laboratory">Laboratory / testing</option><option value="service">Standardized services</option><option value="other">Other repeatable workflow</option></select></label><label class="field">Shift / manager label<input id="shift" type="text" maxlength="80" placeholder="Day shift / Supervisor"></label>
+</div><div class="input-grid three">
+<label class="field">Scheduled shift (minutes)<input id="scheduled" type="number" min="0" step="any" placeholder="480"><small>Clocked shift length</small></label><label class="field">Excluded time (minutes)<input id="excluded" type="number" min="0" step="any" placeholder="30"><small>Lunch, breaks, no planned production</small></label><label class="field">Demand this shift (good units) <i>Optional</i><input id="demand" type="number" min="0" step="1" placeholder="e.g., 420"><small>Same time window and comparable units</small></label>
+</div><div class="subhead"><strong>Downtime during planned production</strong><span>Enter minutes by reason. Total is automatically added. Do not enter excluded breaks here.</span></div><div class="input-grid three downtime-grid">
+<label class="field">Breakdowns<input id="stop-breakdowns" data-stop type="number" min="0" step="any" placeholder="0"></label><label class="field">Setups / changeovers<input id="stop-changeovers" data-stop type="number" min="0" step="any" placeholder="0"></label><label class="field">Material / supply delays<input id="stop-material" data-stop type="number" min="0" step="any" placeholder="0"></label><label class="field">Staffing / waiting<input id="stop-staffing" data-stop type="number" min="0" step="any" placeholder="0"></label><label class="field">Quality holds<input id="stop-quality" data-stop type="number" min="0" step="any" placeholder="0"></label><label class="field">Other / unclassified<input id="stop-other" data-stop type="number" min="0" step="any" placeholder="0"></label></div>
+<div class="inline-totals"><span>Planned production <strong id="live-planned">—</strong></span><span>Total downtime <strong id="live-down">—</strong></span><span>Actual run time <strong id="live-run">—</strong></span></div>
+</section>
+<section class="panel" id="products-section"><div class="section-heading"><div><div class="eyebrow">02 / OUTPUT</div><h2>Products or repeatable activities</h2><p class="muted">Use the fastest <em>sustainable</em> ideal cycle / processing time; count rejected or reworked-on-first-pass units as rejects.</p></div><button class="btn secondary" id="add-product" type="button">+ Add activity</button></div><div id="product-rows" class="product-rows"></div><div class="small-note" id="product-count">1 of 10 activity rows</div></section>
+<section class="panel" id="scenario-section"><div class="section-heading"><div><div class="eyebrow">03 / OPPORTUNITY ASSUMPTIONS</div><h2>Downtime & recovered time</h2></div><span class="pill accent">Scenario, not booked savings</span></div>
+<div class="input-grid three"><label class="field">Estimated downtime exposure ($/hour) <i>Optional</i><input id="cost-rate" type="number" min="0" step="any" placeholder="e.g., 250"><small>Defensible incremental economic impact—not automatic revenue or payroll savings</small></label><label class="field">Proposed downtime reduction (%)<input id="reduction" type="number" min="0" max="100" step="1" value="25"><small>Illustrative improvement target</small></label><label class="field">Manager / reviewer <i>Optional</i><input id="reviewer" type="text" maxlength="80" placeholder="Name or initials"><small>Document preparer; not a certified sign-off</small></label></div>
+<div class="scenario-help">Illustration: reducing 60 minutes of recorded downtime by 25% recovers 15 minutes. The recovered minutes may increase output <em>or</em> allow earlier completion when demand is already met—not both simultaneously. Actual savings require proof of an avoidable cost.</div>
+</section>
+<section class="panel results-panel" id="results"><div class="section-heading"><div><div class="eyebrow">04 / LIVE ANALYSIS</div><h2>Daily performance</h2></div><span class="audit-chip" id="audit-chip">Awaiting valid data</span></div>
+<div class="metric-grid"><div class="metric"><span>Availability</span><strong id="m-availability">—</strong><small>Running ÷ planned</small></div><div class="metric"><span>Performance</span><strong id="m-performance">—</strong><small>Ideal output time ÷ running</small></div><div class="metric"><span>Quality</span><strong id="m-quality">—</strong><small>First-pass ideal-time yield</small></div><div class="metric primary-metric"><span>Overall OEE</span><strong id="m-oee">—</strong><small>A × P × Q</small></div></div>
+<div id="message" class="message" role="status" aria-live="polite">Enter shift timing and output to see results.</div>
+<div class="analysis-grid"><div class="analysis-tile"><h3>Where the planned time went</h3><div id="loss-chart" class="loss-chart" role="img" aria-label="Planned time breakdown"><div class="empty-chart">Complete inputs to visualize losses</div></div><div class="legend"><span><i class="c-good"></i> Good production</span><span><i class="c-quality"></i> Quality loss</span><span><i class="c-speed"></i> Speed loss</span><span><i class="c-stops"></i> Downtime</span></div><div class="micro" id="loss-explain">Losses are reported as equivalent ideal minutes, not additional clock time.</div></div><div class="analysis-tile"><h3>Takt & output requirement</h3><div class="summary-stats" id="takt-stats"><p class="muted">Enter customer demand to calculate takt and attainment.</p></div></div></div>
+<div class="analysis-grid"><div class="analysis-tile"><h3>Financial exposure & recovery</h3><div class="summary-stats" id="cost-stats"><p class="muted">Enter the hourly exposure rate for cost estimates.</p></div></div><div class="analysis-tile"><h3>Smart management interpretation</h3><div class="recommendations" id="recommendations"><p class="muted">The recommended focus updates with your results.</p></div></div></div>
+<div class="analysis-tile task-tile"><div class="section-heading"><div><h3>Put potential recovered time to work</h3><p class="muted">Example tasks tailored to your industry; always check safe work windows, training, approvals and staffing.</p></div><span id="available-time-chip" class="pill">Scenario pending</span></div><div id="task-list" class="task-grid"></div><p class="micro">These are possible uses of capacity, not a promise of free employee hours. A bottleneck may remain, and tasks must never replace required controls, breaks or production obligations.</p></div>
+<div class="analysis-tile audit-tile"><div class="section-heading"><div><h3>Input & formula verification</h3><p class="muted">Transparent rule checks; not an independent engineering or financial audit.</p></div><span id="test-status" class="pill">Self-tests not run</span></div><ul id="audit-list" class="audit-list"></ul><button id="run-tests" type="button" class="btn secondary small-button">Run calculation self-tests</button><div class="micro" id="formula-list"></div></div>
+<div class="report-actions"><button id="print" class="btn primary" type="button">Print / Save PDF report</button><button id="save" class="btn secondary" type="button">Save day to browser</button><button id="archive-next" class="btn success" type="button">Save & start next day →</button><button id="export" class="btn secondary" type="button">Export history CSV</button><button id="example" class="btn ghost" type="button">Load example</button><button id="reset" class="btn danger" type="button">Reset current form</button></div>
+<div class="action-feedback" id="feedback" role="status" aria-live="polite"></div>
+<p class="legal-warning"><b>Decision-use warning:</b> This is an informational calculator provided “AS IS.” Results and scenarios depend on user inputs and may not represent realizable savings, actual capacity, or safe staffing changes. Independently confirm all decisions and review the <a href="terms-of-use.html" target="_blank" rel="noopener">Terms of Use</a>.</p>
+</section>
+<section class="panel" id="history-section"><div class="section-heading"><div><div class="eyebrow">05 / DAY RECORDS</div><h2>Saved production days</h2><p class="muted">Saved only in this browser. An existing Forge10 v1 history is copied forward when available; the old data is left intact.</p></div><div class="actions"><button class="btn secondary" id="export-history" type="button">Export CSV</button><button class="btn danger" id="clear-history" type="button">Delete history</button></div></div><div id="history-wrap" class="history-wrap"></div><p class="micro">Maximum 120 saved days per browser. A saved day can be reloaded, printed, or deleted. Back up history before clearing site data or switching devices. This is not a server-backed audit trail.</p></section>
+<section class="panel" id="methods"><div class="section-heading"><div><div class="eyebrow">METHOD / REFERENCE</div><h2>What the metrics mean</h2></div></div><div class="method-grid"><div><h3>OEE is measured against planned production</h3><p>Planned = scheduled shift − excluded breaks. Run time = planned − downtime. Availability = run/planned. Performance = ideal seconds for all output/run seconds. Quality = ideal seconds for good first-pass output/ideal seconds for all output. OEE = good ideal seconds/planned seconds.</p></div><div><h3>Takt is driven by demand, not machinery</h3><p>Takt = planned production seconds ÷ required good units. Compare it to actual average good-output interval cautiously: multi-product mixes require equivalent units or separate analysis. Meeting demand does not necessarily require maximizing OEE.</p></div><div><h3>What dollars actually represent</h3><p>Downtime exposure = downtime hours × entered hourly economic impact. Modeled opportunity = targeted recovered hours × that same rate. Neither value proves recoverable profit, expense reduction, or financial return.</p></div><div><h3>Improvement before higher output</h3><p>If output meets demand, recovered capacity can support earlier cleanup, preventive inspections, setup preparation, 5S, employee training, verification and maintenance planning—in accordance with local procedures.</p></div></div><p class="micro">Methodology: <a href="https://www.oee.com/calculating-oee/" rel="noopener" target="_blank">OEE.com OEE calculation</a> · <a href="https://www.lean.org/lexicon-terms/takt-time/" rel="noopener" target="_blank">Lean Enterprise Institute takt time</a>. Industry benchmarks are deliberately not imposed.</p></section>
+</div>
+<div class="print-only" id="print-sheet" aria-hidden="true"></div>
+</main><footer>© 2026 Lukas Rudolph · FORGE10 · Free analytical utility · <a href="index.html">Portfolio</a> · <a href="terms-of-use.html">Terms</a> · <a href="privacy-notice.html">Privacy</a></footer>
+<script>(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const KEY='forge10-oee-v2-draft', DAYS='forge10-oee-v2-days', OLDKEY='forge10-oee-v1', OLDDAYS='forge10-oee-days-v1';
+const CONSENT='forge10-legal-consent-v2', TERMS_VERSION='2026-10-18';
+const STOP_KEYS=['breakdowns','changeovers','material','staffing','quality','other'];
+const STOP_LABELS={breakdowns:'Breakdowns',changeovers:'Setups / changeovers',material:'Material / supply delays',staffing:'Staffing / waiting',quality:'Quality holds',other:'Other / unclassified'};
+const SECTORS={
+ manufacturing:[['Inspect before failure','Complete approved basic-condition checks, lubrication observations and abnormality reports.'],['Prepare the next changeover','Stage tooling, work instructions, gauges and first-off materials.'],['Run a 5S improvement','Organize point-of-use tools and remove search time.'],['Build team capability','Cross-train staff against the skills matrix and approved work instructions.'],['Validate the process','Review scrap causes, first-piece checks and quality trends.'],['Close maintenance actions','Update work requests, asset history and preventive-maintenance plans.']],
+ packaging:[['Prepare the next run','Stage labels, approved packaging stock and changeover parts.'],['Strengthen sanitation','Complete scheduled GMP / cleaning checks in approved windows.'],['Inspect common wear points','Use authorized checks on guides, sensors and conveyors.'],['Reduce material trips','Replenish point-of-use packaging supplies.'],['Review packaging defects','Log rejects, seal faults and labeling errors.'],['Train on changeovers','Practice documented setup or verification sequences.']],
+ warehouse:[['Improve inventory accuracy','Perform directed cycle counts on accessible locations.'],['Prepare the next wave','Stage packing supplies, totes and approved pick resources.'],['Investigate order errors','Resolve recurring mispicks and scanning issues.'],['Improve travel paths','Review slotting and high-frequency item placement.'],['Inspect workstations','Use standard equipment / safety checklists.'],['Cross-train team members','Practice scanner procedures and exception handling.']],
+ laboratory:[['Prepare approved test setups','Stage fixtures, labels and reference materials according to procedures.'],['Review instrument records','Check due dates, service notes and verification schedules.'],['Organize sample flow','Improve custody paperwork and queue visibility.'],['Analyze repeat tests','Identify causes of rework and documentation gaps.'],['Improve standard work','Review instructions for clarity and controlled revisions.'],['Build technical capability','Conduct authorized cross-training on test workflows.']],
+ service:[['Clear quality follow-ups','Resolve documented rework and customer exceptions.'],['Improve templates','Standardize repetitive forms and handoffs.'],['Cross-train the team','Build flexibility for peak-demand periods.'],['Prepare tomorrow’s workflow','Stage schedules, assignments and required materials.'],['Investigate delays','Analyze wait states and handoff failures.'],['Update process documentation','Capture lessons learned in standard work.']],
+ other:[['Prepare the next work cycle','Stage approved tools, materials and job details.'],['Remove preventable delays','Address repeat causes of waiting and handoff loss.'],['Improve standard work','Clarify instructions and checklists.'],['Inspect equipment','Complete authorized preventive or condition checks.'],['Develop staff capability','Run brief cross-training or knowledge-transfer sessions.'],['Review quality escapes','Document sources of rework and variation.']]
+};
+const safe=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cleanNumber=(v)=>v===''||v==null?null:Number(v);
+const finite=(v)=>Number.isFinite(v);
+const fixed=(v,n=1)=>finite(v)?Number(v).toLocaleString(undefined,{minimumFractionDigits:n,maximumFractionDigits:n}):'—';
+const pct=(v)=>finite(v)?fixed(v*100,1)+'%':'—';
+const money=(v)=>finite(v)?v.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}):'—';
+const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');};
+const clone=v=>JSON.parse(JSON.stringify(v));
+const defaultForm=()=>({date:today(),process:'',industry:'manufacturing',shift:'',scheduled:'',excluded:'',demand:'',stops:Object.fromEntries(STOP_KEYS.map(k=>[k,''])),products:[{name:'',ideal:'',total:'',rejects:''}],costRate:'',reduction:'25',reviewer:''});
+let form=defaultForm(), last=null, localAvailable=true, selfTest={ok:false,results:[]};
+function readJSON(key,def){try{const str=localStorage.getItem(key);return str?JSON.parse(str):def;}catch(e){return def;}}
+function writeJSON(key,val){try{localStorage.setItem(key,JSON.stringify(val));localAvailable=true;return true;}catch(e){localAvailable=false;feedback('Browser storage is unavailable/full. Printing still works, but records are NOT backed up.','error');return false;}}
+function notify(msg,kind=''){const n=$('message');n.className='message'+(kind?' '+kind:'');n.textContent=msg;}
+function feedback(msg,kind=''){const n=$('feedback');n.textContent=msg;n.style.color=kind==='error'?'#ffbfc6':'#bfe7ff';}
+function oldForm(f){const out=defaultForm();out.date=f.day||today();out.process=f.shift||'Imported process';out.shift='Imported v1';out.scheduled=String(f.planned??'');out.excluded='0';out.stops.other=String(f.downtime??'');out.products=(f.parts||[]).slice(0,10).map(p=>({name:p.name||'',ideal:String(p.ideal??''),total:String(p.total??''),rejects:String(p.rejects??'')}));if(!out.products.length)out.products=[{name:'',ideal:'',total:'',rejects:''}];return out;}
+function migrate(){
+ let days=readJSON(DAYS,null);
+ if(!Array.isArray(days)){
+  const old=readJSON(OLDDAYS,[]);
+  days=Array.isArray(old)?old.slice(-120).map((r,i)=>({id:'v1-'+i+'-'+(r.id||''),form:oldForm(r.form||{}),savedAt:r.savedAt||null,source:'Imported from Forge10 v1; source entries preserved; review definitions and assumptions'})):[];
+  if(days.length)writeJSON(DAYS,days);
+ }
+ if(!readJSON(KEY,null)){
+  const old=readJSON(OLDKEY,null);
+  if(old&&typeof old==='object')writeJSON(KEY,oldForm(old));
+ }
+}
+function storedDays(){const d=readJSON(DAYS,[]);return Array.isArray(d)?d:[];}
+function persistDraft(){writeJSON(KEY,form);}
+function rowHTML(p,i){return `<article class="product" data-index="${i}"><div class="product-head"><b>ACTIVITY ${i+1}</b><button type="button" class="remove" data-remove="${i}" aria-label="Remove activity ${i+1}">Remove</button></div><div class="product-fields"><label class="field">Product / activity<input type="text" data-p="name" value="${safe(p.name)}" maxlength="90" placeholder="Part A / Orders"></label><label class="field">Ideal seconds / unit<input type="number" min="0" step="any" data-p="ideal" value="${safe(p.ideal)}" placeholder="45"></label><label class="field">Total produced<input type="number" min="0" step="1" data-p="total" value="${safe(p.total)}" placeholder="300"></label><label class="field">First-pass rejects<input type="number" min="0" step="1" data-p="rejects" value="${safe(p.rejects)}" placeholder="5"></label></div></article>`;}
+function renderProducts(){ $('product-rows').innerHTML=form.products.map(rowHTML).join('');$('product-count').textContent=form.products.length+' of 10 activity rows';$('add-product').disabled=form.products.length>=10;}
+function applyForm(f,write=true){form=Object.assign(defaultForm(),clone(f||{}));form.stops=Object.assign(defaultForm().stops,form.stops||{});form.products=(Array.isArray(form.products)?form.products:[]).slice(0,10).map(p=>Object.assign({name:'',ideal:'',total:'',rejects:''},p));if(!form.products.length)form.products=[{name:'',ideal:'',total:'',rejects:''}];
+ ['date','process','industry','shift','scheduled','excluded','demand','costRate','reduction','reviewer'].forEach(k=>{const id={costRate:'cost-rate'}[k]||k; if($(id))$(id).value=form[k]??'';});STOP_KEYS.forEach(k=>$('stop-'+k).value=form.stops[k]??'');renderProducts();if(write)persistDraft();update();}
+function calculate(f){
+ const errors=[],warnings=[],checks=[];
+ const check=(label,ok,text,level='error')=>{checks.push({label,ok,text,level});if(!ok)(level==='warning'?warnings:errors).push(text);};
+ check('Production date',/^\d{4}-\d{2}-\d{2}$/.test(f.date)&&!Number.isNaN(Date.parse(f.date)),'Enter a valid production date.');
+ check('Process identifier',typeof f.process==='string'&&f.process.trim().length>0,'Enter the process / work-center name.');
+ const sch=cleanNumber(f.scheduled),exc=f.excluded===''?0:cleanNumber(f.excluded);
+ check('Shift time',finite(sch)&&sch>0,'Scheduled shift must be greater than zero.');
+ check('Excluded breaks',finite(exc)&&exc>=0&&(!finite(sch)||exc<sch),'Excluded time must be between 0 and the scheduled shift.');
+ const planned=finite(sch)&&finite(exc)?sch-exc:null;
+ const stops={};let downtime=0;
+ STOP_KEYS.forEach(k=>{const v=f.stops[k]===''?0:cleanNumber(f.stops[k]);stops[k]=v;downtime+=finite(v)?v:0;});
+ check('Downtime entries',STOP_KEYS.every(k=>finite(stops[k])&&stops[k]>=0),'Enter nonnegative downtime minutes in every stop category.');
+ check('Downtime fits shift',finite(planned)&&planned>0&&downtime<=planned+1e-8,'Total downtime cannot exceed planned production minutes.');
+ const runtime=finite(planned)?planned-downtime:null;
+ let total=0,bad=0,idealSec=0,goodSec=0,validRows=0;
+ const rows=[];
+ f.products.forEach((p,i)=>{
+  const qty=p.total===''?0:cleanNumber(p.total),rej=p.rejects===''?0:cleanNumber(p.rejects),ideal=cleanNumber(p.ideal);
+  const touched=[p.total,p.rejects,p.ideal,p.name].some(v=>String(v??'').trim()!=='');
+  const valid=Number.isSafeInteger(qty)&&qty>=0&&Number.isSafeInteger(rej)&&rej>=0&&rej<=qty&&(qty===0?(p.ideal===''||finite(ideal)&&ideal>0):(finite(ideal)&&ideal>0));
+  if(touched&&!valid)errors.push('Activity '+(i+1)+': enter a positive ideal time, whole-number units, and rejects no greater than output.');
+  if(!valid)return;
+  if(qty>0)validRows++;
+  total+=qty;bad+=rej;if(qty>0){idealSec+=ideal*qty;goodSec+=ideal*(qty-rej);}
+  rows.push({name:p.name||'Activity '+(i+1),ideal,qty,rej,good:qty-rej});
+ });
+ check('Activity rows',!f.products.some(p=>String(p.name??'').trim()||String(p.total??'').trim()||String(p.ideal??'').trim()||String(p.rejects??'').trim())||!errors.some(e=>e.startsWith('Activity ')),'All entered activity rows must contain valid values.');
+ check('Output recorded',validRows>0,'Enter at least one activity with actual output.');
+ check('Run time vs output',!finite(runtime)||runtime>0||total===0,'Positive output is inconsistent with zero run time.');
+ const demand=f.demand===''?null:cleanNumber(f.demand);
+ check('Demand, if entered',demand===null||Number.isSafeInteger(demand)&&demand>0,'Shift demand must be a whole number greater than zero.');
+ const costRate=f.costRate===''?null:cleanNumber(f.costRate);
+ check('Cost rate, if entered',costRate===null||finite(costRate)&&costRate>=0,'Downtime rate must be nonnegative.');
+ const reduction=cleanNumber(f.reduction);
+ check('Recovery scenario',finite(reduction)&&reduction>=0&&reduction<=100,'Recovery target must be between 0% and 100%.');
+ if(finite(runtime)&&runtime>0&&validRows>0&&idealSec>(runtime*60)*(1+1e-7))errors.push('Ideal production time exceeds actual run time: performance would exceed 100%. Verify standards and counts.');
+ if(finite(planned)&&planned>0&&validRows>0&&goodSec>planned*60*(1+1e-7))errors.push('Good ideal time exceeds planned time. Verify inputs.');
+ if(f.products.length>1&&demand!==null)warnings.push('Takt and demand attainment assume all activity units are interchangeable or normalized to equivalent units.');
+ if(total===0&&finite(planned)&&planned>0)warnings.push('No completed output: full three-factor OEE cannot be calculated; investigate the shift.');
+ if(downtime>0&&STOP_KEYS.every(k=>stops[k]===0))warnings.push('Recorded downtime has no categories.');
+ if(costRate!==null)warnings.push('Hourly downtime impact is an assumption. Financial exposure is not verified profit, wages saved, or guaranteed cash recovery.');
+ if(demand!==null&&total>0)warnings.push('Takt comparison is descriptive and does not prove achievable cycle time or available employee time.');
+ const valid=errors.length===0;
+ let a=null,p=null,q=null,oee=null;
+ if(valid&&finite(planned)&&planned>0&&runtime>0&&idealSec>0){a=runtime/planned;p=idealSec/(runtime*60);q=goodSec/idealSec;oee=a*p*q;}
+ const good=total-bad;
+ const recovered=finite(reduction)?downtime*reduction/100:null;
+ return {valid,errors,warnings,checks,planned,runtime,downtime,stops,total,bad,good,idealSec,goodSec,rows,availability:a,performance:p,quality:q,oee,losses:{downtime,performance:finite(runtime)?runtime-idealSec/60:null,quality:(idealSec-goodSec)/60,good:goodSec/60},demand,takt:finite(planned)&&planned>0&&demand>0?planned*60/demand:null,actualInterval:good>0&&finite(planned)?planned*60/good:null,demandGap:demand===null?null:demand-good,costRate,reduction,recovered,exposure:costRate===null?null:costRate*downtime/60,opportunity:costRate===null||recovered===null?null:costRate*recovered/60};
+}
+function stat(k,v,cls=''){return `<div class="statpair"><span>${safe(k)}</span><strong class="${cls}">${safe(v)}</strong></div>`;}
+function taskItems(f,r){const list=SECTORS[f.industry]||SECTORS.other;const time=finite(r.recovered)?fixed(r.recovered,1):'—';return list.map(([title,explain])=>({title,explain}));}
+function recommendation(f,r){if(!r.valid)return 'Correct the input checks before relying on this day’s report.';
+ const losses=[['downtime',r.downtime],['speed loss',r.losses.performance],['first-pass quality loss',r.losses.quality]].sort((a,b)=>b[1]-a[1]);
+ const reasons=Object.entries(r.stops).sort((a,b)=>b[1]-a[1]);
+ let pieces=[];
+ if(r.demand!==null){if(r.demandGap>0)pieces.push(`<p><strong>Customer demand gap:</strong> ${safe(fixed(r.demandGap,0))} additional good units are required. Prioritize output and bottleneck recovery before scheduling discretionary tasks.</p>`);else pieces.push('<p><strong>Demand met:</strong> Seek a shorter required run or better use of available time rather than assuming that maximizing output is always valuable.</p>');}
+ if(losses[0][1]>0.00001){pieces.push(`<p><strong>Largest measured loss:</strong> ${safe(losses[0][0])}, ${safe(fixed(losses[0][1],1))} equivalent minutes. ${losses[0][0]==='downtime'&&reasons[0][1]>0?'Leading stop reason: '+safe(STOP_LABELS[reasons[0][0]])+' ('+safe(fixed(reasons[0][1],1))+' min).':'Verify measurements and prioritize the largest recurring cause.'}</p>`);}else pieces.push('<p><strong>Measured loss:</strong> No loss beyond the documented standards is shown. Verify that ideal times and downtime are realistic.</p>');
+ if(r.recovered>0)pieces.push(`<p><strong>Improvement experiment:</strong> Pilot the ${safe(fixed(r.reduction,0))}% downtime-reduction scenario, measure whether ${safe(fixed(r.recovered,1))} minutes are actually released, and log what workers can safely do with those minutes.</p>`);
+ return pieces.join('');}
+function showAudit(r){const list=[...r.checks,...r.errors.filter(e=>!r.checks.some(c=>c.text===e)).map(e=>({label:'Consistency check',ok:false,text:e,level:'error'})),...r.warnings.map(e=>({label:'Interpretation',ok:false,text:e,level:'warning'}))];$('audit-list').innerHTML=list.map(c=>`<li class="${c.ok?'':c.level==='warning'?'warn':'fail'}">${safe(c.ok?c.label+' — valid':c.label+' — '+c.text)}</li>`).join('');const chip=$('audit-chip');chip.className='audit-chip '+(!r.valid?'error':r.warnings.length?'warning':'ok');chip.textContent=!r.valid?'CHECK INPUTS · '+r.errors.length+' issue(s)':r.warnings.length?'VALID · '+r.warnings.length+' caveat(s)':'INPUT CHECKS PASSED';$('formula-list').textContent='Checks include time bounds, stop totals, quantities, standards, demand, optional cost and cross-factor consistency. A displayed pass is an automated reasonableness check, not an independent audit.';}
+function update(){const r=calculate(form);last=r;
+ $('live-planned').textContent=finite(r.planned)&&r.planned>0?fixed(r.planned,1)+' min':'—';$('live-down').textContent=fixed(r.downtime,1)+' min';$('live-run').textContent=finite(r.runtime)&&r.runtime>=0?fixed(r.runtime,1)+' min':'—';
+ [['availability',r.availability],['performance',r.performance],['quality',r.quality],['oee',r.oee]].forEach(([id,value])=>$('m-'+id).textContent=pct(value));
+ showAudit(r);
+ if(!r.valid)notify('Input checks found '+r.errors.length+' problem(s). Resolve these before saving or printing. '+r.errors[0],'error');else if(r.warnings.length)notify('Valid calculation with interpretation caveats. Read the verification section before acting.','warning');else notify('Inputs passed automated checks. Review assumptions before making management decisions.');
+ if(r.valid){const segments=[['good',r.losses.good],['quality',r.losses.quality],['speed',r.losses.performance],['stops',r.losses.downtime]]; $('loss-chart').innerHTML=segments.map(([name,n])=>`<div class="${name}" style="width:${Math.max(0,100*n/r.planned).toFixed(5)}%" title="${name}: ${fixed(n,1)} minutes"></div>`).join('');$('loss-chart').setAttribute('aria-label',segments.map(([k,v])=>k+' '+fixed(v,1)+' minutes').join('; '));$('loss-explain').textContent='Good production '+fixed(r.losses.good,1)+'m · Quality '+fixed(r.losses.quality,1)+'m · Speed '+fixed(r.losses.performance,1)+'m · Stops '+fixed(r.downtime,1)+'m. All segments reconcile to planned time.';
+ }else{$('loss-chart').innerHTML='<div class="empty-chart">Correct input issues to display the time bridge</div>';$('loss-explain').textContent='Loss allocation will reconcile once valid shift and activity data are entered.';}
+ $('takt-stats').innerHTML=r.takt!==null&&r.valid?stat('Customer takt',fixed(r.takt,1)+' sec/good unit')+stat('Actual good-unit interval',fixed(r.actualInterval,1)+' sec/good unit')+stat('Good output / demand',fixed(r.good,0)+' / '+fixed(r.demand,0))+stat('Good units over / (under) demand',fixed(-r.demandGap,0),r.demandGap>0?'warm':'cool')+'<p class="stat-caption">Takt is a demand pace—not the machine’s ideal cycle. Mixed outputs require equivalent units.</p>':'<p class="muted">Enter positive shift demand and valid production data to see takt and attainment.</p>';
+ $('cost-stats').innerHTML=(r.valid?stat('Observed stop time',fixed(r.downtime,1)+' min')+stat('Potential recovered time',fixed(r.recovered,1)+' min'):'')+(r.valid&&r.costRate!==null?stat('Illustrative downtime exposure',money(r.exposure),'warm')+stat('Illustrative avoided exposure',money(r.opportunity),'cool'):'<p class="stat-caption">Add a defensible hourly impact rate for an optional scenario in dollars.</p>')+'<p class="stat-caption">Only actually avoidable costs can become realized financial savings. Do not double-count added output and earlier completion.</p>';
+ $('recommendations').innerHTML=recommendation(form,r);
+ $('available-time-chip').textContent=r.valid?fixed(r.recovered,1)+' min potential':'Scenario pending';
+ $('task-list').innerHTML=taskItems(form,r).map(t=>`<div class="task"><b>${safe(t.title)}</b><span>${safe(t.explain)}</span></div>`).join('');
+}
+function recordId(f){return [f.date,(f.process||'').trim().toLowerCase(),(f.shift||'').trim().toLowerCase()].join('||');}
+function saveDay(next=false){const r=calculate(form);if(!r.valid){feedback('Cannot save: resolve audit errors first.','error');notify('Cannot archive: '+r.errors[0],'error');return false;}
+ if(!form.process.trim()){feedback('Enter a process or work center name before saving.','error');return false;}
+ const all=storedDays(),id=recordId(form),old=all.findIndex(x=>x.id===id);
+ if(old>=0&&!confirm('A day already exists for this date, process and shift. Replace that saved record?'))return false;
+ const item={id,form:clone(form),savedAt:new Date().toISOString(),source:'Forge10 v2, user-entered data, automated checks only'};
+ if(old>=0)all.splice(old,1);all.push(item);if(all.length>120)all.splice(0,all.length-120);
+ if(!writeJSON(DAYS,all))return false;renderHistory();feedback('Saved day to this browser. Export CSV periodically for a durable backup.');
+ if(next){const fresh=defaultForm();fresh.date=nextDate(form.date);fresh.process=form.process;fresh.industry=form.industry;fresh.shift=form.shift;fresh.products=form.products.map(p=>({name:p.name,ideal:p.ideal,total:'',rejects:''}));fresh.costRate=form.costRate;fresh.reduction=form.reduction;fresh.scheduled=form.scheduled;fresh.excluded=form.excluded;fresh.demand=form.demand;fresh.reviewer=form.reviewer;applyForm(fresh);feedback('Previous day saved. New date selected; counts and downtime cleared. Verify repeated shift assumptions before entering the next day.');window.scrollTo({top:0,behavior:'smooth'});if(window.Forge10Sound)Forge10Sound.play('reset');}
+ return true;
+}
+function nextDate(iso){if(!/^\d{4}-\d{2}-\d{2}$/.test(iso))return today();const parts=iso.split('-').map(Number);const d=new Date(Date.UTC(parts[0],parts[1]-1,parts[2]+1));return d.toISOString().slice(0,10);}
+function renderHistory(){const d=storedDays().slice().reverse();$('clear-history').disabled=!d.length;
+ if(!d.length){$('history-wrap').innerHTML='<p class="muted">No saved days yet. Save a valid day to create a browser-local record.</p>';return;}
+ $('history-wrap').innerHTML='<table class="history-table"><thead><tr><th>Day</th><th>Process</th><th>OEE</th><th>Good output</th><th>Options</th></tr></thead><tbody>'+d.map(item=>{const r=calculate(item.form);const ix=encodeURIComponent(item.id);return `<tr><td>${safe(item.form.date||'—')}</td><td>${safe(item.form.process||'—')}</td><td>${pct(r.oee)}</td><td>${fixed(r.good,0)}</td><td><button type="button" data-action="load" data-id="${safe(ix)}">Load</button><button type="button" data-action="print" data-id="${safe(ix)}">Print</button><button type="button" class="delete" data-action="delete" data-id="${safe(ix)}">Delete</button></td></tr>`;}).join('')+'</tbody></table>';
+}
+function sheet(f,r,stamp){const rows=r.rows.filter(x=>x.qty||x.name).map(x=>`<tr><td>${safe(x.name)}</td><td>${fixed(x.ideal,2)}</td><td>${fixed(x.qty,0)}</td><td>${fixed(x.rej,0)}</td><td>${fixed(x.good,0)}</td></tr>`).join('');
+ const stopRows=STOP_KEYS.map(k=>`<tr><td>${safe(STOP_LABELS[k])}</td><td>${fixed(r.stops[k],1)}</td></tr>`).join('');
+ const aud=[...r.errors.map(x=>'FAIL: '+x),...r.warnings.map(x=>'NOTE: '+x)];
+ return `<h1>FORGE10 | Daily operations report</h1><p>Generated ${safe(new Date().toLocaleString())} · ${stamp?'Saved '+safe(new Date(stamp).toLocaleString()):'Current working day'} · <b>Not a certified audit</b></p><p><b>Production date:</b> ${safe(f.date)} &nbsp; <b>Work center:</b> ${safe(f.process||'Not specified')} &nbsp; <b>Shift:</b> ${safe(f.shift||'—')} &nbsp; <b>Prepared by:</b> ${safe(f.reviewer||'Not specified')}</p><div class="print-metrics"><div>Availability<strong>${pct(r.availability)}</strong></div><div>Performance<strong>${pct(r.performance)}</strong></div><div>Quality<strong>${pct(r.quality)}</strong></div><div>Overall OEE<strong>${pct(r.oee)}</strong></div></div><h2>Time &amp; throughput</h2><table><tbody><tr><th>Scheduled shift</th><td>${fixed(cleanNumber(f.scheduled),1)} min</td><th>Excluded breaks</th><td>${fixed(f.excluded===''?0:cleanNumber(f.excluded),1)} min</td></tr><tr><th>Planned production</th><td>${fixed(r.planned,1)} min</td><th>Running</th><td>${fixed(r.runtime,1)} min</td></tr><tr><th>Downtime</th><td>${fixed(r.downtime,1)} min</td><th>Good / rejects</th><td>${fixed(r.good,0)} / ${fixed(r.bad,0)}</td></tr><tr><th>Good ideal time</th><td>${fixed(r.goodSec/60,1)} min</td><th>Total produced</th><td>${fixed(r.total,0)}</td></tr><tr><th>Speed loss</th><td>${fixed(r.losses.performance,1)} min</td><th>Quality loss</th><td>${fixed(r.losses.quality,1)} min</td></tr></tbody></table><h2>Products or activities</h2><table><thead><tr><th>Name</th><th>Ideal sec/unit</th><th>Total units</th><th>First-pass rejects</th><th>Good units</th></tr></thead><tbody>${rows}</tbody></table><h2>Downtime reasons</h2><table><thead><tr><th>Category</th><th>Minutes</th></tr></thead><tbody>${stopRows}</tbody></table><h2>Demand, financial exposure & improvement scenario</h2><table><tbody><tr><th>Customer demand</th><td>${r.demand===null?'Not entered':fixed(r.demand,0)+' good units'}</td><th>Takt</th><td>${r.takt===null?'Not available':fixed(r.takt,1)+' sec/good unit'}</td></tr><tr><th>Demand gap</th><td>${r.demandGap===null?'Not available':fixed(r.demandGap,0)+' good units needed'}</td><th>Downtime rate</th><td>${r.costRate===null?'Not entered':money(r.costRate)+'/hour'}</td></tr><tr><th>Estimated exposure</th><td>${money(r.exposure)}</td><th>Recovery scenario</th><td>${fixed(r.reduction,0)}% reduction = ${fixed(r.recovered,1)} min</td></tr><tr><th>Illustrative avoided exposure</th><td>${money(r.opportunity)}</td><th>Projected employee time</th><td>Only if capacity actually becomes usable</td></tr></tbody></table><h2>Operational actions to consider</h2><p>${safe((SECTORS[f.industry]||SECTORS.other).map(a=>a[0]).join(' · '))}</p><p class="print-note">${safe(r.demandGap>0?'Demand not met: prioritize capacity used for customer output.':'If demand is met, recovered time might support approved inspection, preparation, 5S, training or documentation without producing unnecessary inventory.')}</p><h2>Audit checks, assumptions & report limitations</h2><p class="warningprint"><b>${r.valid?'Automated input checks passed':'Input errors present'}</b>. ${aud.length?aud.map(safe).join(' · '):'No additional interpretation warnings.'}</p><p class="smallprint">Calculations: planned = scheduled − excluded. Run = planned − downtime. Availability = run ÷ planned. Performance = Σ(ideal sec × total qty) ÷ (run min × 60). Quality = Σ(ideal sec × good qty) ÷ Σ(ideal sec × total qty). OEE = good ideal sec ÷ planned sec. Takt = planned sec ÷ required good units. Exposure = downtime hours × user-supplied $/hour. Savings scenarios are hypothetical; no actual cost recovery is certified.</p><p class="smallprint">FORGE10 and Lukas Rudolph provide this free informational aid AS IS, without guaranteed accuracy or fitness for a specific operation. Verify original records, standards, formulas and local policies before production, staffing, financial, safety or regulatory decisions. This is not an independent audit, legal advice or an official company record. See website Terms of Use and Privacy Notice.</p>`;}
+function printDay(f=form, stamp=null){const r=calculate(f);if(!r.valid){feedback('Resolve data audit errors before printing.','error');return;} $('print-sheet').innerHTML=sheet(f,r,stamp);window.print();}
+function csvSafe(v){let x=String(v??'');if(/^[\s]*[=+@-]/.test(x)&&!/^[-+]?(\d+(\.\d*)?|\.\d+)$/.test(x.trim()))x="'"+x;return '"'+x.replace(/"/g,'""')+'"';}
+function exportCSV(){const data=storedDays();if(!data.length){feedback('Save a production day before exporting history.','error');return;}
+ const cols=['Date','Process','Shift','Industry','Saved at','Scheduled min','Excluded min','Planned min','Downtime min','Run min','Availability %','Performance %','Quality %','OEE %','Demand good units','Takt sec/unit','Rate per hour','Downtime exposure','Reduction %','Recovered min','Avoided exposure','Activity','Ideal sec/unit','Total produced','Rejected','Good units','Audit warnings','Source'];
+ const lines=[cols];data.forEach(x=>{const f=x.form,r=calculate(f);r.rows.forEach(p=>{lines.push([f.date,f.process,f.shift,f.industry,x.savedAt,f.scheduled,f.excluded,r.planned,r.downtime,r.runtime,finite(r.availability)?(r.availability*100).toFixed(4):'',finite(r.performance)?(r.performance*100).toFixed(4):'',finite(r.quality)?(r.quality*100).toFixed(4):'',finite(r.oee)?(r.oee*100).toFixed(4):'',r.demand??'',r.takt??'',r.costRate??'',r.exposure??'',r.reduction??'',r.recovered??'',r.opportunity??'',p.name,p.ideal??'',p.qty,p.rej,p.good,r.errors.concat(r.warnings).join('; '),x.source||'']);});});
+ const csv='\uFEFF'+lines.map(cols=>cols.map(csvSafe).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='forge10-oee-history-'+today()+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);feedback('CSV exported. Keep the file as your own backup and review its contents before sharing.');}
+function runSelfTests(){const make=(f)=>calculate(Object.assign(defaultForm(),f));const base=defaultForm();base.process='Test Cell';base.scheduled='480';base.excluded='30';base.stops.breakdowns='30';base.products=[{name:'Standard',ideal:'60',total:'300',rejects:'15'}];base.reduction='25';base.demand='400';base.costRate='120';
+ const r=calculate(base);const eq=(actual,expected)=>finite(actual)&&Math.abs(actual-expected)<1e-8;
+ const tests=[['Availability arithmetic',eq(r.availability,420/450)],['Performance arithmetic',eq(r.performance,300/420)],['Quality arithmetic',eq(r.quality,285/300)],['OEE recomposes from good time',eq(r.oee,285/450)&&eq(r.oee,r.availability*r.performance*r.quality)],['Takt based on demand',eq(r.takt,450*60/400)],['Downtime economic scenario',eq(r.exposure,60)&&eq(r.opportunity,15)&&eq(r.recovered,7.5)],['Loss bridge reconciles',eq(r.losses.good+r.losses.quality+r.losses.performance+r.losses.downtime,r.planned)],['Impossible time blocks results',!make({...base,stops:{...base.stops,other:'500'}}).valid],['Rejects greater than output blocked',!make({...base,products:[{name:'X',ideal:'60',total:'10',rejects:'11'}]}).valid],['Over-100% performance flagged',!make({...base,products:[{name:'X',ideal:'120',total:'300',rejects:'0'}]}).valid],['Multi-product weighted OEE',eq(make({...base,products:[{name:'A',ideal:'30',total:'100',rejects:'10'},{name:'B',ideal:'90',total:'100',rejects:'0'}]}).oee,(90*30+100*90)/(450*60))]];
+ selfTest={ok:tests.every(x=>x[1]),results:tests};const b=$('test-status');b.className='pill '+(selfTest.ok?'accent':'');b.textContent=(tests.filter(t=>t[1]).length)+'/'+tests.length+' formula tests passed';if(!selfTest.ok){notify('Internal formula test failure. Do not rely on results.','error');}
+ return selfTest;
+}
+function init(){migrate();applyForm(readJSON(KEY,defaultForm()),false);renderHistory();runSelfTests();
+ $('product-rows').addEventListener('input',e=>{const target=e.target,key=target.dataset.p;if(!key)return;const row=target.closest('[data-index]');if(!row)return;form.products[Number(row.dataset.index)][key]=target.value;persistDraft();update();});
+ $('product-rows').addEventListener('click',e=>{const b=e.target.closest('[data-remove]');if(!b)return;const i=Number(b.dataset.remove);if(form.products.length>1)form.products.splice(i,1);else form.products=[{name:'',ideal:'',total:'',rejects:''}];renderProducts();persistDraft();update();if(window.Forge10Sound)Forge10Sound.play('remove');});
+ $('add-product').addEventListener('click',()=>{if(form.products.length>=10)return;form.products.push({name:'',ideal:'',total:'',rejects:''});renderProducts();persistDraft();update();});
+ ['date','process','industry','shift','scheduled','excluded','demand','costRate','reduction','reviewer'].forEach(k=>{const el=$(({costRate:'cost-rate'})[k]||k);el.addEventListener('input',()=>{form[k]=el.value;persistDraft();update();});});
+ STOP_KEYS.forEach(k=>$('stop-'+k).addEventListener('input',e=>{form.stops[k]=e.target.value;persistDraft();update();}));
+ $('instructions-toggle').addEventListener('click',()=>{const b=$('instructions-body'),hidden=!b.hidden;b.hidden=hidden;$('instructions-toggle').setAttribute('aria-expanded',String(!hidden));$('instructions-toggle').textContent=hidden?'Show instructions ▾':'Hide instructions ▴';});
+ $('save').addEventListener('click',()=>saveDay());$('archive-next').addEventListener('click',()=>saveDay(true));$('print').addEventListener('click',()=>printDay());$('export').addEventListener('click',exportCSV);$('export-history').addEventListener('click',exportCSV);
+ $('run-tests').addEventListener('click',()=>{const t=runSelfTests();feedback(t.ok?'All '+t.results.length+' calculation self-tests passed. These are software checks, not a certification.':'Formula test failure: '+t.results.filter(x=>!x[1]).map(x=>x[0]).join(', '),t.ok?'':'error');});
+ $('reset').addEventListener('click',()=>{if(!confirm('Reset only the current unsaved form? Saved days remain in browser storage.'))return;applyForm(defaultForm());feedback('Current form reset. Saved day history was preserved.');if(window.Forge10Sound)Forge10Sound.play('reset');});
+ $('example').addEventListener('click',()=>{if(!confirm('Replace the current working form with an illustrative example? Saved days remain unchanged.'))return;const f=defaultForm();Object.assign(f,{process:'Packaging Line A · DEMO',shift:'Day shift',industry:'packaging',scheduled:'480',excluded:'30',demand:'400',costRate:'225',reduction:'25',reviewer:'Illustrative only'});f.stops={breakdowns:'20',changeovers:'15',material:'10',staffing:'0',quality:'0',other:'0'};f.products=[{name:'Carton A',ideal:'45',total:'300',rejects:'8'},{name:'Carton B',ideal:'60',total:'100',rejects:'2'}];applyForm(f);feedback('Illustrative example loaded. All figures are fictional; edit inputs to model your process.');});
+ $('history-wrap').addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const id=decodeURIComponent(b.dataset.id),days=storedDays(),item=days.find(x=>x.id===id);if(!item)return;const a=b.dataset.action;if(a==='load'){if(!confirm('Load this saved day into the current form? Unsaved edits will be overwritten.'))return;applyForm(item.form);feedback('Saved day loaded. Its current calculation is recomputed from saved inputs.');window.scrollTo({top:0,behavior:'smooth'});}else if(a==='print')printDay(item.form,item.savedAt);else if(a==='delete'){if(!confirm('Permanently delete the selected saved day from this browser? Export a backup first.'))return;writeJSON(DAYS,days.filter(x=>x.id!==id));renderHistory();feedback('Saved day deleted from this browser; working form unchanged.');if(window.Forge10Sound)Forge10Sound.play('reset');}});
+ $('clear-history').addEventListener('click',()=>{const n=storedDays().length;if(!n)return;if(!confirm('Permanently delete ALL '+n+' saved Forge10 v2 days? Export a CSV first. The current form and original v1 records are not cleared.'))return;writeJSON(DAYS,[]);renderHistory();feedback('Saved v2 history cleared. Current form and original v1 records were not modified.');});
+ let agreed=false;try{const a=readJSON(CONSENT,null);agreed=Boolean(a&&a.version===TERMS_VERSION&&a.agreed===true&&typeof a.acceptedAt==='string');}catch(e){}
+ const unlock=()=>{$('legal-gate').hidden=true;$('protected-tool').hidden=false;$('protected-tool').removeAttribute('inert');};
+ if(agreed)unlock(); $('consent-check').addEventListener('change',e=>$('consent-button').disabled=!e.target.checked);
+ $('consent-form').addEventListener('submit',e=>{e.preventDefault();if(!$('consent-check').checked)return;writeJSON(CONSENT,{version:TERMS_VERSION,agreed:true,acceptedAt:new Date().toISOString()});unlock();$('protected-tool').scrollIntoView({behavior:'smooth',block:'start'});});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+window.Forge10Test=()=>({selfTest,calculation:calculate(form),savedDays:storedDays().length});
 })();
 </script>
 <script src="assets/forge10-audio.js" defer></script>
