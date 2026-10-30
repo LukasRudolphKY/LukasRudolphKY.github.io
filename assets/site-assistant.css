@@ -1,7 +1,7 @@
 /* Portfolio question and inquiry panel. Excludes the production OEE dashboard. */
 .lr-help-trigger{position:fixed;bottom:20px;right:22px;z-index:9000;border:1px solid #8fdcff;border-radius:999px;background:#43baff;color:#061526;padding:14px 18px;font:700 15px Arial,Helvetica,sans-serif;box-shadow:0 9px 24px #0008;cursor:pointer}
 .lr-help-trigger:hover,.lr-help-trigger:focus-visible{background:#a4e7ff}
-.lr-help-panel{position:fixed;z-index:9001;right:22px;bottom:85px;width:min(430px,calc(100vw - 24px));height:min(660px,calc(100dvh - 105px));display:flex;flex-direction:column;background:#09192a;color:#eaf5ff;border:1px solid #385978;border-radius:16px;box-shadow:0 18px 44px #000d;overflow:hidden;font:15px/1.5 Arial,Helvetica,sans-serif}
+.lr-help-panel{position:fixed;z-index:9001;right:22px;bottom:85px;width:min(620px,calc(100vw - 32px));height:min(700px,calc(100dvh - 105px));display:flex;flex-direction:column;background:#09192a;color:#eaf5ff;border:1px solid #385978;border-radius:16px;box-shadow:0 18px 44px #000d;overflow:hidden;font:15px/1.5 Arial,Helvetica,sans-serif}
 .lr-help-panel[hidden]{display:none!important}
 .lr-help-panel *{box-sizing:border-box}
 .lr-help-header{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:14px 16px;background:#102a42;border-bottom:1px solid #355b77}
@@ -10,7 +10,7 @@
 .lr-help-tabs{display:flex;background:#0d2235;border-bottom:1px solid #385978}
 .lr-help-tabs button{flex:1;border:0;border-bottom:3px solid transparent;background:transparent;color:#cfdfec;padding:12px;cursor:pointer;font:700 14px Arial,Helvetica,sans-serif}
 .lr-help-tabs button[aria-selected="true"]{border-bottom-color:#43baff;color:white}
-.lr-help-body{overflow:auto;min-height:0;flex:1;padding:14px 17px 19px}
+.lr-help-body{overflow:auto;min-height:0;flex:1;padding:20px 24px 24px}
 .lr-help-body [hidden]{display:none!important}
 .lr-help-intro{font-size:13px;color:#bed2e4;margin:0 0 11px}
 .lr-help-connect{background:#102d46;border:1px solid #3c5e77;border-radius:9px;padding:12px;margin:10px 0 16px}
