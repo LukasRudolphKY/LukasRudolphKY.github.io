@@ -6,5 +6,5 @@
    Empty values mean that feature remains clearly marked as not connected. */
 window.LR_SITE_ASSISTANT = {
   botpressConfigScript: "",
-  formspreeEndpoint: ""
+  formspreeEndpoint: "https://formspree.io/f/mpppjjap"
 };
