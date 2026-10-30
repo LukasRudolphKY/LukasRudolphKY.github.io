@@ -5,6 +5,6 @@
    Formspree: paste its public https://formspree.io/f/xxxxxxxx form endpoint.
    Empty values mean that feature remains clearly marked as not connected. */
 window.LR_SITE_ASSISTANT = {
-  botpressConfigScript: "",
+  botpressConfigScript: "https://files.bpcontent.cloud/2026/10/30/18/20261030180910-LLULYHS7.js",
   formspreeEndpoint: "https://formspree.io/f/mpppjjap"
 };
