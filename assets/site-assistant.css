@@ -31,3 +31,17 @@
 #lr-botpress-chat .bpWebchat{position:absolute!important;width:100%!important;height:100%!important;max-height:100%!important;inset:0!important}
 #lr-botpress-chat .bpFab{display:none!important}
 @media(max-width:520px){.lr-help-panel{right:12px;bottom:77px;width:calc(100vw - 24px);height:min(680px,calc(100dvh - 94px))}.lr-help-trigger{right:12px;bottom:12px}}
+
+/* Botpress embedded layout: fill available panel space instead of the
+   compact default webchat width. Only applies inside our assistant. */
+.lr-help-panel:has(#lr-view-ai:not([hidden])) .lr-help-body{padding:0;overflow:hidden;display:flex;min-height:0}
+#lr-view-ai:not([hidden]){display:flex;flex:1;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
+#lr-view-ai .lr-help-intro{padding:10px 16px 0;margin:0;font-size:12px}
+#lr-view-ai .lr-help-connect{margin:8px 16px;padding:7px 10px;font-size:11px;line-height:1.35}
+#lr-view-ai .lr-help-links{display:none}
+#lr-botpress-chat{flex:1 1 auto;width:100%;min-width:0;min-height:0;height:auto!important;overflow:hidden;position:relative}
+#lr-botpress-chat .bpWebchat,
+#lr-botpress-chat iframe,
+#lr-botpress-chat [class*="bpWebchat"]{width:100%!important;max-width:none!important;min-width:0!important;height:100%!important;max-height:100%!important;inset:0!important;border:0!important}
+#lr-botpress-chat .bpWebchat{position:absolute!important}
+@media(max-width:520px){#lr-view-ai .lr-help-intro{padding:8px 12px 0}}
