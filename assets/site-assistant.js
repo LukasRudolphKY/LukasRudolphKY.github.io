@@ -68,7 +68,7 @@ const init = () => {
     aiMsg.textContent="Connecting to the AI assistant…";
     // Load third-party AI only after a visitor chooses to open the assistant.
     const loader=(src)=>new Promise((resolve,reject)=>{const tag=document.createElement("script");tag.src=src;tag.async=true;tag.onload=resolve;tag.onerror=reject;document.head.append(tag);});
-    loader("https://cdn.botpress.cloud/webchat/v3.3/inject.js")
+    loader("https://cdn.botpress.cloud/webchat/v5.0/inject.js")
       .then(()=>{
         if(!window.botpress || typeof window.botpress.on!=="function")throw new Error("Botpress API not available");
         window.botpress.on("webchat:initialized",()=>{
