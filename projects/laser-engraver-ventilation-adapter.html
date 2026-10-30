@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Lukas Rudolph">
+<meta name="description" content="Functional SolidWorks and 3D printing project: laser engraver exhaust window adapter, prototype changes, honeycomb redesign, and final PETG-CF part.">
+<link rel="canonical" href="https://lukasrudolphky.github.io/projects/laser-engraver-ventilation-adapter.html">
+<title>Laser Engraver Window Ventilation Adapter — CAD and 3D Printing Case Study | Lukas Rudolph</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laser Engraver Window Ventilation Adapter — CAD and 3D Printing Case Study | Lukas Rudolph">
+<meta property="og:description" content="Functional SolidWorks and 3D printing project: laser engraver exhaust window adapter, prototype changes, honeycomb redesign, and final PETG-CF part.">
+<meta property="og:url" content="https://lukasrudolphky.github.io/projects/laser-engraver-ventilation-adapter.html">
+<style>
+:root{--bg:#07101e;--panel:#101e32;--blue:#43baff;--text:#f3f7ff;--muted:#b4c5da;--border:#284463}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 Arial,Helvetica,sans-serif}
+a{color:#7ed2ff}a:hover{color:#c5edff}header{padding:19px max(24px,calc((100vw - 1050px)/2));background:#060d18;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{color:var(--blue);font-weight:800;letter-spacing:1px;text-decoration:none}nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}nav a{text-decoration:none;color:#d0dfed}
+main{max-width:1000px;margin:auto;padding:0 24px 75px}.hero{padding:65px 0 36px;border-bottom:1px solid var(--border)}.eyebrow{color:var(--blue);font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:1px}
+h1{line-height:1.2;font-size:clamp(30px,5vw,48px);margin:10px 0 14px}h2{font-size:clamp(22px,3vw,28px);line-height:1.25;margin:0 0 14px}p{margin:0 0 16px}.lead{font-size:19px;color:#d1e1f0;max-width:780px}
+section{padding:34px 0;border-bottom:1px solid var(--border)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{border:1px solid var(--border);border-radius:12px;padding:22px;background:var(--panel)}.card h3{margin:0 0 10px}.card p:last-child{margin-bottom:0}
+figure{margin:22px 0}figure img{display:block;max-width:100%;height:auto;border-radius:9px;border:1px solid var(--border)}figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+ul{padding-left:24px;margin-top:5px}li{margin-bottom:8px}.muted{color:var(--muted)}.button{display:inline-block;background:var(--blue);color:#061020;text-decoration:none;padding:12px 18px;border-radius:8px;font-weight:700;margin:7px 9px 7px 0}.button:hover{color:#061020;background:#8cdaff}.note{border-left:3px solid var(--blue);padding:12px 18px;background:var(--panel);margin:20px 0}
+iframe.project-visual{width:100%;height:auto;aspect-ratio:1600/1120;border:1px solid var(--border);border-radius:9px;background:#07111c}
+footer{padding:22px 24px;text-align:center;font-size:14px;color:var(--muted)}@media(max-width:670px){.grid{grid-template-columns:1fr}.hero{padding-top:40px}.card{padding:17px}}
+</style>
+</head>
+<body>
+<header><a class="brand" href="../index.html">LUKAS RUDOLPH</a><nav aria-label="Main navigation"><a href="../index.html">Home</a><a href="../cad-3d-printing.html">CAD &amp; Prototyping</a><a href="../index.html#projects">All Projects</a><a href="../free-oee-tracker.html">Free OEE Tool</a><a href="#contact">Connect</a></nav></header>
+<main>
+<div class="hero"><p class="eyebrow">Personal Project · SolidWorks · FDM Prototyping</p><h1>Laser Engraver Window Ventilation Adapter</h1><p class="lead">A practical adapter for routing a laser engraver's exhaust hose through a window, developed through CAD modeling and revisions to the printed geometry.</p></div>
+<section><h2>Problem and Design Goal</h2><p>I needed an adapter that would help route exhaust from a laser engraver through a window. The goal was to create a functional, printable component that fit the intended setup and could be refined after seeing the physical prototype.</p><p>Rather than treating the first print as final, I used it to review how the component was shaped and where the design could be improved.</p></section>
+<section><h2>Prototype and Design Iteration</h2><div class="grid"><div class="card"><h3>Initial Prototype</h3><p>The early white printed version used smaller openings. It helped establish the overall form and gave me something physical to evaluate.</p></div><div class="card"><h3>Revised Geometry</h3><p>I revised the SolidWorks model to use a more open honeycomb-style pattern. The intent was to reduce unnecessary printing material and avoid overly restrictive openings.</p></div><div class="card"><h3>Final Printed Component</h3><p>The later version was printed in black PETG-CF. The project demonstrates moving from CAD geometry to a finished functional component.</p></div><div class="card"><h3>Practical Tradeoffs</h3><p>Design choices balanced physical fit, opening geometry, material use, printability, and the requirements of the installed exhaust path.</p></div></div></section>
+<section><h2>Design Progression</h2><figure><a href="../laser-ventilation-design-process.png.png" target="_blank" rel="noopener noreferrer"><img src="../laser-ventilation-design-process.png.png" alt="Sequence showing white laser exhaust window adapter prototypes and final black honeycomb PETG-CF printed adapter" loading="lazy" width="1200"></a><figcaption>Design-process infographic showing the prototype and later revisions. Select the image for a closer view.</figcaption></figure>
+<p class="note"><strong>Important distinction:</strong> The honeycomb revision was an airflow-oriented design change, not a measured airflow or filtration performance claim. I have not published instrumented flow, pressure-drop, or emissions data for this project.</p></section>
+<section><h2>What This Project Demonstrates</h2><p>SolidWorks modeling, functional FDM printing, geometry changes based on a physical prototype, selection of a final print material, and the practical evaluation of how a component will be installed.</p><p>My takeaway: a useful design doesn't have to be complicated. It needs to address the actual installation constraints and be straightforward to improve.</p></section>
+<section id="contact"><h2>Discuss a Technical Project</h2><p>I’m open to connecting about CAD modeling, functional prototyping, technical documentation, and practical industrial problems. If reaching out, include the intended use, key dimensions or constraints, and what you want the finished solution to accomplish.</p><p class="muted">This is a personal technical portfolio, not an offer of licensed professional engineering or regulated design approval.</p><a class="button" href="https://www.linkedin.com/in/lukas-rudolph-377b45100/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn →</a><a class="button" href="../cad-3d-printing.html">More CAD Projects →</a></section>
+</main>
+<footer>© 2026 Lukas Rudolph · Mechanical Design &amp; Industrial Technology · <a href="../index.html">Home</a></footer>
+</body></html>
