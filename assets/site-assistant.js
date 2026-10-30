@@ -10,6 +10,8 @@ const init = () => {
   const formEndpoint = typeof cfg.formspreeEndpoint === "string" ? cfg.formspreeEndpoint.trim() : "";
   const aiEnabled = /^https:\/\/files\.bpcontent\.cloud\/[\w\/-]+\.js(?:\?[\w=&-]+)?$/.test(aiScript);
   const formEnabled = /^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(formEndpoint);
+  // Do not publicly display unfinished or nonfunctional services.
+  if (!aiEnabled && !formEnabled) return;
   const add = (tag, props, parent) => { const el=document.createElement(tag); for(const [k,v] of Object.entries(props||{})){if(k==="text")el.textContent=v;else el.setAttribute(k,v);} (parent||document.body).append(el);return el; };
   const launcher=add("button",{id:"lr-help-trigger",class:"lr-help-trigger",type:"button",text:"💬 Ask a question", "aria-expanded":"false","aria-controls":"lr-help-panel"});
   const panel=add("section",{id:"lr-help-panel",class:"lr-help-panel",role:"dialog","aria-label":"Portfolio assistant and project inquiries","aria-modal":"false",hidden:""});
@@ -43,6 +45,8 @@ const init = () => {
     <div class="lr-help-links"><a href="https://www.linkedin.com/in/lukas-rudolph-377b45100/" target="_blank" rel="noopener noreferrer">Or message Lukas on LinkedIn →</a></div>
   </section></div>`;
   const tabAi=panel.querySelector("#lr-tab-ai"), tabInquiry=panel.querySelector("#lr-tab-inquiry"), viewAi=panel.querySelector("#lr-view-ai"), viewInquiry=panel.querySelector("#lr-view-inquiry");
+  if (!aiEnabled) tabAi.hidden = true;
+  if (!formEnabled) tabInquiry.hidden = true;
   function selectTab(tab){
     const inquiry=tab==="inquiry";
     tabAi.setAttribute("aria-selected",String(!inquiry)); tabInquiry.setAttribute("aria-selected",String(inquiry));
@@ -51,21 +55,38 @@ const init = () => {
   const close=()=>{panel.hidden=true;launcher.setAttribute("aria-expanded","false");launcher.focus();};
   launcher.addEventListener("click",()=>{const wasHidden=panel.hidden;panel.hidden=!wasHidden;launcher.setAttribute("aria-expanded",String(wasHidden));if(wasHidden)panel.querySelector(".lr-help-close").focus();});
   panel.querySelector(".lr-help-close").addEventListener("click",close);
+  if (!aiEnabled) selectTab("inquiry");
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)close();});
   tabAi.addEventListener("click",()=>selectTab("ai"));
   tabInquiry.addEventListener("click",()=>selectTab("inquiry"));
-  document.querySelectorAll('a[href="#contact"]').forEach(a=>{a.addEventListener("click",e=>{if(!a.closest("#lr-help-panel")){e.preventDefault();panel.hidden=false;launcher.setAttribute("aria-expanded","true");selectTab("inquiry");panel.querySelector("#lr-name").focus();}});});
+  document.querySelectorAll('a[href="#contact"]').forEach(a=>{a.addEventListener("click",e=>{if(!a.closest("#lr-help-panel")){e.preventDefault();panel.hidden=false;launcher.setAttribute("aria-expanded","true");selectTab(formEnabled ? "inquiry" : "ai");(formEnabled ? panel.querySelector("#lr-name") : tabAi).focus();}});});
   const aiMsg=panel.querySelector("#lr-ai-message");
-  if (!aiEnabled){
-    aiMsg.textContent="Live AI answers are not connected yet. The project links below work now. For a personal question, use the Project inquiry tab or LinkedIn.";
-    panel.querySelector("#lr-botpress-chat").hidden=true;
-  } else {
-    aiMsg.textContent="Connecting to the independent AI assistant…";
+  let chatStarted=false;
+  const startChat=()=>{
+    if(!aiEnabled || chatStarted)return;
+    chatStarted=true;
+    aiMsg.textContent="Connecting to the AI assistant…";
+    // Load third-party AI only after a visitor chooses to open the assistant.
     const loader=(src)=>new Promise((resolve,reject)=>{const tag=document.createElement("script");tag.src=src;tag.async=true;tag.onload=resolve;tag.onerror=reject;document.head.append(tag);});
     loader("https://cdn.botpress.cloud/webchat/v3.3/inject.js")
-      .then(()=>loader(aiScript)).then(()=>{aiMsg.textContent="AI is provided by Botpress. Avoid entering private information in chat. For a project quote or personal reply, use the Project inquiry tab.";})
-      .catch(()=>{aiMsg.textContent="AI chat is temporarily unavailable. Use the project links or the Project inquiry tab.";});
+      .then(()=>{
+        if(!window.botpress || typeof window.botpress.on!=="function")throw new Error("Botpress API not available");
+        window.botpress.on("webchat:initialized",()=>{
+          window.botpress.open();
+          aiMsg.textContent="Botpress AI is ready. Answers may be inaccurate; use the project inquiry tab for quotes and direct replies.";
+        });
+        return loader(aiScript);
+      }).catch(()=>{
+        aiMsg.textContent="AI chat is unavailable. You can still explore the project pages or request direct contact.";
+        chatStarted=false;
+      });
+  };
+  if (!aiEnabled){
+    aiMsg.textContent="AI chat is not yet connected. Please use the project inquiry form.";
+    panel.querySelector("#lr-botpress-chat").hidden=true;
   }
+  launcher.addEventListener("click",()=>{if(!panel.hidden&&!viewAi.hidden)startChat();});
+  tabAi.addEventListener("click",startChat);
   const form=panel.querySelector("#lr-help-form"),btn=panel.querySelector("#lr-submit"),status=panel.querySelector("#lr-form-status"),pref=panel.querySelector("#lr-preference"),contact=panel.querySelector("#lr-contact");
   const setStatus=(message,error=false)=>{status.textContent=message;status.dataset.error=String(error);};
   pref.addEventListener("change",()=>{const p=pref.value;contact.type=p==="Email"?"email":p==="Phone"?"tel":"text";contact.placeholder=p==="Email"?"your@email.com":p==="Phone"?"Preferred phone number":p==="LinkedIn"?"LinkedIn profile link or username":"Enter the matching contact detail";});
