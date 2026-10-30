@@ -32,7 +32,7 @@
 #lr-botpress-chat .bpFab{display:none!important}
 @media(max-width:520px){.lr-help-panel{right:12px;bottom:77px;width:calc(100vw - 24px);height:min(680px,calc(100dvh - 94px))}.lr-help-trigger{right:12px;bottom:12px}}
 /* Safe embedded layout: explicit size prevents zero-height Botpress frames. */
-.lr-help-panel:has(#lr-view-ai:not([hidden])) .lr-help-body{padding:12px 14px 16px;overflow:auto}
+.lr-help-panel:has(#lr-view-ai:not([hidden])) .lr-help-body{padding:12px 5px 16px;overflow:auto}
 #lr-view-ai .lr-help-intro{font-size:12px;margin-bottom:6px}
 #lr-view-ai .lr-help-connect{margin:6px 0 10px;padding:6px 9px;font-size:11px}
 #lr-view-ai .lr-help-links{display:none}
