@@ -73,7 +73,7 @@ const init = () => {
         if(!window.botpress || typeof window.botpress.on!=="function")throw new Error("Botpress API not available");
         window.botpress.on("webchat:initialized",()=>{
           window.botpress.open();
-          aiMsg.textContent="Botpress AI is ready. Answers may be inaccurate; use the project inquiry tab for quotes and direct replies.";
+          aiMsg.textContent="AI answers may be inaccurate. Use Project inquiry to contact Lukas directly.";
         });
         return loader(aiScript);
       }).catch(()=>{
